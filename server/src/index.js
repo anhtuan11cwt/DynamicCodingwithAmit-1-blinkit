@@ -4,6 +4,7 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import connectDB from "./config/connectDB.js";
 
 const app = express();
 
@@ -28,6 +29,12 @@ app.get("/", (_req, res) => {
 
 const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, () => {
-  console.log(`Máy chủ đang chạy tại http://localhost:${PORT}`);
-});
+const startServer = async () => {
+  await connectDB();
+
+  app.listen(PORT, () => {
+    console.log(`Máy chủ đang chạy tại http://localhost:${PORT}`);
+  });
+};
+
+startServer();
