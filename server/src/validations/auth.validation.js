@@ -22,8 +22,13 @@ export const verifyOtpSchema = z.object({
   otp: z.string().regex(/^\d{6}$/, "OTP phải gồm 6 chữ số"),
 });
 
-export const resetPasswordSchema = z.object({
-  email: z.string().email().max(254),
-  otp: z.string().regex(/^\d{6}$/, "OTP phải gồm 6 chữ số"),
-  password: passwordSchema,
-});
+export const resetPasswordSchema = z
+  .object({
+    confirmPassword: passwordSchema,
+    email: z.string().email().max(254),
+    newPassword: passwordSchema,
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Mật khẩu xác nhận không khớp",
+    path: ["confirmPassword"],
+  });

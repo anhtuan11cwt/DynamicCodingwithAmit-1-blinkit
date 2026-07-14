@@ -1,9 +1,13 @@
 import express from "express";
 import {
+  forgotPasswordController,
   loginController,
   logoutController,
+  refreshToken,
   registerUserController,
+  resetPassword,
   verifyEmailController,
+  verifyForgotPasswordOtp,
 } from "../controllers/auth.controller.js";
 import auth from "../middleware/auth.js";
 
@@ -259,5 +263,262 @@ router.post("/login", loginController);
  *               success: false
  */
 router.post("/logout", auth, logoutController);
+
+/**
+ * @openapi
+ * /api/v1/auth/forgot-password:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Gửi OTP quên mật khẩu
+ *     description: |
+ *       Kiểm tra email tồn tại, sinh OTP 6 số (hiệu lực 1 giờ), lưu vào DB
+ *       và gửi qua email. Không yêu cầu đăng nhập.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [email]
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: nguyenvana@gmail.com
+ *           example:
+ *             email: nguyenvana@gmail.com
+ *     responses:
+ *       200:
+ *         description: Đã gửi OTP qua email
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Đã gửi mã OTP qua email
+ *               success: true
+ *       400:
+ *         description: Email không hợp lệ
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: true
+ *               message: Dữ liệu không hợp lệ
+ *               success: false
+ *       404:
+ *         description: Email không tồn tại
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: true
+ *               message: Email không tồn tại
+ *               success: false
+ *       500:
+ *         description: Lỗi máy chủ (gửi email thất bại)
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: true
+ *               message: Đã xảy ra lỗi
+ *               success: false
+ */
+router.post("/forgot-password", forgotPasswordController);
+
+/**
+ * @openapi
+ * /api/v1/auth/verify-forgot-password-otp:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Xác thực OTP quên mật khẩu
+ *     description: |
+ *       Kiểm tra OTP còn hạn và khớp với mã đã lưu. Nếu hợp lệ, client chuyển
+ *       sang bước đặt lại mật khẩu. Không yêu cầu đăng nhập.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [email, otp]
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: nguyenvana@gmail.com
+ *               otp:
+ *                 type: string
+ *                 example: "524871"
+ *           example:
+ *             email: nguyenvana@gmail.com
+ *             otp: "524871"
+ *     responses:
+ *       200:
+ *         description: Xác thực OTP thành công
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Xác thực OTP thành công
+ *               success: true
+ *       400:
+ *         description: OTP sai hoặc đã hết hạn
+ *         content:
+ *           application/json:
+ *             examples:
+ *               expired:
+ *                 summary: Hết hạn
+ *                 value:
+ *                   error: true
+ *                   message: Mã OTP đã hết hạn
+ *                   success: false
+ *               invalid:
+ *                 summary: Sai OTP
+ *                 value:
+ *                   error: true
+ *                   message: Mã OTP không đúng
+ *                   success: false
+ *       404:
+ *         description: Email không tồn tại
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: true
+ *               message: Email không tồn tại
+ *               success: false
+ *       500:
+ *         description: Lỗi máy chủ
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: true
+ *               message: Đã xảy ra lỗi
+ *               success: false
+ */
+router.post("/verify-forgot-password-otp", verifyForgotPasswordOtp);
+
+/**
+ * @openapi
+ * /api/v1/auth/reset-password:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Đặt lại mật khẩu
+ *     description: |
+ *       Nhận email, mật khẩu mới và xác nhận, băm bằng bcrypt và cập nhật vào DB,
+ *       đồng thời xóa OTP cũ. Không yêu cầu đăng nhập.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [email, newPassword, confirmPassword]
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: nguyenvana@gmail.com
+ *               newPassword:
+ *                 type: string
+ *                 example: Matkhau@123
+ *               confirmPassword:
+ *                 type: string
+ *                 example: Matkhau@123
+ *           example:
+ *             email: nguyenvana@gmail.com
+ *             newPassword: Matkhau@123
+ *             confirmPassword: Matkhau@123
+ *     responses:
+ *       200:
+ *         description: Đặt lại mật khẩu thành công
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Đặt lại mật khẩu thành công
+ *               success: true
+ *       400:
+ *         description: Dữ liệu không hợp lệ hoặc mật khẩu xác nhận không khớp
+ *         content:
+ *           application/json:
+ *             examples:
+ *               mismatch:
+ *                 summary: Không khớp
+ *                 value:
+ *                   error: true
+ *                   message: Mật khẩu xác nhận không khớp
+ *                   success: false
+ *               weak:
+ *                 summary: Mật khẩu yếu
+ *                 value:
+ *                   error: true
+ *                   message: "Mật khẩu tối thiểu 8 ký tự"
+ *                   success: false
+ *       404:
+ *         description: Email không tồn tại
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: true
+ *               message: Email không tồn tại
+ *               success: false
+ *       500:
+ *         description: Lỗi máy chủ
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: true
+ *               message: Đã xảy ra lỗi
+ *               success: false
+ */
+router.post("/reset-password", resetPassword);
+
+/**
+ * @openapi
+ * /api/v1/auth/refresh-token:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Cấp lại Access Token
+ *     description: |
+ *       Dùng Refresh Token (cookie `refreshToken` hoặc header `Authorization: Bearer <token>`)
+ *       để cấp mới Access Token mà không cần đăng nhập lại. Refresh Token phải khớp
+ *       với giá trị lưu trong DB.
+ *     responses:
+ *       200:
+ *         description: Cấp lại access token thành công
+ *         headers:
+ *           Set-Cookie:
+ *             description: accessToken mới (httpOnly, secure, sameSite=None)
+ *             schema:
+ *               type: string
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Cấp lại access token thành công
+ *               success: true
+ *               data:
+ *                 accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+ *       401:
+ *         description: Thiếu / không hợp lệ / hết hạn refresh token
+ *         content:
+ *           application/json:
+ *             examples:
+ *               missing:
+ *                 summary: Thiếu token
+ *                 value:
+ *                   error: true
+ *                   message: Refresh token không tồn tại
+ *                   success: false
+ *               invalid:
+ *                 summary: Không hợp lệ/hết hạn
+ *                 value:
+ *                   error: true
+ *                   message: Refresh token không hợp lệ hoặc đã hết hạn
+ *                   success: false
+ *       500:
+ *         description: Lỗi máy chủ
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: true
+ *               message: Đã xảy ra lỗi
+ *               success: false
+ */
+router.post("/refresh-token", refreshToken);
 
 export default router;

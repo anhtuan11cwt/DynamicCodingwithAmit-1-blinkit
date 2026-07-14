@@ -1,11 +1,20 @@
 import "dotenv/config";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import sendEmail from "../config/sendEmail.js";
 import UserModel from "../models/user.model.js";
+import forgotPasswordTemplate from "../utils/forgotPasswordTemplate.js";
 import generateAccessToken from "../utils/generateAccessToken.js";
+import generateOtp from "../utils/generateOtp.js";
 import generateRefreshToken from "../utils/generateRefreshToken.js";
 import verifyEmailTemplate from "../utils/verifyEmailTemplate.js";
-import { loginSchema, registerSchema } from "../validations/auth.validation.js";
+import {
+  forgotPasswordSchema,
+  loginSchema,
+  registerSchema,
+  resetPasswordSchema,
+  verifyOtpSchema,
+} from "../validations/auth.validation.js";
 
 export const registerUserController = async (req, res) => {
   try {
@@ -195,6 +204,221 @@ export const logoutController = async (req, res) => {
 
     return res.json({
       message: "Đăng xuất thành công",
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: error.message || "Đã xảy ra lỗi",
+      success: false,
+    });
+  }
+};
+
+export const forgotPasswordController = async (req, res) => {
+  try {
+    const parsed = forgotPasswordSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({
+        error: true,
+        message: parsed.error.errors[0]?.message || "Dữ liệu không hợp lệ",
+        success: false,
+      });
+    }
+
+    const { email } = parsed.data;
+
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        error: true,
+        message: "Email không tồn tại",
+        success: false,
+      });
+    }
+
+    const otp = generateOtp();
+    const expireTime = new Date(Date.now() + 60 * 60 * 1000);
+
+    await UserModel.findByIdAndUpdate(user._id, {
+      forgot_password_expiry: expireTime,
+      forgot_password_otp: String(otp),
+    });
+
+    await sendEmail({
+      html: forgotPasswordTemplate({ name: user.name, otp }),
+      sendTo: email,
+      subject: "Mã OTP quên mật khẩu",
+    });
+
+    return res.json({
+      message: "Đã gửi mã OTP qua email",
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: error.message || "Đã xảy ra lỗi",
+      success: false,
+    });
+  }
+};
+
+export const verifyForgotPasswordOtp = async (req, res) => {
+  try {
+    const parsed = verifyOtpSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({
+        error: true,
+        message: parsed.error.errors[0]?.message || "Dữ liệu không hợp lệ",
+        success: false,
+      });
+    }
+
+    const { email, otp } = parsed.data;
+
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        error: true,
+        message: "Email không tồn tại",
+        success: false,
+      });
+    }
+
+    if (new Date() > user.forgot_password_expiry) {
+      return res.status(400).json({
+        error: true,
+        message: "Mã OTP đã hết hạn",
+        success: false,
+      });
+    }
+
+    if (String(otp) !== user.forgot_password_otp) {
+      return res.status(400).json({
+        error: true,
+        message: "Mã OTP không đúng",
+        success: false,
+      });
+    }
+
+    return res.json({
+      message: "Xác thực OTP thành công",
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: error.message || "Đã xảy ra lỗi",
+      success: false,
+    });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  try {
+    const parsed = resetPasswordSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({
+        error: true,
+        message: parsed.error.errors[0]?.message || "Dữ liệu không hợp lệ",
+        success: false,
+      });
+    }
+
+    const { email, newPassword } = parsed.data;
+
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        error: true,
+        message: "Email không tồn tại",
+        success: false,
+      });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(newPassword, salt);
+
+    await UserModel.findOneAndUpdate(
+      { email },
+      {
+        forgot_password_expiry: null,
+        forgot_password_otp: null,
+        password: hashPassword,
+      },
+    );
+
+    return res.json({
+      message: "Đặt lại mật khẩu thành công",
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: error.message || "Đã xảy ra lỗi",
+      success: false,
+    });
+  }
+};
+
+export const refreshToken = async (req, res) => {
+  try {
+    const token =
+      req.cookies?.refreshToken ||
+      (req.headers.authorization?.startsWith("Bearer ")
+        ? req.headers.authorization.split(" ")[1]
+        : null);
+
+    if (!token) {
+      return res.status(401).json({
+        error: true,
+        message: "Refresh token không tồn tại",
+        success: false,
+      });
+    }
+
+    let decoded;
+    try {
+      decoded = jwt.verify(token, process.env.SECRET_KEY_REFRESH_TOKEN);
+    } catch {
+      return res.status(401).json({
+        error: true,
+        message: "Refresh token không hợp lệ hoặc đã hết hạn",
+        success: false,
+      });
+    }
+
+    const user = await UserModel.findById(decoded.id);
+    if (!user) {
+      return res.status(404).json({
+        error: true,
+        message: "Email không tồn tại",
+        success: false,
+      });
+    }
+
+    if (user.refresh_token !== token) {
+      return res.status(401).json({
+        error: true,
+        message: "Refresh token không hợp lệ",
+        success: false,
+      });
+    }
+
+    const accessToken = generateAccessToken(user._id);
+
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
+
+    return res.json({
+      data: {
+        accessToken,
+      },
+      message: "Cấp lại access token thành công",
       success: true,
     });
   } catch (error) {
