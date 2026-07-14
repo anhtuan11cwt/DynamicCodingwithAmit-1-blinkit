@@ -43,3 +43,14 @@ export const createUserSchema = z.object({
 });
 
 export const updateUserSchema = createUserSchema.partial();
+
+export const updateProfileSchema = z.object({
+  email: z.string().trim().email().max(254).toLowerCase().optional(),
+  mobile: z
+    .string()
+    .regex(/^0\d{9}$/, "Số điện thoại phải có 10 chữ số và bắt đầu bằng 0")
+    .nullable()
+    .optional(),
+  name: personNameSchema.optional(),
+  password: passwordSchema.optional(),
+});
