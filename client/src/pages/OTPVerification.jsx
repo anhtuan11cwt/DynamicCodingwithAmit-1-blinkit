@@ -89,7 +89,7 @@ const OTPVerification = () => {
       if (response.data.success) {
         toast.success(response.data.message);
         navigate("/reset-password", {
-          state: { email, otp: otpValue },
+          state: { data: response.data, email },
         });
       }
     } catch (error) {

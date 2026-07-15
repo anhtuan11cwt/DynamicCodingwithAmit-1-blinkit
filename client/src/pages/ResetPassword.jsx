@@ -1,7 +1,7 @@
 import { Eye, EyeOff, KeyRound, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SummaryApi from "../common/SummaryApi";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/axios";
@@ -25,41 +25,37 @@ const wrapClass = (hasError, disabled) =>
   } ${disabled ? "pointer-events-none opacity-50" : ""}`;
 
 const ResetPassword = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const email = location.state?.email;
+  const otpSuccess = location.state?.data?.success;
+
   const [data, setData] = useState(initialData);
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const email = location.state?.email;
-  const otp = location.state?.otp;
 
   useEffect(() => {
-    if (!email || !otp) {
-      navigate("/forgot-password", { replace: true });
+    if (!otpSuccess || !email) {
+      navigate("/", { replace: true });
     }
-  }, [email, otp, navigate]);
+  }, [otpSuccess, email, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
   const validateField = (name, value) => {
-    const result = fieldSchemas[name].safeParse(value);
-    let message;
-    if (!result.success) {
-      message = result.error.issues[0]?.message;
-    } else if (name === "confirmPassword" && value !== data.newPassword) {
-      message = "Mật khẩu xác nhận không khớp";
-    }
-    setErrors((prev) => ({ ...prev, [name]: message }));
+    const result = fieldSchemas[name]?.safeParse(value);
+    if (!result) return;
+    setErrors((prev) => ({
+      ...prev,
+      [name]: result.success ? undefined : result.error.issues[0]?.message,
+    }));
   };
 
   const handleBlur = (e) => {
@@ -75,9 +71,11 @@ const ResetPassword = () => {
     e.preventDefault();
 
     const result = resetPasswordSchema.safeParse({
-      ...data,
+      confirmPassword: data.confirmPassword,
       email,
+      newPassword: data.newPassword,
     });
+
     if (!result.success) {
       const fieldErrors = {};
       for (const issue of result.error.issues) {
@@ -99,9 +97,9 @@ const ResetPassword = () => {
       const response = await Axios({
         ...SummaryApi.resetPassword,
         data: {
+          confirmPassword: result.data.confirmPassword,
           email,
           newPassword: result.data.newPassword,
-          otp,
         },
       });
 
@@ -118,7 +116,9 @@ const ResetPassword = () => {
     }
   };
 
-  if (!email || !otp) return null;
+  if (!otpSuccess || !email) return null;
+
+  const passwordType = showPassword ? "text" : "password";
 
   return (
     <section className="flex min-h-[78vh] items-center justify-center px-4 py-10">
@@ -128,7 +128,7 @@ const ResetPassword = () => {
             Đặt lại mật khẩu
           </h1>
           <p className="mt-1 text-gray-500 text-sm">
-            Nhập mật khẩu mới cho{" "}
+            Nhập mật khẩu mới cho tài khoản{" "}
             <span className="font-medium text-gray-700">{email}</span>
           </p>
         </div>
@@ -156,7 +156,7 @@ const ResetPassword = () => {
                 onChange={handleChange}
                 placeholder="Nhập mật khẩu mới"
                 required
-                type={showPassword ? "text" : "password"}
+                type={passwordType}
                 value={data.newPassword}
               />
               <button
@@ -215,9 +215,9 @@ const ResetPassword = () => {
                 name="confirmPassword"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                placeholder="Nhập lại mật khẩu"
+                placeholder="Nhập lại mật khẩu mới"
                 required
-                type={showPassword ? "text" : "password"}
+                type={passwordType}
                 value={data.confirmPassword}
               />
               <button
@@ -261,9 +261,21 @@ const ResetPassword = () => {
             ) : (
               <KeyRound aria-hidden="true" size={18} />
             )}
-            {loading ? "Đang đặt lại..." : "Đặt lại mật khẩu"}
+            {loading ? "Đang cập nhật..." : "Đặt lại mật khẩu"}
           </button>
         </form>
+
+        <p className="mt-6 text-center text-gray-600 text-sm">
+          Nhớ mật khẩu rồi?{" "}
+          <Link
+            className={`font-semibold text-secondary-100 outline-none transition-colors hover:text-primary-200 focus-visible:text-primary-200 ${
+              loading ? "pointer-events-none cursor-not-allowed opacity-50" : ""
+            }`}
+            to="/login"
+          >
+            Đăng nhập
+          </Link>
+        </p>
       </div>
     </section>
   );
