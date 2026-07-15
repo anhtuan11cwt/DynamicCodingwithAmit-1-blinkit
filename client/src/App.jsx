@@ -19,7 +19,8 @@ const hideFooterRoutes = [
 function App() {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const showFooter = !hideFooterRoutes.includes(pathname);
+  const showFooter =
+    !hideFooterRoutes.includes(pathname) && !pathname.startsWith("/dashboard");
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {

@@ -1,11 +1,18 @@
-import { ArrowLeft, LogIn, Menu, User, X } from "lucide-react";
+import { ArrowLeft, ChevronDown, LogIn, Menu, User, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import SummaryApi from "../common/SummaryApi";
 import useMobile from "../hooks/useMobile";
+import { logout } from "../store/userSlice";
+import AxiosToastError from "../utils/AxiosToastError";
+import Axios from "../utils/axios";
 import Cart from "./Cart";
 import SearchBar from "./Search";
+import UserMenu from "./UserMenu";
+import UserMenuMobile from "./UserMenuMobile";
 
 const mobileLinks = [
   { label: "Trang chủ", to: "/" },
@@ -18,8 +25,11 @@ const totalPrice = 15000;
 
 const Header = ({ isHydrated }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openUserMenu, setOpenUserMenu] = useState(false);
+  const [openMobileMenu, setOpenMobileMenu] = useState(false);
   const headerRef = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
   const isMobile = useMobile();
   const isSearchPage = pathname === "/search";
@@ -28,16 +38,20 @@ const Header = ({ isHydrated }) => {
   const isLoggedIn = Boolean(user._id);
 
   useEffect(() => {
-    if (!menuOpen) return;
+    if (!menuOpen && !openUserMenu) return;
 
     const handlePointerDown = (event) => {
       if (headerRef.current && !headerRef.current.contains(event.target)) {
-        setMenuOpen(false);
+        if (menuOpen) setMenuOpen(false);
+        if (openUserMenu) setOpenUserMenu(false);
       }
     };
 
     const handleKeyDown = (event) => {
-      if (event.key === "Escape") setMenuOpen(false);
+      if (event.key === "Escape") {
+        if (menuOpen) setMenuOpen(false);
+        if (openUserMenu) setOpenUserMenu(false);
+      }
     };
 
     document.addEventListener("pointerdown", handlePointerDown);
@@ -46,7 +60,33 @@ const Header = ({ isHydrated }) => {
       document.removeEventListener("pointerdown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [menuOpen]);
+  }, [menuOpen, openUserMenu]);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: chỉ đóng menu khi đường dẫn thay đổi
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setOpenUserMenu(false);
+  }, [pathname]);
+
+  const handleLogout = async () => {
+    try {
+      const response = await Axios({ ...SummaryApi.logout });
+      if (response.data.success) {
+        dispatch(logout());
+        setOpenUserMenu(false);
+        setOpenMobileMenu(false);
+        toast.success(response.data.message);
+        navigate("/");
+      }
+    } catch (error) {
+      AxiosToastError(error);
+    }
+  };
+
+  const closeMobileMenu = () => {
+    setOpenMobileMenu(false);
+    window.history.back();
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md" ref={headerRef}>
@@ -66,13 +106,38 @@ const Header = ({ isHydrated }) => {
         <div className="flex items-center gap-4">
           {isHydrated ? (
             isLoggedIn ? (
-              <Link
-                className="flex max-w-[12rem] cursor-pointer items-center gap-1.5 font-semibold text-secondary-100 outline-none transition-colors duration-200 hover:text-primary-200 focus-visible:ring-2 focus-visible:ring-primary-200"
-                to="/account"
-              >
-                <User aria-hidden="true" className="shrink-0" size={20} />
-                <span className="truncate">{user.name || "Tài khoản"}</span>
-              </Link>
+              <div className="relative">
+                <button
+                  aria-expanded={openUserMenu}
+                  aria-haspopup="menu"
+                  className="flex max-w-[12rem] cursor-pointer items-center gap-1.5 rounded-lg px-2 py-1.5 font-semibold text-secondary-100 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
+                  onClick={() => setOpenUserMenu((open) => !open)}
+                  type="button"
+                >
+                  {user.avatar ? (
+                    <img
+                      alt=""
+                      className="size-7 shrink-0 rounded-full object-cover"
+                      src={user.avatar}
+                    />
+                  ) : (
+                    <User aria-hidden="true" className="shrink-0" size={20} />
+                  )}
+                  <span className="truncate">{user.name || "Tài khoản"}</span>
+                  <ChevronDown
+                    aria-hidden="true"
+                    className={`shrink-0 transition-transform ${openUserMenu ? "rotate-180" : ""}`}
+                    size={16}
+                  />
+                </button>
+                {openUserMenu && (
+                  <UserMenu
+                    onClose={() => setOpenUserMenu(false)}
+                    onLogout={handleLogout}
+                    user={user}
+                  />
+                )}
+              </div>
             ) : (
               <Link
                 className="flex cursor-pointer items-center gap-1.5 font-semibold text-secondary-100 outline-none transition-colors duration-200 hover:text-primary-200 focus-visible:ring-2 focus-visible:ring-primary-200"
@@ -121,13 +186,22 @@ const Header = ({ isHydrated }) => {
               )}
               <div className="flex items-center gap-2">
                 {!hideLogoAndUser && (
-                  <Link
+                  <button
                     aria-label="Tài khoản"
                     className="flex cursor-pointer items-center justify-center rounded-lg p-2.5 text-secondary-100 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
-                    to={isLoggedIn ? "/account" : "/login"}
+                    onClick={() => setOpenMobileMenu(true)}
+                    type="button"
                   >
-                    <User aria-hidden="true" size={22} />
-                  </Link>
+                    {user.avatar ? (
+                      <img
+                        alt=""
+                        className="size-6 rounded-full object-cover"
+                        src={user.avatar}
+                      />
+                    ) : (
+                      <User aria-hidden="true" size={22} />
+                    )}
+                  </button>
                 )}
                 <button
                   aria-controls="mobile-menu"
@@ -177,7 +251,7 @@ const Header = ({ isHydrated }) => {
             <Link
               className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg bg-gray-100 px-4 py-3 font-medium text-secondary-100 text-sm outline-none transition-colors hover:bg-gray-200 focus-visible:ring-2 focus-visible:ring-primary-200"
               onClick={() => setMenuOpen(false)}
-              to={isLoggedIn ? "/account" : "/login"}
+              to={isLoggedIn ? "/dashboard" : "/login"}
             >
               <User aria-hidden="true" size={20} />
               <span className="truncate">
@@ -196,6 +270,14 @@ const Header = ({ isHydrated }) => {
           </div>
         </nav>
       </div>
+
+      {openMobileMenu && isLoggedIn && (
+        <UserMenuMobile
+          onClose={closeMobileMenu}
+          onLogout={handleLogout}
+          user={user}
+        />
+      )}
     </header>
   );
 };

@@ -1,10 +1,14 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../App";
-import Account from "../pages/Account";
+import AuthRoute from "../components/AuthRoute";
+import Dashboard from "../layouts/Dashboard";
+import Addresses from "../pages/Addresses";
 import ForgotPassword from "../pages/ForgotPassword";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import MyOrders from "../pages/MyOrders";
 import OTPVerification from "../pages/OTPVerification";
+import Profile from "../pages/Profile";
 import Register from "../pages/Register";
 import ResetPassword from "../pages/ResetPassword";
 import SearchPage from "../pages/SearchPage";
@@ -22,32 +26,74 @@ const router = createBrowserRouter([
         path: "search",
       },
       {
-        element: <Register />,
+        element: (
+          <AuthRoute>
+            <Register />
+          </AuthRoute>
+        ),
         path: "register",
       },
       {
-        element: <Login />,
+        element: (
+          <AuthRoute>
+            <Login />
+          </AuthRoute>
+        ),
         path: "login",
       },
       {
-        element: <VerifyEmail />,
+        element: (
+          <AuthRoute>
+            <VerifyEmail />
+          </AuthRoute>
+        ),
         path: "verify-email",
       },
       {
-        element: <ForgotPassword />,
+        element: (
+          <AuthRoute>
+            <ForgotPassword />
+          </AuthRoute>
+        ),
         path: "forgot-password",
       },
       {
-        element: <OTPVerification />,
+        element: (
+          <AuthRoute>
+            <OTPVerification />
+          </AuthRoute>
+        ),
         path: "verification-otp",
       },
       {
-        element: <ResetPassword />,
+        element: (
+          <AuthRoute>
+            <ResetPassword />
+          </AuthRoute>
+        ),
         path: "reset-password",
       },
       {
-        element: <Account />,
-        path: "account",
+        children: [
+          {
+            element: <Navigate replace to="profile" />,
+            index: true,
+          },
+          {
+            element: <Profile />,
+            path: "profile",
+          },
+          {
+            element: <MyOrders />,
+            path: "myorders",
+          },
+          {
+            element: <Addresses />,
+            path: "address",
+          },
+        ],
+        element: <Dashboard />,
+        path: "dashboard",
       },
     ],
     element: <App />,

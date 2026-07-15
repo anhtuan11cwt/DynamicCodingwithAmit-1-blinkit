@@ -23,6 +23,14 @@ const SummaryApi = {
     method: "post",
     url: "/auth/reset-password",
   },
+  updateUserDetails: {
+    method: "patch",
+    url: "/users/update-user",
+  },
+  uploadAvatar: {
+    method: "put",
+    url: "/users/upload-avatar",
+  },
   userDetails: {
     method: "get",
     url: "/users/me",
