@@ -3,9 +3,24 @@
 
 @theme {
   --font-sans: "Inter", sans-serif;
+
+  --color-primary-100: #ffc929;
+  --color-primary-200: #ffbf00;
+
+  --color-secondary-100: #0b1a78;
+  --color-secondary-200: #071c55;
 }
 
 body {
   font-family: var(--font-sans);
   background: #eff6ff;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
