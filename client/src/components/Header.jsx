@@ -1,8 +1,9 @@
-import { ArrowLeft, Menu, ShoppingCart, User, X } from "lucide-react";
+import { ArrowLeft, LogIn, Menu, User, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import useMobile from "../hooks/useMobile";
+import Cart from "./Cart";
 import SearchBar from "./Search";
 
 const mobileLinks = [
@@ -10,6 +11,9 @@ const mobileLinks = [
   { label: "Danh mục", to: "/categories" },
   { label: "Ưu đãi", to: "/offers" },
 ];
+
+const totalQty = 3;
+const totalPrice = 15000;
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -56,24 +60,15 @@ const Header = () => {
           <SearchBar />
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           <Link
-            className="flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2.5 font-medium text-secondary-100 text-sm outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
+            className="flex cursor-pointer items-center gap-1.5 font-semibold text-secondary-100 outline-none transition-colors duration-200 hover:text-primary-200 focus-visible:ring-2 focus-visible:ring-primary-200"
             to="/login"
           >
-            <User aria-hidden="true" size={20} />
-            <span>Đăng nhập</span>
+            <LogIn aria-hidden="true" size={20} />
+            Đăng nhập
           </Link>
-          <button
-            aria-label="Giỏ hàng"
-            className="relative flex cursor-pointer items-center justify-center rounded-lg bg-primary-200 p-2.5 text-secondary-200 outline-none transition-colors hover:bg-primary-100 focus-visible:ring-2 focus-visible:ring-secondary-100"
-            type="button"
-          >
-            <ShoppingCart aria-hidden="true" size={20} />
-            <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-secondary-100 font-semibold text-white text-xs">
-              0
-            </span>
-          </button>
+          <Cart totalPrice={totalPrice} totalQty={totalQty} />
         </div>
       </div>
 
@@ -167,17 +162,11 @@ const Header = () => {
               <User aria-hidden="true" size={20} />
               <span>Đăng nhập</span>
             </Link>
-            <button
-              aria-label="Giỏ hàng"
-              className="relative flex cursor-pointer items-center justify-center rounded-lg bg-primary-200 px-4 py-3 text-secondary-200 outline-none transition-colors hover:bg-primary-100 focus-visible:ring-2 focus-visible:ring-secondary-100"
+            <Cart
               onClick={() => setMenuOpen(false)}
-              type="button"
-            >
-              <ShoppingCart aria-hidden="true" size={20} />
-              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-secondary-100 font-semibold text-white text-xs">
-                0
-              </span>
-            </button>
+              totalPrice={totalPrice}
+              totalQty={totalQty}
+            />
           </div>
         </nav>
       </div>
