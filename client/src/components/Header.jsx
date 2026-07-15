@@ -1,7 +1,8 @@
-import { Menu, Search, ShoppingCart, User, X } from "lucide-react";
+import { ArrowLeft, Menu, ShoppingCart, User, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import useMobile from "../hooks/useMobile";
 import SearchBar from "./Search";
 
 const mobileLinks = [
@@ -14,6 +15,10 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef(null);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const isMobile = useMobile();
+  const isSearchPage = pathname === "/search";
+  const hideLogoAndUser = isMobile && isSearchPage;
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -38,21 +43,20 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md" ref={headerRef}>
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-3">
+      <div className="mx-auto hidden h-20 max-w-7xl items-center justify-between px-3 lg:flex">
         <Link
           aria-label="Trang chủ Blinkit"
           className="flex shrink-0 cursor-pointer items-center"
           to="/"
         >
-          <img alt="Blinkit" className="hidden w-32 lg:block" src={logo} />
-          <img alt="Blinkit" className="block w-10 lg:hidden" src={logo} />
+          <img alt="Blinkit" className="w-32" src={logo} />
         </Link>
 
-        <div className="hidden flex-1 px-6 lg:block">
+        <div className="flex-1 px-6">
           <SearchBar />
         </div>
 
-        <div className="hidden items-center gap-2 lg:flex">
+        <div className="flex items-center gap-2">
           <Link
             className="flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2.5 font-medium text-secondary-100 text-sm outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
             to="/login"
@@ -71,31 +75,64 @@ const Header = () => {
             </span>
           </button>
         </div>
+      </div>
 
-        <div className="flex items-center gap-2 lg:hidden">
-          <button
-            aria-label="Tìm kiếm"
-            className="flex cursor-pointer items-center justify-center rounded-lg p-2.5 text-secondary-100 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
-            onClick={() => navigate("/search")}
-            type="button"
-          >
-            <Search aria-hidden="true" size={22} />
-          </button>
-          <button
-            aria-controls="mobile-menu"
-            aria-expanded={menuOpen}
-            aria-label={menuOpen ? "Đóng menu" : "Mở menu"}
-            className="flex cursor-pointer items-center justify-center rounded-lg p-2.5 text-secondary-100 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
-            onClick={() => setMenuOpen((open) => !open)}
-            type="button"
-          >
-            {menuOpen ? (
-              <X aria-hidden="true" size={24} />
-            ) : (
-              <Menu aria-hidden="true" size={24} />
-            )}
-          </button>
-        </div>
+      <div className="lg:hidden">
+        {isSearchPage ? (
+          <div className="flex h-16 items-center gap-2 px-3">
+            <button
+              aria-label="Quay lại"
+              className="flex cursor-pointer items-center justify-center rounded-lg p-2.5 text-secondary-100 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
+              onClick={() => navigate(-1)}
+              type="button"
+            >
+              <ArrowLeft aria-hidden="true" size={22} />
+            </button>
+            <div className="flex-1">
+              <SearchBar />
+            </div>
+          </div>
+        ) : (
+          <div className="flex h-24 flex-col justify-center gap-2 px-3">
+            <div className="flex items-center justify-between">
+              {!hideLogoAndUser && (
+                <Link
+                  aria-label="Trang chủ Blinkit"
+                  className="flex shrink-0 cursor-pointer items-center"
+                  to="/"
+                >
+                  <img alt="Blinkit" className="w-10" src={logo} />
+                </Link>
+              )}
+              <div className="flex items-center gap-2">
+                {!hideLogoAndUser && (
+                  <Link
+                    aria-label="Tài khoản"
+                    className="flex cursor-pointer items-center justify-center rounded-lg p-2.5 text-secondary-100 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
+                    to="/login"
+                  >
+                    <User aria-hidden="true" size={22} />
+                  </Link>
+                )}
+                <button
+                  aria-controls="mobile-menu"
+                  aria-expanded={menuOpen}
+                  aria-label={menuOpen ? "Đóng menu" : "Mở menu"}
+                  className="flex cursor-pointer items-center justify-center rounded-lg p-2.5 text-secondary-100 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
+                  onClick={() => setMenuOpen((open) => !open)}
+                  type="button"
+                >
+                  {menuOpen ? (
+                    <X aria-hidden="true" size={24} />
+                  ) : (
+                    <Menu aria-hidden="true" size={24} />
+                  )}
+                </button>
+              </div>
+            </div>
+            <SearchBar />
+          </div>
+        )}
       </div>
 
       <div
