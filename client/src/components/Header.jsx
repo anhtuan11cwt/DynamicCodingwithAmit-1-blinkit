@@ -1,5 +1,6 @@
 import { ArrowLeft, LogIn, Menu, User, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import useMobile from "../hooks/useMobile";
@@ -15,7 +16,7 @@ const mobileLinks = [
 const totalQty = 3;
 const totalPrice = 15000;
 
-const Header = () => {
+const Header = ({ isHydrated }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef(null);
   const navigate = useNavigate();
@@ -23,6 +24,8 @@ const Header = () => {
   const isMobile = useMobile();
   const isSearchPage = pathname === "/search";
   const hideLogoAndUser = isMobile && isSearchPage;
+  const user = useSelector((state) => state.user);
+  const isLoggedIn = Boolean(user._id);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -61,13 +64,30 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <Link
-            className="flex cursor-pointer items-center gap-1.5 font-semibold text-secondary-100 outline-none transition-colors duration-200 hover:text-primary-200 focus-visible:ring-2 focus-visible:ring-primary-200"
-            to="/login"
-          >
-            <LogIn aria-hidden="true" size={20} />
-            Đăng nhập
-          </Link>
+          {isHydrated ? (
+            isLoggedIn ? (
+              <Link
+                className="flex max-w-[12rem] cursor-pointer items-center gap-1.5 font-semibold text-secondary-100 outline-none transition-colors duration-200 hover:text-primary-200 focus-visible:ring-2 focus-visible:ring-primary-200"
+                to="/account"
+              >
+                <User aria-hidden="true" className="shrink-0" size={20} />
+                <span className="truncate">{user.name || "Tài khoản"}</span>
+              </Link>
+            ) : (
+              <Link
+                className="flex cursor-pointer items-center gap-1.5 font-semibold text-secondary-100 outline-none transition-colors duration-200 hover:text-primary-200 focus-visible:ring-2 focus-visible:ring-primary-200"
+                to="/login"
+              >
+                <LogIn aria-hidden="true" size={20} />
+                Đăng nhập
+              </Link>
+            )
+          ) : (
+            <div className="flex items-center gap-1.5">
+              <div className="size-5 animate-pulse rounded-full bg-gray-200" />
+              <div className="h-4 w-20 animate-pulse rounded bg-gray-200" />
+            </div>
+          )}
           <Cart totalPrice={totalPrice} totalQty={totalQty} />
         </div>
       </div>
@@ -104,7 +124,7 @@ const Header = () => {
                   <Link
                     aria-label="Tài khoản"
                     className="flex cursor-pointer items-center justify-center rounded-lg p-2.5 text-secondary-100 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
-                    to="/login"
+                    to={isLoggedIn ? "/account" : "/login"}
                   >
                     <User aria-hidden="true" size={22} />
                   </Link>
@@ -157,10 +177,16 @@ const Header = () => {
             <Link
               className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-lg bg-gray-100 px-4 py-3 font-medium text-secondary-100 text-sm outline-none transition-colors hover:bg-gray-200 focus-visible:ring-2 focus-visible:ring-primary-200"
               onClick={() => setMenuOpen(false)}
-              to="/login"
+              to={isLoggedIn ? "/account" : "/login"}
             >
               <User aria-hidden="true" size={20} />
-              <span>Đăng nhập</span>
+              <span className="truncate">
+                {isHydrated
+                  ? isLoggedIn
+                    ? user.name || "Tài khoản"
+                    : "Đăng nhập"
+                  : "Đang tải..."}
+              </span>
             </Link>
             <Cart
               onClick={() => setMenuOpen(false)}

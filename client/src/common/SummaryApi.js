@@ -23,6 +23,10 @@ const SummaryApi = {
     method: "post",
     url: "/auth/reset-password",
   },
+  userDetails: {
+    method: "get",
+    url: "/users/me",
+  },
   verifyEmail: {
     method: "post",
     url: "/auth/verify-email",
