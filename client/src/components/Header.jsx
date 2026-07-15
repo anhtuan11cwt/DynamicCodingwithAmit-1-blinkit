@@ -1,7 +1,8 @@
 import { Menu, Search, ShoppingCart, User, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import SearchBar from "./Search";
 
 const mobileLinks = [
   { label: "Trang chủ", to: "/" },
@@ -12,6 +13,7 @@ const mobileLinks = [
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -47,19 +49,7 @@ const Header = () => {
         </Link>
 
         <div className="hidden flex-1 px-6 lg:block">
-          <label className="relative flex items-center">
-            <span className="sr-only">Tìm kiếm sản phẩm</span>
-            <Search
-              aria-hidden="true"
-              className="pointer-events-none absolute left-3 text-gray-400"
-              size={18}
-            />
-            <input
-              className="w-full rounded-lg border border-gray-200 bg-gray-50 py-2.5 pr-4 pl-10 text-gray-800 text-sm outline-none transition-colors focus:border-primary-200 focus:bg-white focus-visible:ring-2 focus-visible:ring-primary-200"
-              placeholder="Tìm kiếm sản phẩm..."
-              type="search"
-            />
-          </label>
+          <SearchBar />
         </div>
 
         <div className="hidden items-center gap-2 lg:flex">
@@ -86,6 +76,7 @@ const Header = () => {
           <button
             aria-label="Tìm kiếm"
             className="flex cursor-pointer items-center justify-center rounded-lg p-2.5 text-secondary-100 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
+            onClick={() => navigate("/search")}
             type="button"
           >
             <Search aria-hidden="true" size={22} />
