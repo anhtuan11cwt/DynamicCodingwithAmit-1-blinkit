@@ -2,9 +2,9 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <h1 className="font-bold text-3xl underline">Xin chào thế giới!</h1>
-    </div>
+    <main className="min-h-screen bg-blue-50">
+      <h1 className="font-bold text-3xl text-red-500">Blinkit App</h1>
+    </main>
   );
 }
 
