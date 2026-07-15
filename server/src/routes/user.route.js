@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  getUserDetails,
   updateUserDetails,
   uploadAvatar,
 } from "../controllers/user.controller.js";
@@ -7,6 +8,63 @@ import auth from "../middleware/auth.js";
 import upload from "../middleware/multer.js";
 
 const router = express.Router();
+
+/**
+ * @openapi
+ * /api/v1/users/me:
+ *   get:
+ *     tags: [Users]
+ *     summary: Lấy thông tin người dùng đang đăng nhập
+ *     description: |
+ *       Trả về thông tin profile của user hiện tại dựa trên accessToken
+ *       (cookie `accessToken` hoặc header `Authorization: Bearer <token>`).
+ *       Đã loại bỏ các trường nhạy cảm (password, refresh_token, OTP).
+ *     security:
+ *       - cookieAuth: []
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lấy thông tin thành công
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Lấy thông tin người dùng thành công
+ *               success: true
+ *               data:
+ *                 _id: 6849a1b2c3d4e5f6a7b8c9d0
+ *                 name: Nguyen Van A
+ *                 email: nguyenvana@gmail.com
+ *                 avatar: ""
+ *                 mobile: null
+ *                 role: USER
+ *                 verify_email: true
+ *                 status: Active
+ *       401:
+ *         description: Chưa xác thực hoặc token không hợp lệ
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: true
+ *               message: Token không hợp lệ
+ *               success: false
+ *       404:
+ *         description: Không tìm thấy người dùng
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: true
+ *               message: Không tìm thấy người dùng
+ *               success: false
+ *       500:
+ *         description: Lỗi máy chủ
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: true
+ *               message: Đã xảy ra lỗi
+ *               success: false
+ */
+router.get("/me", auth, getUserDetails);
 
 /**
  * @openapi

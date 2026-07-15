@@ -7,6 +7,34 @@ import uploadImageCloudinary, {
 } from "../utils/uploadImageCloudinary.js";
 import { updateProfileSchema } from "../validations/user.validation.js";
 
+export const getUserDetails = async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.userId).select(
+      "-password -refresh_token -forgot_password_otp -forgot_password_expiry",
+    );
+
+    if (!user) {
+      return res.status(404).json({
+        error: true,
+        message: "Không tìm thấy người dùng",
+        success: false,
+      });
+    }
+
+    return res.json({
+      data: user,
+      message: "Lấy thông tin người dùng thành công",
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: error.message || "Đã xảy ra lỗi",
+      success: false,
+    });
+  }
+};
+
 export const uploadAvatar = async (req, res) => {
   try {
     const file = req.file;
