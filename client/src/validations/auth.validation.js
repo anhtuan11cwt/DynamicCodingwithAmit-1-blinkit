@@ -13,6 +13,7 @@ export const fieldSchemas = {
   confirmPassword: passwordSchema,
   email: emailSchema,
   name: personNameSchema,
+  newPassword: passwordSchema,
   password: passwordSchema,
 };
 
@@ -32,3 +33,14 @@ export const loginSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
 });
+
+export const resetPasswordSchema = z
+  .object({
+    confirmPassword: passwordSchema,
+    email: emailSchema,
+    newPassword: passwordSchema,
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Mật khẩu xác nhận không khớp",
+    path: ["confirmPassword"],
+  });

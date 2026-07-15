@@ -7,7 +7,14 @@ import Header from "./components/Header";
 import { setUserDetails } from "./store/userSlice";
 import fetchUserDetails from "./utils/fetchUserDetails";
 
-const hideFooterRoutes = ["/register", "/login", "/verify-email"];
+const hideFooterRoutes = [
+  "/register",
+  "/login",
+  "/verify-email",
+  "/forgot-password",
+  "/verification-otp",
+  "/reset-password",
+];
 
 function App() {
   const { pathname } = useLocation();
