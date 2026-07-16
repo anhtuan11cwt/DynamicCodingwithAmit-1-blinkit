@@ -1,7 +1,19 @@
 const SummaryApi = {
+  addCategory: {
+    method: "post",
+    url: "/category/add-category",
+  },
+  deleteCategory: {
+    method: "delete",
+    url: "/category/delete",
+  },
   forgotPassword: {
     method: "post",
     url: "/auth/forgot-password",
+  },
+  getCategory: {
+    method: "get",
+    url: "/category/get",
   },
   login: {
     method: "post",
@@ -23,6 +35,10 @@ const SummaryApi = {
     method: "post",
     url: "/auth/reset-password",
   },
+  updateCategory: {
+    method: "put",
+    url: "/category/update",
+  },
   updateUserDetails: {
     method: "patch",
     url: "/users/update-user",
@@ -33,7 +49,7 @@ const SummaryApi = {
   },
   uploadImage: {
     method: "post",
-    url: "/files/upload",
+    url: "/upload/image",
   },
   userDetails: {
     method: "get",

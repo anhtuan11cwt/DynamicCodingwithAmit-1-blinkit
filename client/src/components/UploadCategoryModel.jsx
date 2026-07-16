@@ -1,18 +1,31 @@
-import { Camera, Loader2, Trash2, Upload } from "lucide-react";
-import { useState } from "react";
+import { Camera, Loader2, Trash2, Upload, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { IoClose } from "react-icons/io5";
+import SummaryApi from "../common/SummaryApi";
 import AxiosToastError from "../utils/AxiosToastError";
+import Axios from "../utils/axios";
 import uploadImage from "../utils/uploadImage";
 
 const ALLOWED_TYPES = ["image/gif", "image/jpeg", "image/png", "image/webp"];
 
-const UploadCategoryModel = ({ close }) => {
+const UploadCategoryModel = ({ close, onSuccess }) => {
   const [data, setData] = useState({
-    image: "",
+    imageFile: null,
+    imagePreview: "",
     name: "",
   });
-  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
+  const previewUrlRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (previewUrlRef.current) {
+        URL.revokeObjectURL(previewUrlRef.current);
+      }
+    };
+  }, []);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -22,7 +35,7 @@ const UploadCategoryModel = ({ close }) => {
     }));
   };
 
-  const handleUploadCategoryImage = async (e) => {
+  const handleSelectImage = (e) => {
     const file = e.target.files?.[0];
 
     if (!file) return;
@@ -32,25 +45,70 @@ const UploadCategoryModel = ({ close }) => {
       return;
     }
 
-    try {
-      setLoading(true);
-      const response = await uploadImage(file);
-      const imageUrl =
-        response?.data?.url ?? response?.data?.image ?? response?.url ?? "";
-
-      setData((prev) => ({
-        ...prev,
-        image: imageUrl,
-      }));
-    } catch (error) {
-      AxiosToastError(error);
-    } finally {
-      setLoading(false);
+    if (previewUrlRef.current) {
+      URL.revokeObjectURL(previewUrlRef.current);
     }
+
+    const objectUrl = URL.createObjectURL(file);
+    previewUrlRef.current = objectUrl;
+
+    setData((prev) => ({
+      ...prev,
+      imageFile: file,
+      imagePreview: objectUrl,
+    }));
   };
 
   const handleRemoveImage = () => {
-    setData((prev) => ({ ...prev, image: "" }));
+    if (previewUrlRef.current) {
+      URL.revokeObjectURL(previewUrlRef.current);
+      previewUrlRef.current = null;
+    }
+
+    setData((prev) => ({
+      ...prev,
+      imageFile: null,
+      imagePreview: "",
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!data.name || !data.imageFile) {
+      toast.error("Vui lòng nhập tên và chọn ảnh danh mục");
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+
+      const uploadRes = await uploadImage(data.imageFile, "category");
+      const imageUrl =
+        uploadRes?.data?.url ?? uploadRes?.data?.image ?? uploadRes?.url ?? "";
+
+      if (!imageUrl) {
+        toast.error("Tải ảnh lên thất bại");
+        return;
+      }
+
+      const response = await Axios({
+        ...SummaryApi.addCategory,
+        data: { image: imageUrl, name: data.name },
+      });
+
+      if (response.data.success) {
+        toast.success(response.data.message);
+        handleRemoveImage();
+        setData((prev) => ({ ...prev, name: "" }));
+        onSuccess?.();
+        close();
+      }
+    } catch (error) {
+      AxiosToastError(error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -70,7 +128,12 @@ const UploadCategoryModel = ({ close }) => {
           </h2>
           <button
             aria-label="Đóng"
-            className="flex cursor-pointer items-center justify-center rounded-lg p-2 text-secondary-100 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
+            className={`flex items-center justify-center rounded-lg p-2 text-secondary-100 outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200 ${
+              submitting
+                ? "pointer-events-none cursor-not-allowed opacity-50"
+                : "cursor-pointer"
+            }`}
+            disabled={submitting}
             onClick={close}
             type="button"
           >
@@ -78,7 +141,7 @@ const UploadCategoryModel = ({ close }) => {
           </button>
         </div>
 
-        <form className="grid gap-4">
+        <form className="grid gap-4" onSubmit={handleSubmit}>
           <div className="grid gap-1.5">
             <label
               className="font-medium text-secondary-100 text-sm"
@@ -87,7 +150,12 @@ const UploadCategoryModel = ({ close }) => {
               Tên danh mục
             </label>
             <input
-              className="h-11 rounded-lg border border-gray-300 bg-blue-50/40 px-3 text-secondary-100 outline-none transition-colors focus-visible:border-primary-200 focus-visible:ring-2 focus-visible:ring-primary-200"
+              className={`h-11 rounded-lg border bg-blue-50/40 px-3 text-secondary-100 outline-none transition-colors focus-visible:border-primary-200 focus-visible:ring-2 focus-visible:ring-primary-200 ${
+                submitting
+                  ? "pointer-events-none border-gray-200 opacity-50"
+                  : "border-gray-300"
+              }`}
+              disabled={submitting}
               id="categoryName"
               name="name"
               onChange={handleOnChange}
@@ -103,16 +171,29 @@ const UploadCategoryModel = ({ close }) => {
               Hình ảnh
             </span>
 
-            {data.image ? (
-              <div className="group relative overflow-hidden rounded-xl border border-gray-200">
+            {data.imagePreview ? (
+              <div
+                className={`relative overflow-hidden rounded-xl border border-gray-200 ${
+                  submitting ? "pointer-events-none" : "group"
+                }`}
+              >
                 <img
                   alt={data.name || "Ảnh danh mục"}
-                  className="aspect-video w-full object-cover"
-                  src={data.image}
+                  className="pointer-events-none aspect-video w-full select-none object-cover"
+                  draggable="false"
+                  src={data.imagePreview}
                 />
-                <div className="absolute inset-0 flex items-center justify-center gap-2 bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
+                <div
+                  className={`absolute inset-0 flex items-center justify-center gap-2 bg-black/40 transition-opacity ${
+                    submitting ? "hidden" : "opacity-0 group-hover:opacity-100"
+                  }`}
+                >
                   <label
-                    className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-white/90 px-3 py-2 font-medium text-secondary-100 text-xs backdrop-blur-sm transition-colors hover:bg-white"
+                    className={`items-center gap-1.5 rounded-lg bg-white/90 px-3 py-2 font-medium text-secondary-100 text-xs backdrop-blur-sm transition-colors hover:bg-white ${
+                      submitting
+                        ? "pointer-events-none cursor-not-allowed opacity-50"
+                        : "flex cursor-pointer"
+                    }`}
                     htmlFor="uploadCategoryImageReplace"
                   >
                     <Upload aria-hidden="true" size={14} />
@@ -120,14 +201,19 @@ const UploadCategoryModel = ({ close }) => {
                     <input
                       accept="image/*"
                       className="hidden"
-                      disabled={loading}
+                      disabled={submitting}
                       id="uploadCategoryImageReplace"
-                      onChange={handleUploadCategoryImage}
+                      onChange={handleSelectImage}
                       type="file"
                     />
                   </label>
                   <button
-                    className="flex cursor-pointer items-center gap-1.5 rounded-lg bg-red-500/90 px-3 py-2 font-medium text-white text-xs backdrop-blur-sm transition-colors hover:bg-red-600"
+                    className={`items-center gap-1.5 rounded-lg bg-red-500/90 px-3 py-2 font-medium text-white text-xs backdrop-blur-sm transition-colors hover:bg-red-600 ${
+                      submitting
+                        ? "pointer-events-none cursor-not-allowed opacity-50"
+                        : "flex cursor-pointer"
+                    }`}
+                    disabled={submitting}
                     onClick={handleRemoveImage}
                     type="button"
                   >
@@ -135,41 +221,24 @@ const UploadCategoryModel = ({ close }) => {
                     Xoá
                   </button>
                 </div>
-                {loading && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                    <Loader2
-                      aria-hidden="true"
-                      className="animate-spin text-white"
-                      size={28}
-                    />
-                  </div>
-                )}
               </div>
             ) : (
               <label
-                className={`flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-gray-300 border-dashed bg-gray-50/50 px-4 py-8 transition-colors ${
-                  loading
-                    ? "pointer-events-none cursor-not-allowed border-primary-200 bg-primary-50"
-                    : "hover:border-primary-200 hover:bg-primary-50"
+                className={`flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed bg-gray-50/50 px-4 py-8 transition-colors ${
+                  submitting
+                    ? "pointer-events-none cursor-not-allowed border-gray-200 opacity-50"
+                    : "cursor-pointer border-gray-300 hover:border-primary-200 hover:bg-primary-50"
                 }`}
                 htmlFor="uploadCategoryImage"
               >
-                {loading ? (
-                  <Loader2
-                    aria-hidden="true"
-                    className="animate-spin text-primary-200"
-                    size={32}
-                  />
-                ) : (
-                  <Camera
-                    aria-hidden="true"
-                    className="text-gray-400"
-                    size={32}
-                  />
-                )}
+                <Camera
+                  aria-hidden="true"
+                  className="text-gray-400"
+                  size={32}
+                />
                 <div className="text-center">
                   <p className="font-medium text-secondary-100 text-sm">
-                    {loading ? "Đang tải ảnh lên..." : "Nhấn để tải ảnh lên"}
+                    Nhấn để chọn ảnh
                   </p>
                   <p className="mt-0.5 text-gray-400 text-xs">
                     JPG, PNG, WEBP hoặc GIF
@@ -178,22 +247,48 @@ const UploadCategoryModel = ({ close }) => {
                 <input
                   accept="image/*"
                   className="hidden"
-                  disabled={loading}
+                  disabled={submitting}
                   id="uploadCategoryImage"
-                  onChange={handleUploadCategoryImage}
+                  onChange={handleSelectImage}
                   type="file"
                 />
               </label>
             )}
           </div>
 
-          <button
-            className="mt-1 h-11 rounded-lg bg-primary-200 font-semibold text-secondary-100 outline-none transition-colors hover:bg-primary-100 focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-400"
-            disabled={loading || !data.name || !data.image}
-            type="submit"
-          >
-            Thêm danh mục
-          </button>
+          <div className="mt-1 flex gap-3">
+            <button
+              className={`flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-gray-300 font-semibold text-gray-600 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary-200 ${
+                submitting
+                  ? "pointer-events-none cursor-not-allowed opacity-50"
+                  : "cursor-pointer hover:bg-gray-50"
+              }`}
+              disabled={submitting}
+              onClick={close}
+              type="button"
+            >
+              <X aria-hidden="true" size={18} />
+              Hủy
+            </button>
+            <button
+              className={`flex h-11 flex-1 items-center justify-center gap-2 rounded-full bg-green-600 font-semibold text-white outline-none transition-colors duration-200 hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-800 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500 ${
+                submitting ? "pointer-events-none opacity-50" : "cursor-pointer"
+              }`}
+              disabled={submitting || !data.name || !data.imageFile}
+              type="submit"
+            >
+              {submitting ? (
+                <Loader2
+                  aria-hidden="true"
+                  className="animate-spin"
+                  size={18}
+                />
+              ) : (
+                <Upload aria-hidden="true" size={18} />
+              )}
+              {submitting ? "Đang thêm..." : "Thêm danh mục"}
+            </button>
+          </div>
         </form>
       </div>
     </section>
