@@ -1,4 +1,16 @@
-import { ArrowLeft, ChevronDown, LogIn, Menu, User, X } from "lucide-react";
+import {
+  ArrowLeft,
+  ChevronDown,
+  LayoutGrid,
+  ListTree,
+  LogIn,
+  MapPin,
+  Menu,
+  Package,
+  Upload,
+  User,
+  X,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,19 +21,11 @@ import useMobile from "../hooks/useMobile";
 import { logout } from "../store/userSlice";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/axios";
+import isAdmin from "../utils/isAdmin";
 import Cart from "./Cart";
 import SearchBar from "./Search";
 import UserMenu from "./UserMenu";
 import UserMenuMobile from "./UserMenuMobile";
-
-const mobileLinks = [
-  { label: "Trang chủ", to: "/" },
-  { label: "Danh mục", to: "/categories" },
-  { label: "Ưu đãi", to: "/offers" },
-];
-
-const totalQty = 3;
-const totalPrice = 15000;
 
 const Header = ({ isHydrated }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -153,7 +157,7 @@ const Header = ({ isHydrated }) => {
               <div className="h-4 w-20 animate-pulse rounded bg-gray-200" />
             </div>
           )}
-          <Cart totalPrice={totalPrice} totalQty={totalQty} />
+          <Cart />
         </div>
       </div>
 
@@ -173,7 +177,7 @@ const Header = ({ isHydrated }) => {
             </div>
           </div>
         ) : (
-          <div className="flex h-24 flex-col justify-center gap-2 px-3">
+          <div className="flex h-24 flex-col justify-center gap-2 px-3 pb-2">
             <div className="flex items-center justify-between">
               {!hideLogoAndUser && (
                 <Link
@@ -235,17 +239,83 @@ const Header = ({ isHydrated }) => {
           className="mx-auto max-w-7xl px-3 py-3"
         >
           <ul className="flex flex-col">
-            {mobileLinks.map((link) => (
-              <li key={link.to}>
-                <Link
-                  className="block cursor-pointer rounded-lg px-3 py-3 font-medium text-gray-700 text-sm outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
-                  onClick={() => setMenuOpen(false)}
-                  to={link.to}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+            {isAdmin(user.role) ? (
+              <>
+                <li>
+                  <Link
+                    className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3 font-medium text-gray-700 text-sm outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
+                    onClick={() => setMenuOpen(false)}
+                    to="/dashboard/category"
+                  >
+                    <LayoutGrid aria-hidden="true" size={18} />
+                    Danh mục
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3 font-medium text-gray-700 text-sm outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
+                    onClick={() => setMenuOpen(false)}
+                    to="/dashboard/subcategory"
+                  >
+                    <ListTree aria-hidden="true" size={18} />
+                    Danh mục con
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3 font-medium text-gray-700 text-sm outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
+                    onClick={() => setMenuOpen(false)}
+                    to="/dashboard/upload-product"
+                  >
+                    <Upload aria-hidden="true" size={18} />
+                    Tải lên sản phẩm
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3 font-medium text-gray-700 text-sm outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
+                    onClick={() => setMenuOpen(false)}
+                    to="/dashboard/product"
+                  >
+                    <Package aria-hidden="true" size={18} />
+                    Sản phẩm
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3 font-medium text-gray-700 text-sm outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
+                    onClick={() => setMenuOpen(false)}
+                    to="/dashboard/profile"
+                  >
+                    <User aria-hidden="true" size={18} />
+                    Hồ sơ của tôi
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3 font-medium text-gray-700 text-sm outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
+                    onClick={() => setMenuOpen(false)}
+                    to="/dashboard/myorders"
+                  >
+                    <Package aria-hidden="true" size={18} />
+                    Đơn hàng của tôi
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3 font-medium text-gray-700 text-sm outline-none transition-colors hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-primary-200"
+                    onClick={() => setMenuOpen(false)}
+                    to="/dashboard/address"
+                  >
+                    <MapPin aria-hidden="true" size={18} />
+                    Địa chỉ đã lưu
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
           <div className="mt-2 flex items-center gap-2 border-gray-100 border-t pt-3">
             <Link
@@ -262,11 +332,7 @@ const Header = ({ isHydrated }) => {
                   : "Đang tải..."}
               </span>
             </Link>
-            <Cart
-              onClick={() => setMenuOpen(false)}
-              totalPrice={totalPrice}
-              totalQty={totalQty}
-            />
+            <Cart onClick={() => setMenuOpen(false)} />
           </div>
         </nav>
       </div>
