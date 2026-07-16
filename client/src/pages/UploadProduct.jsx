@@ -1,7 +1,9 @@
 import { ImagePlus, Trash2 } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { IoClose } from "react-icons/io5";
 import { useSelector } from "react-redux";
+import AddFieldComponent from "../components/AddFieldComponent";
 import Loading from "../components/Loading";
 import ViewImage from "../components/ViewImage";
 import uploadImage from "../utils/uploadImage";
@@ -17,6 +19,7 @@ const UploadProduct = () => {
     description: "",
     discount: "",
     image: [],
+    moreDetails: {},
     name: "",
     price: "",
     stock: "",
@@ -25,12 +28,91 @@ const UploadProduct = () => {
   });
   const [imageLoading, setImageLoading] = useState(false);
   const [viewImageURL, setViewImageURL] = useState("");
+  const [openAddField, setOpenAddField] = useState(false);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setData((prev) => ({
       ...prev,
       [name]: value,
+    }));
+  };
+
+  const handleSelectCategory = (e) => {
+    const value = e.target.value;
+    e.target.value = "";
+
+    const category = allCategory.find((item) => item._id === value);
+    if (!category) return;
+
+    const exists = data.category.some((id) => id === value);
+    if (exists) return;
+
+    setData((prev) => ({
+      ...prev,
+      category: [...prev.category, value],
+    }));
+  };
+
+  const handleSelectSubCategory = (e) => {
+    const value = e.target.value;
+    e.target.value = "";
+
+    const subCategory = allSubCategory.find((item) => item._id === value);
+    if (!subCategory) return;
+
+    const exists = data.subCategory.some((id) => id === value);
+    if (exists) return;
+
+    setData((prev) => ({
+      ...prev,
+      subCategory: [...prev.subCategory, value],
+    }));
+  };
+
+  const handleRemoveCategory = (id) => {
+    setData((prev) => ({
+      ...prev,
+      category: prev.category.filter((item) => item !== id),
+    }));
+  };
+
+  const handleRemoveSubCategory = (id) => {
+    setData((prev) => ({
+      ...prev,
+      subCategory: prev.subCategory.filter((item) => item !== id),
+    }));
+  };
+
+  const handleAddField = (fieldName) => {
+    if (!fieldName.trim()) return;
+
+    setData((prev) => ({
+      ...prev,
+      moreDetails: {
+        ...prev.moreDetails,
+        [fieldName]: prev.moreDetails[fieldName] ?? "",
+      },
+    }));
+    setOpenAddField(false);
+  };
+
+  const handleChangeMoreDetails = (key, value) => {
+    setData((prev) => ({
+      ...prev,
+      moreDetails: {
+        ...prev.moreDetails,
+        [key]: value,
+      },
+    }));
+  };
+
+  const handleRemoveField = (key) => {
+    const copy = { ...data.moreDetails };
+    delete copy[key];
+    setData((prev) => ({
+      ...prev,
+      moreDetails: copy,
     }));
   };
 
@@ -195,13 +277,12 @@ const UploadProduct = () => {
           >
             Danh mục
           </label>
+
           <select
             className="h-11 w-full rounded-lg border border-gray-300 bg-blue-50/40 px-3 text-secondary-100 outline-none transition-colors focus-visible:border-primary-200 focus-visible:ring-2 focus-visible:ring-primary-200"
-            disabled
             id="productCategory"
-            name="category"
-            onChange={handleOnChange}
-            value={data.category}
+            onChange={handleSelectCategory}
+            value=""
           >
             <option value="">Chọn danh mục</option>
             {allCategory.map((category) => (
@@ -210,6 +291,31 @@ const UploadProduct = () => {
               </option>
             ))}
           </select>
+
+          {data.category.length > 0 && (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {data.category.map((id) => {
+                const category = allCategory.find((item) => item._id === id);
+                if (!category) return null;
+                return (
+                  <p
+                    className="flex items-center gap-1.5 rounded-full bg-primary-100 px-3 py-1 font-medium text-secondary-100 text-sm"
+                    key={id}
+                  >
+                    {category.name}
+                    <button
+                      aria-label={`Bỏ chọn ${category.name}`}
+                      className="rounded-full outline-none transition-colors hover:text-red-600 focus-visible:ring-2 focus-visible:ring-red-600"
+                      onClick={() => handleRemoveCategory(id)}
+                      type="button"
+                    >
+                      <IoClose aria-hidden="true" size={14} />
+                    </button>
+                  </p>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         <div className="grid gap-1.5">
@@ -219,13 +325,12 @@ const UploadProduct = () => {
           >
             Danh mục con
           </label>
+
           <select
             className="h-11 w-full rounded-lg border border-gray-300 bg-blue-50/40 px-3 text-secondary-100 outline-none transition-colors focus-visible:border-primary-200 focus-visible:ring-2 focus-visible:ring-primary-200"
-            disabled
             id="productSubCategory"
-            name="subCategory"
-            onChange={handleOnChange}
-            value={data.subCategory}
+            onChange={handleSelectSubCategory}
+            value=""
           >
             <option value="">Chọn danh mục con</option>
             {allSubCategory.map((subCategory) => (
@@ -234,6 +339,33 @@ const UploadProduct = () => {
               </option>
             ))}
           </select>
+
+          {data.subCategory.length > 0 && (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {data.subCategory.map((id) => {
+                const subCategory = allSubCategory.find(
+                  (item) => item._id === id,
+                );
+                if (!subCategory) return null;
+                return (
+                  <p
+                    className="flex items-center gap-1.5 rounded-full bg-primary-100 px-3 py-1 font-medium text-secondary-100 text-sm"
+                    key={id}
+                  >
+                    {subCategory.name}
+                    <button
+                      aria-label={`Bỏ chọn ${subCategory.name}`}
+                      className="rounded-full outline-none transition-colors hover:text-red-600 focus-visible:ring-2 focus-visible:ring-red-600"
+                      onClick={() => handleRemoveSubCategory(id)}
+                      type="button"
+                    >
+                      <IoClose aria-hidden="true" size={14} />
+                    </button>
+                  </p>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         <div className="grid grid-cols-2 gap-4">
@@ -309,10 +441,67 @@ const UploadProduct = () => {
             />
           </div>
         </div>
+
+        <div className="grid gap-2">
+          <div className="flex items-center justify-between">
+            <span className="font-medium text-secondary-100 text-sm">
+              Thông tin bổ sung
+            </span>
+            <button
+              className="rounded border border-primary-200 px-3 py-1.5 font-medium text-secondary-100 text-sm outline-none transition-all hover:bg-primary-200 focus-visible:ring-2 focus-visible:ring-primary-200"
+              onClick={() => setOpenAddField(true)}
+              type="button"
+            >
+              Thêm trường
+            </button>
+          </div>
+
+          {Object.keys(data.moreDetails).length > 0 && (
+            <div className="grid gap-3">
+              {Object.keys(data.moreDetails).map((key) => (
+                <div className="grid gap-1.5" key={key}>
+                  <div className="flex items-center justify-between">
+                    <label
+                      className="font-medium text-secondary-100 text-sm"
+                      htmlFor={`field-${key}`}
+                    >
+                      {key}
+                    </label>
+                    <button
+                      aria-label={`Xóa trường ${key}`}
+                      className="rounded p-1 text-red-600 outline-none transition-colors hover:bg-red-50 focus-visible:ring-2 focus-visible:ring-red-600"
+                      onClick={() => handleRemoveField(key)}
+                      type="button"
+                    >
+                      <Trash2 aria-hidden="true" size={16} />
+                    </button>
+                  </div>
+                  <input
+                    className="h-11 rounded-lg border border-gray-300 bg-blue-50/40 px-3 text-secondary-100 outline-none transition-colors focus-visible:border-primary-200 focus-visible:ring-2 focus-visible:ring-primary-200"
+                    id={`field-${key}`}
+                    onChange={(e) =>
+                      handleChangeMoreDetails(key, e.target.value)
+                    }
+                    placeholder={`Nhập ${key}`}
+                    type="text"
+                    value={data.moreDetails[key]}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {viewImageURL && (
         <ViewImage close={() => setViewImageURL("")} url={viewImageURL} />
+      )}
+
+      {openAddField && (
+        <AddFieldComponent
+          close={() => setOpenAddField(false)}
+          onAdd={handleAddField}
+        />
       )}
     </section>
   );
