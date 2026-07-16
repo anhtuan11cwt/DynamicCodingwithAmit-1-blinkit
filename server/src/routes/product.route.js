@@ -1,7 +1,10 @@
 import express from "express";
 import {
   createProductController,
+  deleteProductController,
+  getProductByIdController,
   getProductController,
+  updateProductController,
 } from "../controllers/product.controller.js";
 import admin from "../middleware/admin.js";
 import auth from "../middleware/auth.js";
@@ -79,6 +82,103 @@ router.post("/create", auth, admin, createProductController);
 
 /**
  * @openapi
+ * /api/v1/product/update:
+ *   put:
+ *     tags: [Product]
+ *     summary: Cập nhật sản phẩm
+ *     description: |
+ *       Cập nhật thông tin sản phẩm theo `_id`. Các trường không truyền sẽ giữ nguyên giá trị cũ.
+ *       Nếu `image` thay đổi, ảnh cũ sẽ tự động xóa trên Cloudinary. Yêu cầu quyền ADMIN.
+ *     security:
+ *       - cookieAuth: []
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [_id]
+ *             properties:
+ *               _id:
+ *                 type: string
+ *                 example: 6849a1b2c3d4e5f6a7b8c9d0
+ *               name:
+ *                 type: string
+ *                 example: Sữa tươi hữu cơ
+ *               image:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               category:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               subCategory:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               unit:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               stock:
+ *                 type: number
+ *               discount:
+ *                 type: number
+ *               description:
+ *                 type: string
+ *               more_details:
+ *                 type: object
+ *     responses:
+ *       200:
+ *         description: Cập nhật sản phẩm thành công
+ *       400:
+ *         description: Thiếu ID hoặc dữ liệu không hợp lệ
+ *       404:
+ *         description: Không tìm thấy sản phẩm
+ *       500:
+ *         description: Lỗi máy chủ
+ */
+router.put("/update", auth, admin, updateProductController);
+
+/**
+ * @openapi
+ * /api/v1/product/delete:
+ *   delete:
+ *     tags: [Product]
+ *     summary: Xóa sản phẩm
+ *     description: |
+ *       Xóa sản phẩm theo `_id` và xóa tất cả ảnh liên quan trên Cloudinary.
+ *       Yêu cầu quyền ADMIN.
+ *     security:
+ *       - cookieAuth: []
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [_id]
+ *             properties:
+ *               _id:
+ *                 type: string
+ *                 example: 6849a1b2c3d4e5f6a7b8c9d0
+ *     responses:
+ *       200:
+ *         description: Xóa sản phẩm thành công
+ *       400:
+ *         description: Thiếu ID sản phẩm
+ *       404:
+ *         description: Không tìm thấy sản phẩm
+ *       500:
+ *         description: Lỗi máy chủ
+ */
+router.delete("/delete", auth, admin, deleteProductController);
+
+/**
+ * @openapi
  * /api/v1/product/get:
  *   post:
  *     tags: [Product]
@@ -126,5 +226,46 @@ router.post("/create", auth, admin, createProductController);
  *         description: Lỗi máy chủ
  */
 router.post("/get", getProductController);
+
+/**
+ * @openapi
+ * /api/v1/product/getById:
+ *   post:
+ *     tags: [Product]
+ *     summary: Lấy thông tin sản phẩm theo ID
+ *     description: |
+ *       Trả về chi tiết một sản phẩm dựa trên `_id`. Yêu cầu quyền ADMIN.
+ *     security:
+ *       - cookieAuth: []
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [_id]
+ *             properties:
+ *               _id:
+ *                 type: string
+ *                 example: 6849a1b2c3d4e5f6a7b8c9d0
+ *     responses:
+ *       200:
+ *         description: Lấy sản phẩm thành công
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *       400:
+ *         description: Thiếu ID sản phẩm
+ *       404:
+ *         description: Không tìm thấy sản phẩm
+ *       500:
+ *         description: Lỗi máy chủ
+ */
+router.post("/getById", auth, admin, getProductByIdController);
 
 export default router;
