@@ -25,7 +25,7 @@ const ViewImage = ({ url, close }) => {
 
       <button
         aria-label="Đóng"
-        className="absolute top-5 right-5 z-10 rounded-lg p-2 text-white outline-none transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white"
+        className="absolute top-5 right-5 z-10 cursor-pointer rounded-lg p-2 text-white outline-none transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white"
         onClick={close}
         type="button"
       >

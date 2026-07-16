@@ -6,6 +6,7 @@ import SummaryApi from "../common/SummaryApi";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/axios";
 import uploadImage from "../utils/uploadImage";
+import { categorySchema } from "../validations/category.validation";
 
 const ALLOWED_TYPES = ["image/gif", "image/jpeg", "image/png", "image/webp"];
 
@@ -92,9 +93,17 @@ const UploadCategoryModel = ({ close, onSuccess }) => {
         return;
       }
 
+      const payload = { image: imageUrl, name: data.name };
+      const parsed = categorySchema.safeParse(payload);
+
+      if (!parsed.success) {
+        toast.error(parsed.error.errors[0]?.message || "Dữ liệu không hợp lệ");
+        return;
+      }
+
       const response = await Axios({
         ...SummaryApi.addCategory,
-        data: { image: imageUrl, name: data.name },
+        data: payload,
       });
 
       if (response.data.success) {

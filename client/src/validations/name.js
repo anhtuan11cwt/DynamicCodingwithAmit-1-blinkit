@@ -38,3 +38,24 @@ export const personNameSchema = buildNameSchema({
   maxWords: 10,
   pattern: /^[\p{L}\p{M}\s'-]+$/u,
 });
+
+export const categoryNameSchema = buildNameSchema({
+  label: "Tên danh mục",
+  max: 50,
+  maxWords: 10,
+  pattern: /^[\p{L}\p{M}\p{N}\s&.,'-]+$/u,
+});
+
+export const subCategoryNameSchema = buildNameSchema({
+  label: "Tên danh mục con",
+  max: 50,
+  maxWords: 10,
+  pattern: /^[\p{L}\p{M}\p{N}\s&.,()'-]+$/u,
+});
+
+export const productNameSchema = buildNameSchema({
+  label: "Tên sản phẩm",
+  max: 50,
+  maxWords: 15,
+  pattern: /^[\p{L}\p{M}\p{N}\s.,()/\-&+]+$/u,
+});

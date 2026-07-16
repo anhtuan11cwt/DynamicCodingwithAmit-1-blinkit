@@ -7,6 +7,7 @@ import SummaryApi from "../common/SummaryApi";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/axios";
 import uploadImage from "../utils/uploadImage";
+import { subCategorySchema } from "../validations/subCategory.validation";
 
 const ALLOWED_TYPES = ["image/gif", "image/jpeg", "image/png", "image/webp"];
 
@@ -157,6 +158,13 @@ const UploadSubCategoryModel = ({ close, data, onSuccess }) => {
         image: imageUrl,
         name: subCategoryData.name,
       };
+
+      const parsed = subCategorySchema.safeParse(payload);
+
+      if (!parsed.success) {
+        toast.error(parsed.error.errors[0]?.message || "Dữ liệu không hợp lệ");
+        return;
+      }
 
       const endpoint = subCategoryData._id
         ? SummaryApi.updateSubCategory
