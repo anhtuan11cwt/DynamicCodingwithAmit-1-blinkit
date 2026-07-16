@@ -1,5 +1,15 @@
-import { LogOut, MapPin, Package, User, X } from "lucide-react";
+import {
+  LayoutGrid,
+  ListTree,
+  LogOut,
+  MapPin,
+  Package,
+  Upload,
+  User,
+  X,
+} from "lucide-react";
 import { Link } from "react-router-dom";
+import isAdmin from "../utils/isAdmin";
 import Divider from "./Divider";
 
 const UserMenuMobile = ({ onClose, onLogout, user }) => {
@@ -37,39 +47,83 @@ const UserMenuMobile = ({ onClose, onLogout, user }) => {
           </span>
         )}
         <div className="min-w-0">
-          <p className="truncate font-semibold text-gray-800">{displayName}</p>
+          <p className="truncate font-semibold text-gray-800">
+            {displayName}
+            {isAdmin(user.role) && (
+              <span className="ml-1.5 rounded bg-red-100 px-1.5 py-0.5 font-bold text-[10px] text-red-600 uppercase">
+                Quản trị
+              </span>
+            )}
+          </p>
           <p className="truncate text-gray-500 text-sm">{user.email}</p>
         </div>
       </div>
 
       <Divider />
 
-      <nav aria-label="Tài khoản" className="flex-1 px-2 py-2">
-        <Link
-          className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3.5 text-base text-gray-700 outline-none transition-colors hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-primary-200"
-          onClick={onClose}
-          to="/dashboard/profile"
-        >
-          <User aria-hidden="true" size={20} />
-          Hồ sơ của tôi
-        </Link>
-        <Link
-          className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3.5 text-base text-gray-700 outline-none transition-colors hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-primary-200"
-          onClick={onClose}
-          to="/dashboard/myorders"
-        >
-          <Package aria-hidden="true" size={20} />
-          Đơn hàng của tôi
-        </Link>
-        <Link
-          className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3.5 text-base text-gray-700 outline-none transition-colors hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-primary-200"
-          onClick={onClose}
-          to="/dashboard/address"
-        >
-          <MapPin aria-hidden="true" size={20} />
-          Địa chỉ đã lưu
-        </Link>
-      </nav>
+      {isAdmin(user.role) ? (
+        <nav aria-label="Quản trị" className="flex-1 px-2 py-2">
+          <Link
+            className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3.5 text-base text-gray-700 outline-none transition-colors hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-primary-200"
+            onClick={onClose}
+            to="/dashboard/category"
+          >
+            <LayoutGrid aria-hidden="true" size={20} />
+            Danh mục
+          </Link>
+          <Link
+            className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3.5 text-base text-gray-700 outline-none transition-colors hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-primary-200"
+            onClick={onClose}
+            to="/dashboard/subcategory"
+          >
+            <ListTree aria-hidden="true" size={20} />
+            Danh mục con
+          </Link>
+          <Link
+            className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3.5 text-base text-gray-700 outline-none transition-colors hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-primary-200"
+            onClick={onClose}
+            to="/dashboard/upload-product"
+          >
+            <Upload aria-hidden="true" size={20} />
+            Tải lên sản phẩm
+          </Link>
+          <Link
+            className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3.5 text-base text-gray-700 outline-none transition-colors hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-primary-200"
+            onClick={onClose}
+            to="/dashboard/product"
+          >
+            <Package aria-hidden="true" size={20} />
+            Sản phẩm
+          </Link>
+        </nav>
+      ) : (
+        <nav aria-label="Tài khoản" className="flex-1 px-2 py-2">
+          <Link
+            className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3.5 text-base text-gray-700 outline-none transition-colors hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-primary-200"
+            onClick={onClose}
+            to="/dashboard/profile"
+          >
+            <User aria-hidden="true" size={20} />
+            Hồ sơ của tôi
+          </Link>
+          <Link
+            className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3.5 text-base text-gray-700 outline-none transition-colors hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-primary-200"
+            onClick={onClose}
+            to="/dashboard/myorders"
+          >
+            <Package aria-hidden="true" size={20} />
+            Đơn hàng của tôi
+          </Link>
+          <Link
+            className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-3.5 text-base text-gray-700 outline-none transition-colors hover:bg-gray-50 focus-visible:ring-2 focus-visible:ring-primary-200"
+            onClick={onClose}
+            to="/dashboard/address"
+          >
+            <MapPin aria-hidden="true" size={20} />
+            Địa chỉ đã lưu
+          </Link>
+        </nav>
+      )}
 
       <Divider />
 

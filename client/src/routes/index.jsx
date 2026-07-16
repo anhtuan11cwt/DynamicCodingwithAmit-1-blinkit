@@ -3,15 +3,19 @@ import App from "../App";
 import AuthRoute from "../components/AuthRoute";
 import Dashboard from "../layouts/Dashboard";
 import Addresses from "../pages/Addresses";
+import Category from "../pages/Category";
 import ForgotPassword from "../pages/ForgotPassword";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import MyOrders from "../pages/MyOrders";
 import OTPVerification from "../pages/OTPVerification";
+import ProductAdmin from "../pages/ProductAdmin";
 import Profile from "../pages/Profile";
 import Register from "../pages/Register";
 import ResetPassword from "../pages/ResetPassword";
 import SearchPage from "../pages/SearchPage";
+import SubCategory from "../pages/SubCategory";
+import UploadProduct from "../pages/UploadProduct";
 import VerifyEmail from "../pages/VerifyEmail";
 
 const router = createBrowserRouter([
@@ -90,6 +94,22 @@ const router = createBrowserRouter([
           {
             element: <Addresses />,
             path: "address",
+          },
+          {
+            element: <Category />,
+            path: "category",
+          },
+          {
+            element: <SubCategory />,
+            path: "subcategory",
+          },
+          {
+            element: <UploadProduct />,
+            path: "upload-product",
+          },
+          {
+            element: <ProductAdmin />,
+            path: "product",
           },
         ],
         element: <Dashboard />,
