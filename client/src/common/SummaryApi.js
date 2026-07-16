@@ -11,6 +11,10 @@ const SummaryApi = {
     method: "delete",
     url: "/category/delete",
   },
+  deleteSubCategory: {
+    method: "delete",
+    url: "/subcategory/delete",
+  },
   forgotPassword: {
     method: "post",
     url: "/auth/forgot-password",
@@ -46,6 +50,10 @@ const SummaryApi = {
   updateCategory: {
     method: "put",
     url: "/category/update",
+  },
+  updateSubCategory: {
+    method: "put",
+    url: "/subcategory/update",
   },
   updateUserDetails: {
     method: "patch",

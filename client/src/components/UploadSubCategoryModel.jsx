@@ -10,14 +10,15 @@ import uploadImage from "../utils/uploadImage";
 
 const ALLOWED_TYPES = ["image/gif", "image/jpeg", "image/png", "image/webp"];
 
-const UploadSubCategoryModel = ({ close, onSuccess }) => {
+const UploadSubCategoryModel = ({ close, data, onSuccess }) => {
   const allCategory = useSelector((state) => state.product.allCategory);
 
   const [subCategoryData, setSubCategoryData] = useState({
-    category: [],
+    _id: data?._id ?? "",
+    category: data?.category?.map((item) => item._id) ?? [],
     imageFile: null,
-    imagePreview: "",
-    name: "",
+    imagePreview: data?.image ?? "",
+    name: data?.name ?? "",
   });
   const [submitting, setSubmitting] = useState(false);
 
@@ -117,7 +118,7 @@ const UploadSubCategoryModel = ({ close, onSuccess }) => {
 
     if (
       !subCategoryData.name ||
-      !subCategoryData.imageFile ||
+      (!subCategoryData.imageFile && !subCategoryData._id) ||
       subCategoryData.category.length === 0
     ) {
       toast.error("Vui lòng nhập tên, chọn ảnh và ít nhất một danh mục cha");
@@ -127,36 +128,60 @@ const UploadSubCategoryModel = ({ close, onSuccess }) => {
     try {
       setSubmitting(true);
 
-      const uploadRes = await uploadImage(
-        subCategoryData.imageFile,
-        "subcategory",
-      );
-      const imageUrl =
-        uploadRes?.data?.url ?? uploadRes?.data?.image ?? uploadRes?.url ?? "";
+      let imageUrl = null;
 
-      if (!imageUrl) {
-        toast.error("Tải ảnh lên thất bại");
+      if (subCategoryData.imageFile) {
+        const uploadRes = await uploadImage(
+          subCategoryData.imageFile,
+          "subcategory",
+        );
+        imageUrl =
+          uploadRes?.data?.url ??
+          uploadRes?.data?.image ??
+          uploadRes?.url ??
+          "";
+
+        if (!imageUrl) {
+          toast.error("Tải ảnh lên thất bại");
+          return;
+        }
+      } else if (subCategoryData._id) {
+        imageUrl = subCategoryData.imagePreview;
+      } else {
+        toast.error("Vui lòng chọn ảnh");
         return;
       }
 
+      const payload = {
+        category: subCategoryData.category,
+        image: imageUrl,
+        name: subCategoryData.name,
+      };
+
+      const endpoint = subCategoryData._id
+        ? SummaryApi.updateSubCategory
+        : SummaryApi.addSubCategory;
+
+      if (subCategoryData._id) {
+        payload._id = subCategoryData._id;
+      }
+
       const response = await Axios({
-        ...SummaryApi.addSubCategory,
-        data: {
-          category: subCategoryData.category,
-          image: imageUrl,
-          name: subCategoryData.name,
-        },
+        ...endpoint,
+        data: payload,
       });
 
       if (response.data.success) {
         toast.success(response.data.message);
-        handleRemoveImage();
-        setSubCategoryData({
-          category: [],
-          imageFile: null,
-          imagePreview: "",
-          name: "",
-        });
+        if (!subCategoryData._id) {
+          handleRemoveImage();
+          setSubCategoryData({
+            category: [],
+            imageFile: null,
+            imagePreview: "",
+            name: "",
+          });
+        }
         onSuccess?.();
         close();
       }
@@ -180,7 +205,9 @@ const UploadSubCategoryModel = ({ close, onSuccess }) => {
             className="font-bold text-lg text-secondary-100"
             id="upload-subcategory-title"
           >
-            Thêm danh mục con
+            {subCategoryData._id
+              ? "Cập nhật danh mục con"
+              : "Thêm danh mục con"}
           </h2>
           <button
             aria-label="Đóng"
