@@ -31,6 +31,10 @@ const SummaryApi = {
     method: "put",
     url: "/users/upload-avatar",
   },
+  uploadImage: {
+    method: "post",
+    url: "/files/upload",
+  },
   userDetails: {
     method: "get",
     url: "/users/me",
