@@ -1,4 +1,4 @@
-import { Camera, Loader2, Trash2, Upload, X } from "lucide-react";
+import { Camera, Loader2, Save, Trash2, Upload, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { IoClose } from "react-icons/io5";
@@ -410,7 +410,7 @@ const UploadSubCategoryModel = ({ close, data, onSuccess }) => {
               disabled={
                 submitting ||
                 !subCategoryData.name ||
-                !subCategoryData.imageFile ||
+                (!subCategoryData.imageFile && !subCategoryData.imagePreview) ||
                 subCategoryData.category.length === 0
               }
               type="submit"
@@ -421,10 +421,18 @@ const UploadSubCategoryModel = ({ close, data, onSuccess }) => {
                   className="animate-spin"
                   size={18}
                 />
+              ) : subCategoryData._id ? (
+                <Save aria-hidden="true" size={18} />
               ) : (
                 <Upload aria-hidden="true" size={18} />
               )}
-              {submitting ? "Đang thêm..." : "Thêm danh mục con"}
+              {submitting
+                ? subCategoryData._id
+                  ? "Đang lưu..."
+                  : "Đang thêm..."
+                : subCategoryData._id
+                  ? "Lưu thay đổi"
+                  : "Thêm danh mục con"}
             </button>
           </div>
         </form>

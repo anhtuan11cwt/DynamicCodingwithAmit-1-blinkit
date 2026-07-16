@@ -8,6 +8,7 @@ import ConfirmBox from "../components/ConfirmBox";
 import DisplayTable from "../components/DisplayTable";
 import NoData from "../components/NoData";
 import UploadSubCategoryModel from "../components/UploadSubCategoryModel";
+import ViewImage from "../components/ViewImage";
 import { setAllSubCategory } from "../store/productSlice";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/axios";
@@ -22,6 +23,7 @@ const SubCategoryPage = () => {
   const [editData, setEditData] = useState(null);
   const [deleteData, setDeleteData] = useState(null);
   const [deleting, setDeleting] = useState(false);
+  const [imageURL, setImageURL] = useState("");
 
   const refreshSubCategory = async () => {
     try {
@@ -62,11 +64,17 @@ const SubCategoryPage = () => {
     }),
     columnHelper.accessor("image", {
       cell: ({ row }) => (
-        <img
-          alt={row.original.name}
-          className="h-12 w-12 rounded object-scale-down"
-          src={row.original.image}
-        />
+        <button
+          className="block cursor-pointer rounded outline-none transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-primary-200"
+          onClick={() => setImageURL(row.original.image)}
+          type="button"
+        >
+          <img
+            alt={row.original.name}
+            className="h-12 w-12 rounded object-scale-down"
+            src={row.original.image}
+          />
+        </button>
       ),
       header: "Hình ảnh",
     }),
@@ -158,6 +166,8 @@ const SubCategoryPage = () => {
           title="Xóa danh mục con"
         />
       )}
+
+      {imageURL && <ViewImage close={() => setImageURL("")} url={imageURL} />}
     </section>
   );
 };
