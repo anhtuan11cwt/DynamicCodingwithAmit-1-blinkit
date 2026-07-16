@@ -33,3 +33,22 @@ export const addCategoryController = async (req, res) => {
     });
   }
 };
+
+export const getCategoryController = async (_req, res) => {
+  try {
+    const categories = await CategoryModel.find().sort({ createdAt: -1 });
+
+    return res.json({
+      data: categories,
+      error: false,
+      message: "Lấy danh sách danh mục thành công",
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: error.message || "Đã xảy ra lỗi",
+      success: false,
+    });
+  }
+};

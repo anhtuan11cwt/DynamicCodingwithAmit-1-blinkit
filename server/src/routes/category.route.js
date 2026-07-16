@@ -1,5 +1,8 @@
 import express from "express";
-import { addCategoryController } from "../controllers/category.controller.js";
+import {
+  addCategoryController,
+  getCategoryController,
+} from "../controllers/category.controller.js";
 import auth from "../middleware/auth.js";
 
 const router = express.Router();
@@ -69,5 +72,40 @@ const router = express.Router();
  *               success: false
  */
 router.post("/add-category", auth, addCategoryController);
+
+/**
+ * @openapi
+ * /api/v1/category/get:
+ *   get:
+ *     tags: [Category]
+ *     summary: Lấy danh sách danh mục
+ *     description: |
+ *       Trả về toàn bộ danh mục, sắp xếp theo `createdAt` giảm dần
+ *       (danh mục mới nhất hiển thị đầu tiên).
+ *     responses:
+ *       200:
+ *         description: Lấy danh sách thành công
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: false
+ *               message: Lấy danh sách danh mục thành công
+ *               success: true
+ *               data:
+ *                 - _id: 6849a1b2c3d4e5f6a7b8c9d0
+ *                   name: Sữa
+ *                   image: https://res.cloudinary.com/xxxx/image/upload/v1/1-blinkit/category/milk.png
+ *                   createdAt: 2026-07-16T03:00:00.000Z
+ *                   updatedAt: 2026-07-16T03:00:00.000Z
+ *       500:
+ *         description: Lỗi máy chủ
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: true
+ *               message: Đã xảy ra lỗi
+ *               success: false
+ */
+router.get("/get", getCategoryController);
 
 export default router;
