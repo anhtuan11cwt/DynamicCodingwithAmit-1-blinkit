@@ -1,8 +1,17 @@
-import { ImagePlus, Loader2, Plus, Send, Trash2 } from "lucide-react";
+import {
+  ImagePlus,
+  Loader2,
+  Pencil,
+  Plus,
+  Send,
+  Trash2,
+  X,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { IoClose } from "react-icons/io5";
 import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import SummaryApi from "../common/SummaryApi";
 import AddFieldComponent from "../components/AddFieldComponent";
 import ViewImage from "../components/ViewImage";
@@ -30,6 +39,10 @@ const PRODUCT_UNITS = [
 ];
 
 const UploadProduct = () => {
+  const { productId } = useParams();
+  const navigate = useNavigate();
+  const isEditMode = Boolean(productId);
+
   const allCategory = useSelector((state) => state.product.allCategory);
   const allSubCategory = useSelector((state) => state.product.allSubCategory);
 
@@ -45,9 +58,11 @@ const UploadProduct = () => {
     subCategory: [],
     unit: "",
   });
+  const [existingImages, setExistingImages] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
   const [submitting, setSubmitting] = useState(false);
+  const [loadingProduct, setLoadingProduct] = useState(false);
   const [viewImageURL, setViewImageURL] = useState("");
   const [openAddField, setOpenAddField] = useState(false);
   const [errors, setErrors] = useState({});
@@ -59,6 +74,43 @@ const UploadProduct = () => {
       });
     };
   }, [imagePreviews]);
+
+  useEffect(() => {
+    if (!productId) return;
+
+    const fetchProduct = async () => {
+      setLoadingProduct(true);
+      try {
+        const response = await Axios({
+          ...SummaryApi.getProductById,
+          data: { _id: productId },
+        });
+
+        if (response.data.success) {
+          const p = response.data.data;
+          setData({
+            category: p.category || [],
+            description: p.description || "",
+            discount: p.discount ?? "",
+            image: p.image || [],
+            moreDetails: p.more_details || {},
+            name: p.name || "",
+            price: p.price ?? "",
+            stock: p.stock ?? "",
+            subCategory: p.subCategory || [],
+            unit: p.unit || "",
+          });
+          setExistingImages(p.image || []);
+        }
+      } catch (error) {
+        toast.error(error?.response?.data?.message || "Không thể tải sản phẩm");
+      } finally {
+        setLoadingProduct(false);
+      }
+    };
+
+    fetchProduct();
+  }, [productId]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -158,14 +210,18 @@ const UploadProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Build payload để validate trước
+    const totalImages = existingImages.length + imageFiles.length;
+
     const payload = {
       category: data.category,
       description: data.description,
       discount: data.discount ? Number(data.discount) : null,
       image:
-        imageFiles.length > 0
-          ? imageFiles.map((_, i) => `https://placeholder.com/${i}`)
+        totalImages > 0
+          ? [
+              ...existingImages,
+              ...imageFiles.map((_, i) => `https://placeholder.com/${i}`),
+            ]
           : [],
       more_details: data.moreDetails,
       name: data.name,
@@ -185,12 +241,10 @@ const UploadProduct = () => {
           fieldErrors[key] = issue.message;
         }
       }
-      // Lỗi image: kiểm tra riêng vì dùng placeholder để validate số lượng
-      if (imageFiles.length === 0) {
+      if (totalImages === 0) {
         fieldErrors.image = "Cần ít nhất một hình ảnh";
       }
       setErrors(fieldErrors);
-      // Scroll tới field lỗi đầu tiên
       const firstKey = [
         "name",
         "description",
@@ -257,11 +311,13 @@ const UploadProduct = () => {
         }
       }
 
+      const allImages = [...existingImages, ...uploadedUrls];
+
       const finalPayload = {
         category: data.category,
         description: data.description,
         discount: data.discount ? Number(data.discount) : null,
-        image: uploadedUrls,
+        image: allImages,
         more_details: data.moreDetails,
         name: data.name,
         price: Number(data.price),
@@ -282,33 +338,44 @@ const UploadProduct = () => {
         return;
       }
 
-      const response = await Axios({
-        ...SummaryApi.createProduct,
-        data: finalParsed.data,
-      });
+      const apiConfig = isEditMode
+        ? {
+            ...SummaryApi.updateProduct,
+            data: { _id: productId, ...finalParsed.data },
+          }
+        : { ...SummaryApi.createProduct, data: finalParsed.data };
+
+      const response = await Axios(apiConfig);
 
       if (response.data.success) {
         successAlert({
-          message: response.data.message || "Tạo sản phẩm thành công",
+          message:
+            response.data.message ||
+            (isEditMode
+              ? "Cập nhật sản phẩm thành công"
+              : "Tạo sản phẩm thành công"),
           title: "Thành công",
         });
         imagePreviews.forEach((url) => {
           URL.revokeObjectURL(url);
         });
-        setData({
-          category: [],
-          description: "",
-          discount: "",
-          image: [],
-          moreDetails: {},
-          name: "",
-          price: "",
-          stock: "",
-          subCategory: [],
-          unit: "",
-        });
-        setImagePreviews([]);
-        setImageFiles([]);
+        if (!isEditMode) {
+          setData({
+            category: [],
+            description: "",
+            discount: "",
+            image: [],
+            moreDetails: {},
+            name: "",
+            price: "",
+            stock: "",
+            subCategory: [],
+            unit: "",
+          });
+          setExistingImages([]);
+          setImagePreviews([]);
+          setImageFiles([]);
+        }
         setErrors({});
       }
     } catch (error) {
@@ -341,7 +408,7 @@ const UploadProduct = () => {
       return;
     }
 
-    const currentCount = imageFiles.length;
+    const currentCount = existingImages.length + imageFiles.length;
     if (currentCount >= MAX_IMAGES) {
       toast.error(`Tối đa ${MAX_IMAGES} ảnh cho mỗi sản phẩm`);
       e.target.value = "";
@@ -367,7 +434,11 @@ const UploadProduct = () => {
     e.target.value = "";
   };
 
-  const handleDeleteImage = (index) => {
+  const handleDeleteExistingImage = (index) => {
+    setExistingImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleDeleteNewImage = (index) => {
     URL.revokeObjectURL(imagePreviews[index]);
 
     setImageFiles((prev) => prev.filter((_, i) => i !== index));
@@ -388,11 +459,21 @@ const UploadProduct = () => {
         : "border-gray-300 focus-visible:border-primary-200 focus-visible:ring-primary-200"
     } ${submitting ? "pointer-events-none opacity-50" : ""}`;
 
+  if (loadingProduct) {
+    return (
+      <section className="rounded-xl bg-white p-3 shadow-md sm:p-4">
+        <div className="flex min-h-[78vh] items-center justify-center">
+          <Loader2 className="animate-spin text-gray-400" size={32} />
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="rounded-xl bg-white p-3 shadow-md sm:p-4">
       <div className="border-gray-200 border-b pb-3">
         <h2 className="font-semibold text-lg text-secondary-100 lg:text-xl">
-          Thêm sản phẩm
+          {isEditMode ? "Chỉnh sửa sản phẩm" : "Thêm sản phẩm"}
         </h2>
       </div>
 
@@ -493,14 +574,43 @@ const UploadProduct = () => {
             </p>
           )}
 
-          {imagePreviews.length > 0 && (
+          {(existingImages.length > 0 || imagePreviews.length > 0) && (
             <div
               className={`flex flex-wrap gap-4 ${submitting ? "pointer-events-none opacity-50" : ""}`}
             >
+              {existingImages.map((img, index) => (
+                <div
+                  className="group relative rounded-lg border border-gray-200"
+                  key={`existing-${img}`}
+                >
+                  <button
+                    className="block cursor-pointer rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-primary-200"
+                    onClick={() => setViewImageURL(img)}
+                    type="button"
+                  >
+                    <img
+                      alt={`Ảnh sản phẩm ${index + 1}`}
+                      className="h-24 w-24 rounded-lg object-scale-down"
+                      draggable="false"
+                      src={img}
+                    />
+                  </button>
+                  <button
+                    aria-label={`Xóa ảnh ${index + 1}`}
+                    className={`absolute top-2 right-2 items-center justify-center rounded-lg bg-red-600 p-1.5 text-white transition-colors hover:bg-red-700 focus-visible:flex focus-visible:ring-2 focus-visible:ring-red-600 ${submitting ? "pointer-events-none hidden cursor-not-allowed opacity-50" : "hidden cursor-pointer group-hover:flex"}`}
+                    disabled={submitting}
+                    onClick={() => handleDeleteExistingImage(index)}
+                    type="button"
+                  >
+                    <Trash2 aria-hidden="true" size={14} />
+                  </button>
+                </div>
+              ))}
+
               {imagePreviews.map((preview, index) => (
                 <div
                   className="group relative rounded-lg border border-gray-200"
-                  key={preview}
+                  key={`new-${preview}`}
                 >
                   <button
                     className="block cursor-pointer rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-primary-200"
@@ -508,17 +618,17 @@ const UploadProduct = () => {
                     type="button"
                   >
                     <img
-                      alt={`Ảnh sản phẩm ${index + 1}`}
+                      alt={`Ảnh mới ${index + 1}`}
                       className="h-24 w-24 rounded-lg object-scale-down"
                       draggable="false"
                       src={preview}
                     />
                   </button>
                   <button
-                    aria-label={`Xóa ảnh ${index + 1}`}
+                    aria-label={`Xóa ảnh mới ${index + 1}`}
                     className={`absolute top-2 right-2 items-center justify-center rounded-lg bg-red-600 p-1.5 text-white transition-colors hover:bg-red-700 focus-visible:flex focus-visible:ring-2 focus-visible:ring-red-600 ${submitting ? "pointer-events-none hidden cursor-not-allowed opacity-50" : "hidden cursor-pointer group-hover:flex"}`}
                     disabled={submitting}
-                    onClick={() => handleDeleteImage(index)}
+                    onClick={() => handleDeleteNewImage(index)}
                     type="button"
                   >
                     <Trash2 aria-hidden="true" size={14} />
@@ -843,23 +953,43 @@ const UploadProduct = () => {
           )}
         </div>
 
-        <button
-          className="flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-green-600 font-semibold text-white outline-none transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-800 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500"
-          disabled={submitting}
-          type="submit"
-        >
-          {submitting ? (
-            <>
-              <Loader2 className="animate-spin" size={18} />
-              Đang tạo sản phẩm...
-            </>
-          ) : (
-            <>
-              <Send aria-hidden="true" size={18} />
-              Tạo sản phẩm
-            </>
-          )}
-        </button>
+        <div className="flex gap-3">
+          <button
+            className={`flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-gray-300 font-semibold text-gray-600 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-primary-200 ${
+              submitting
+                ? "pointer-events-none cursor-not-allowed opacity-50"
+                : "cursor-pointer hover:bg-gray-50"
+            }`}
+            disabled={submitting}
+            onClick={() => navigate("/dashboard/product")}
+            type="button"
+          >
+            <X aria-hidden="true" size={18} />
+            Hủy
+          </button>
+          <button
+            className="flex h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-full bg-green-600 font-semibold text-white outline-none transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-800 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500"
+            disabled={submitting}
+            type="submit"
+          >
+            {submitting ? (
+              <>
+                <Loader2 className="animate-spin" size={18} />
+                {isEditMode ? "Đang lưu..." : "Đang tạo sản phẩm..."}
+              </>
+            ) : isEditMode ? (
+              <>
+                <Pencil aria-hidden="true" size={18} />
+                Lưu thay đổi
+              </>
+            ) : (
+              <>
+                <Send aria-hidden="true" size={18} />
+                Tạo sản phẩm
+              </>
+            )}
+          </button>
+        </div>
       </form>
 
       {viewImageURL && (

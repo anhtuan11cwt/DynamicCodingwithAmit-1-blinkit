@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { IoSearch } from "react-icons/io5";
 import SummaryApi from "../common/SummaryApi";
+import ConfirmBox from "../components/ConfirmBox";
 import ProductCardAdmin from "../components/ProductCardAdmin";
+import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/axios";
 
 const ProductAdmin = () => {
@@ -11,6 +14,8 @@ const ProductAdmin = () => {
   const [totalPage, setTotalPage] = useState(1);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const [deleteData, setDeleteData] = useState(null);
+  const [deleting, setDeleting] = useState(false);
 
   const firstRender = useRef(true);
 
@@ -73,6 +78,28 @@ const ProductAdmin = () => {
     setPage(1);
   };
 
+  const handleDeleteProduct = async () => {
+    if (!deleteData) return;
+
+    try {
+      setDeleting(true);
+      const response = await Axios({
+        ...SummaryApi.deleteProduct,
+        data: { _id: deleteData._id },
+      });
+
+      if (response.data.success) {
+        toast.success(response.data.message);
+        setDeleteData(null);
+        fetchProductData();
+      }
+    } catch (error) {
+      AxiosToastError(error);
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   return (
     <div>
       <div className="flex flex-col gap-3 rounded-md bg-white px-4 py-3 shadow sm:flex-row sm:items-center sm:justify-between">
@@ -94,9 +121,19 @@ const ProductAdmin = () => {
         <div className="mt-5 text-center text-gray-500">Đang tải...</div>
       )}
 
+      {!loading && productData.length === 0 && (
+        <div className="mt-5 text-center text-gray-500">
+          Không tìm thấy sản phẩm nào
+        </div>
+      )}
+
       <div className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
         {productData.map((product) => (
-          <ProductCardAdmin data={product} key={product._id} />
+          <ProductCardAdmin
+            data={product}
+            key={product._id}
+            onDelete={setDeleteData}
+          />
         ))}
       </div>
 
@@ -123,6 +160,16 @@ const ProductAdmin = () => {
           Trang sau
         </button>
       </div>
+
+      {deleteData && (
+        <ConfirmBox
+          loading={deleting}
+          message={`Xóa sản phẩm "${deleteData.name}"? Hành động này không thể hoàn tác.`}
+          onCancel={() => setDeleteData(null)}
+          onConfirm={handleDeleteProduct}
+          title="Xóa sản phẩm"
+        />
+      )}
     </div>
   );
 };

@@ -15,6 +15,10 @@ const SummaryApi = {
     method: "delete",
     url: "/category/delete",
   },
+  deleteProduct: {
+    method: "delete",
+    url: "/product/delete",
+  },
   deleteSubCategory: {
     method: "delete",
     url: "/subcategory/delete",
@@ -30,6 +34,10 @@ const SummaryApi = {
   getProduct: {
     method: "post",
     url: "/product/get",
+  },
+  getProductById: {
+    method: "post",
+    url: "/product/getById",
   },
   getSubCategory: {
     method: "get",
@@ -58,6 +66,10 @@ const SummaryApi = {
   updateCategory: {
     method: "put",
     url: "/category/update",
+  },
+  updateProduct: {
+    method: "put",
+    url: "/product/update",
   },
   updateSubCategory: {
     method: "put",

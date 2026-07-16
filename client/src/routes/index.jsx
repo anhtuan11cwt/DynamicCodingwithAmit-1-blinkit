@@ -123,6 +123,14 @@ const router = createBrowserRouter([
           {
             element: (
               <AdminPermission>
+                <UploadProduct />
+              </AdminPermission>
+            ),
+            path: "edit-product/:productId",
+          },
+          {
+            element: (
+              <AdminPermission>
                 <ProductAdmin />
               </AdminPermission>
             ),
