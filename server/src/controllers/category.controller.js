@@ -5,18 +5,24 @@ import {
   deleteImageCloudinary,
   getPublicIdFromUrl,
 } from "../utils/uploadImageCloudinary.js";
+import {
+  createCategorySchema,
+  updateCategorySchema,
+} from "../validations/category.validation.js";
 
 export const addCategoryController = async (req, res) => {
   try {
-    const { name, image } = req.body;
+    const parsed = createCategorySchema.safeParse(req.body);
 
-    if (!name || !image) {
+    if (!parsed.success) {
       return res.status(400).json({
         error: true,
-        message: "Vui lòng cung cấp đầy đủ tên và hình ảnh danh mục",
+        message: parsed.error.errors[0]?.message || "Dữ liệu không hợp lệ",
         success: false,
       });
     }
+
+    const { name, image } = parsed.data;
 
     const category = new CategoryModel({
       image,
@@ -61,7 +67,7 @@ export const getCategoryController = async (_req, res) => {
 
 export const updateCategoryController = async (req, res) => {
   try {
-    const { _id, name, image } = req.body;
+    const { _id } = req.body;
 
     if (!_id) {
       return res.status(400).json({
@@ -70,6 +76,18 @@ export const updateCategoryController = async (req, res) => {
         success: false,
       });
     }
+
+    const parsed = updateCategorySchema.safeParse(req.body);
+
+    if (!parsed.success) {
+      return res.status(400).json({
+        error: true,
+        message: parsed.error.errors[0]?.message || "Dữ liệu không hợp lệ",
+        success: false,
+      });
+    }
+
+    const { name, image } = parsed.data;
 
     const existing = await CategoryModel.findById(_id);
 

@@ -4,18 +4,24 @@ import {
   deleteImageCloudinary,
   getPublicIdFromUrl,
 } from "../utils/uploadImageCloudinary.js";
+import {
+  createSubCategorySchema,
+  updateSubCategorySchema,
+} from "../validations/subCategory.validation.js";
 
 export const addSubCategoryController = async (req, res) => {
   try {
-    const { category, image, name } = req.body;
+    const parsed = createSubCategorySchema.safeParse(req.body);
 
-    if (!name || !image || !category || category.length === 0) {
+    if (!parsed.success) {
       return res.status(400).json({
         error: true,
-        message: "Vui lòng cung cấp đầy đủ tên, hình ảnh và danh mục cha",
+        message: parsed.error.errors[0]?.message || "Dữ liệu không hợp lệ",
         success: false,
       });
     }
+
+    const { category, image, name } = parsed.data;
 
     const subCategory = new SubCategoryModel({
       category,
@@ -63,7 +69,7 @@ export const getSubCategoryController = async (_req, res) => {
 
 export const updateSubCategoryController = async (req, res) => {
   try {
-    const { _id, category, image, name } = req.body;
+    const { _id } = req.body;
 
     if (!_id) {
       return res.status(400).json({
@@ -72,6 +78,18 @@ export const updateSubCategoryController = async (req, res) => {
         success: false,
       });
     }
+
+    const parsed = updateSubCategorySchema.safeParse(req.body);
+
+    if (!parsed.success) {
+      return res.status(400).json({
+        error: true,
+        message: parsed.error.errors[0]?.message || "Dữ liệu không hợp lệ",
+        success: false,
+      });
+    }
+
+    const { category, image, name } = parsed.data;
 
     const existing = await SubCategoryModel.findById(_id);
 

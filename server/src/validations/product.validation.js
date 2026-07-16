@@ -9,7 +9,10 @@ export const createProductSchema = z.object({
 
   discount: z.number().min(0).max(100).nullable().optional(),
 
-  image: z.array(z.string().url().max(2048)).min(1, "Cần ít nhất một hình ảnh"),
+  image: z
+    .array(z.string().url().max(2048))
+    .min(1, "Cần ít nhất một hình ảnh")
+    .max(5, "Tối đa 5 hình ảnh"),
 
   more_details: z.record(z.any()).optional(),
   name: productNameSchema,
@@ -22,7 +25,26 @@ export const createProductSchema = z.object({
 
   subCategory: z.array(objectIdSchema).min(1),
 
-  unit: z.string().trim().min(1).max(30),
+  unit: z.enum([
+    "Kg",
+    "Gram",
+    "Lít",
+    "ml",
+    "Hộp",
+    "Chai",
+    "Gói",
+    "Túi",
+    "Lon",
+    "Cái",
+    "Bịch",
+    "Chục",
+  ]),
 });
 
 export const updateProductSchema = createProductSchema.partial();
+
+export const getProductSchema = z.object({
+  limit: z.coerce.number().int().positive().max(100).default(10),
+  page: z.coerce.number().int().positive().default(1),
+  search: z.string().max(100).optional(),
+});

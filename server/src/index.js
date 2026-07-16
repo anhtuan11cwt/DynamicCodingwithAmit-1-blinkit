@@ -9,6 +9,7 @@ import connectDB from "./config/connectDB.js";
 import swaggerSpec from "./config/swagger.js";
 import authRouter from "./routes/auth.route.js";
 import categoryRouter from "./routes/category.route.js";
+import productRouter from "./routes/product.route.js";
 import subCategoryRouter from "./routes/subCategory.route.js";
 import uploadRouter from "./routes/upload.route.js";
 import userRouter from "./routes/user.route.js";
@@ -40,6 +41,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/category", categoryRouter);
 app.use("/api/v1/subcategory", subCategoryRouter);
+app.use("/api/v1/product", productRouter);
 app.use("/api/v1/upload", uploadRouter);
 
 const PORT = process.env.PORT || 8080;
