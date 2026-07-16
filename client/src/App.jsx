@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Outlet, useLocation } from "react-router-dom";
+import SummaryApi from "./common/SummaryApi";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import { setAllCategory, setAllSubCategory } from "./store/productSlice";
 import { setUserDetails } from "./store/userSlice";
+import Axios from "./utils/axios";
 import fetchUserDetails from "./utils/fetchUserDetails";
 
 const hideFooterRoutes = [
@@ -32,6 +35,33 @@ function App() {
       setIsHydrated(true);
     };
     hydrateUser();
+  }, [dispatch]);
+
+  useEffect(() => {
+    const fetchCategory = async () => {
+      try {
+        const response = await Axios({ ...SummaryApi.getCategory });
+        if (response.data.success) {
+          dispatch(setAllCategory(response.data.data));
+        }
+      } catch {
+        // Bỏ qua lỗi nền: các trang sẽ tự tải lại khi cần
+      }
+    };
+
+    const fetchSubCategory = async () => {
+      try {
+        const response = await Axios({ ...SummaryApi.getSubCategory });
+        if (response.data.success) {
+          dispatch(setAllSubCategory(response.data.data));
+        }
+      } catch {
+        // Bỏ qua lỗi nền
+      }
+    };
+
+    fetchCategory();
+    fetchSubCategory();
   }, [dispatch]);
 
   return (

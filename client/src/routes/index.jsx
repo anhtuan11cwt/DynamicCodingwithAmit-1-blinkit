@@ -15,7 +15,7 @@ import Profile from "../pages/Profile";
 import Register from "../pages/Register";
 import ResetPassword from "../pages/ResetPassword";
 import SearchPage from "../pages/SearchPage";
-import SubCategory from "../pages/SubCategory";
+import SubCategory from "../pages/SubCategoryPage";
 import UploadProduct from "../pages/UploadProduct";
 import VerifyEmail from "../pages/VerifyEmail";
 

@@ -3,6 +3,10 @@ const SummaryApi = {
     method: "post",
     url: "/category/add-category",
   },
+  addSubCategory: {
+    method: "post",
+    url: "/subcategory/add",
+  },
   deleteCategory: {
     method: "delete",
     url: "/category/delete",
@@ -14,6 +18,10 @@ const SummaryApi = {
   getCategory: {
     method: "get",
     url: "/category/get",
+  },
+  getSubCategory: {
+    method: "get",
+    url: "/subcategory/get",
   },
   login: {
     method: "post",
