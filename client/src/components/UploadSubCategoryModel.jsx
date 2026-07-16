@@ -1,4 +1,4 @@
-import { Camera, ChevronDown, Loader2, Trash2, Upload, X } from "lucide-react";
+import { Camera, Loader2, Trash2, Upload, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { IoClose } from "react-icons/io5";
@@ -20,10 +20,8 @@ const UploadSubCategoryModel = ({ close, onSuccess }) => {
     name: "",
   });
   const [submitting, setSubmitting] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const previewUrlRef = useRef(null);
-  const dropdownRef = useRef(null);
 
   useEffect(() => {
     return () => {
@@ -31,16 +29,6 @@ const UploadSubCategoryModel = ({ close, onSuccess }) => {
         URL.revokeObjectURL(previewUrlRef.current);
       }
     };
-  }, []);
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const handleOnChange = (e) => {
@@ -88,22 +76,35 @@ const UploadSubCategoryModel = ({ close, onSuccess }) => {
     }));
   };
 
-  const toggleCategory = (categoryId) => {
-    setSubCategoryData((prev) => {
-      const exists = prev.category.includes(categoryId);
-      return {
-        ...prev,
-        category: exists
-          ? prev.category.filter((id) => id !== categoryId)
-          : [...prev.category, categoryId],
-      };
-    });
-  };
+  const handleOnChangeCategory = (e) => {
+    const value = e.target.value;
 
-  const removeCategory = (categoryId) => {
+    const categoryDetails = allCategory.find((item) => item._id === value);
+
+    if (!categoryDetails) return;
+
+    const alreadyExist = subCategoryData.category.some((id) => id === value);
+
+    if (alreadyExist) return;
+
     setSubCategoryData((prev) => ({
       ...prev,
-      category: prev.category.filter((id) => id !== categoryId),
+      category: [...prev.category, value],
+    }));
+  };
+
+  const handleRemoveCategorySelected = (categoryId) => {
+    const categoryList = [...subCategoryData.category];
+
+    const index = categoryList.indexOf(categoryId);
+
+    if (index === -1) return;
+
+    categoryList.splice(index, 1);
+
+    setSubCategoryData((prev) => ({
+      ...prev,
+      category: categoryList,
     }));
   };
 
@@ -311,98 +312,54 @@ const UploadSubCategoryModel = ({ close, onSuccess }) => {
             )}
           </div>
 
-          <div className="grid gap-1.5" ref={dropdownRef}>
+          <div className="grid gap-1.5">
             <span className="font-medium text-secondary-100 text-sm">
               Danh mục cha
             </span>
 
-            <div className="relative">
-              <button
-                aria-expanded={dropdownOpen}
-                aria-haspopup="listbox"
-                className={`flex min-h-11 w-full items-center justify-between gap-2 rounded-lg border bg-blue-50/40 px-3 py-2 text-left outline-none transition-colors focus-visible:border-primary-200 focus-visible:ring-2 focus-visible:ring-primary-200 ${
-                  submitting
-                    ? "pointer-events-none border-gray-200 opacity-50"
-                    : "cursor-pointer border-gray-300"
-                }`}
-                disabled={submitting}
-                onClick={() => setDropdownOpen((prev) => !prev)}
-                type="button"
-              >
-                <span className="flex flex-1 flex-wrap gap-1.5">
-                  {selectedCategories.length === 0 ? (
-                    <span className="text-gray-400 text-sm">
-                      Chọn danh mục cha
-                    </span>
-                  ) : (
-                    selectedCategories.map((item) => (
-                      <span
-                        className="flex items-center gap-1 rounded-full bg-primary-100 px-2 py-0.5 font-medium text-secondary-100 text-xs"
-                        key={item._id}
-                      >
-                        {item.name}
-                        {/* biome-ignore lint/a11y/useSemanticElements: nested button case */}
-                        <span
-                          aria-label={`Bỏ chọn ${item.name}`}
-                          className="cursor-pointer rounded-full hover:bg-black/10"
-                          onClick={(ev) => {
-                            ev.stopPropagation();
-                            removeCategory(item._id);
-                          }}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === " ") {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              removeCategory(item._id);
-                            }
-                          }}
-                          role="button"
-                          tabIndex={0}
-                        >
-                          <X aria-hidden="true" size={12} />
-                        </span>
-                      </span>
-                    ))
-                  )}
-                </span>
-                <ChevronDown
-                  aria-hidden="true"
-                  className={`shrink-0 text-gray-500 transition-transform ${
-                    dropdownOpen ? "rotate-180" : ""
-                  }`}
-                  size={18}
-                />
-              </button>
+            <select
+              className={`h-11 w-full rounded-lg border bg-blue-50/40 px-3 text-secondary-100 outline-none transition-colors focus-visible:border-primary-200 focus-visible:ring-2 focus-visible:ring-primary-200 ${
+                submitting
+                  ? "pointer-events-none border-gray-200 opacity-50"
+                  : "cursor-pointer border-gray-300"
+              }`}
+              disabled={submitting}
+              onChange={handleOnChangeCategory}
+              value=""
+            >
+              <option value="">Chọn danh mục cha</option>
+              {allCategory.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
 
-              {dropdownOpen && (
-                <ul className="absolute z-10 mt-1 max-h-52 w-full overflow-y-auto rounded-lg border border-gray-200 bg-white py-1 shadow-lg">
-                  {allCategory.length === 0 ? (
-                    <li className="px-3 py-2 text-gray-400 text-sm">
-                      Chưa có danh mục nào
-                    </li>
-                  ) : (
-                    allCategory.map((item) => {
-                      const checked = subCategoryData.category.includes(
-                        item._id,
-                      );
-                      return (
-                        <li key={item._id}>
-                          <label className="flex cursor-pointer items-center gap-2 px-3 py-2 text-secondary-100 text-sm transition-colors hover:bg-primary-50">
-                            <input
-                              checked={checked}
-                              className="size-4 accent-primary-200"
-                              onChange={() => toggleCategory(item._id)}
-                              type="checkbox"
-                            />
-                            {item.name}
-                          </label>
-                        </li>
-                      );
-                    })
-                  )}
-                </ul>
-              )}
-            </div>
+            {selectedCategories.length > 0 && (
+              <div
+                className={`mt-3 flex flex-wrap gap-2 ${submitting ? "pointer-events-none opacity-50" : ""}`}
+              >
+                {selectedCategories.map((category) => (
+                  <p
+                    className="flex items-center gap-2 rounded-full bg-primary-100 px-3 py-1 font-medium text-secondary-100 text-sm"
+                    key={category._id}
+                  >
+                    {category.name}
+                    <button
+                      aria-label={`Bỏ chọn ${category.name}`}
+                      className={`rounded-full outline-none transition-colors hover:text-red-600 focus-visible:ring-2 focus-visible:ring-red-600 ${
+                        submitting ? "cursor-not-allowed" : "cursor-pointer"
+                      }`}
+                      disabled={submitting}
+                      onClick={() => handleRemoveCategorySelected(category._id)}
+                      type="button"
+                    >
+                      <IoClose aria-hidden="true" size={16} />
+                    </button>
+                  </p>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="mt-1 flex gap-3">
