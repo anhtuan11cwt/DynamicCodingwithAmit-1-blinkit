@@ -55,7 +55,7 @@ const Dashboard = () => {
 
       <div className="grid gap-6 lg:grid-cols-[240px_1fr]">
         <aside className="hidden lg:block">
-          <div className="sticky top-24 rounded-xl border border-gray-100 bg-white p-3 shadow-sm">
+          <div className="sticky top-24 rounded-xl border border-gray-100 border-r-gray-200 bg-white p-3 shadow-sm">
             <p className="px-3 py-2 font-semibold text-gray-400 text-xs uppercase tracking-wide">
               {showAdmin ? "Quản trị" : "Tài khoản"}
             </p>
