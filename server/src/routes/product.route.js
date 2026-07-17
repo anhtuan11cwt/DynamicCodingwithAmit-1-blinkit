@@ -2,12 +2,14 @@ import express from "express";
 import {
   createProductController,
   deleteProductController,
+  deleteProductDetails,
   getProductByCategoryAndSubCategoryController,
   getProductByCategoryController,
   getProductByIdController,
   getProductController,
   getProductDetailsController,
   updateProductController,
+  updateProductDetails,
 } from "../controllers/product.controller.js";
 import admin from "../middleware/admin.js";
 import auth from "../middleware/auth.js";
@@ -405,5 +407,78 @@ router.post(
  *         description: Lỗi máy chủ
  */
 router.post("/details", getProductDetailsController);
+
+/**
+ * @openapi
+ * /api/v1/product/details/update:
+ *   put:
+ *     tags: [Product]
+ *     summary: Cập nhật sản phẩm theo ID (trang Admin)
+ *     description: |
+ *       Cập nhật thông tin sản phẩm dựa trên `_id`. Yêu cầu quyền ADMIN.
+ *     security:
+ *       - cookieAuth: []
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [_id]
+ *             properties:
+ *               _id:
+ *                 type: string
+ *                 example: 6849a1b2c3d4e5f6a7b8c9d0
+ *     responses:
+ *       200:
+ *         description: Cập nhật sản phẩm thành công
+ *       400:
+ *         description: Dữ liệu không hợp lệ
+ *       403:
+ *         description: Không có quyền
+ *       404:
+ *         description: Không tìm thấy sản phẩm
+ *       500:
+ *         description: Lỗi máy chủ
+ */
+router.put("/details/update", auth, admin, updateProductDetails);
+
+/**
+ * @openapi
+ * /api/v1/product/details/delete:
+ *   delete:
+ *     tags: [Product]
+ *     summary: Xóa sản phẩm theo ID (trang Admin)
+ *     description: |
+ *       Xóa sản phẩm dựa trên `_id` và xóa ảnh liên quan trên Cloudinary.
+ *       Yêu cầu quyền ADMIN.
+ *     security:
+ *       - cookieAuth: []
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [_id]
+ *             properties:
+ *               _id:
+ *                 type: string
+ *                 example: 6849a1b2c3d4e5f6a7b8c9d0
+ *     responses:
+ *       200:
+ *         description: Xóa sản phẩm thành công
+ *       400:
+ *         description: Thiếu ID sản phẩm
+ *       403:
+ *         description: Không có quyền
+ *       404:
+ *         description: Không tìm thấy sản phẩm
+ *       500:
+ *         description: Lỗi máy chủ
+ */
+router.delete("/details/delete", auth, admin, deleteProductDetails);
 
 export default router;

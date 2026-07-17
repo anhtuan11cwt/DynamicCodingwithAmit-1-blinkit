@@ -19,6 +19,10 @@ const SummaryApi = {
     method: "delete",
     url: "/product/delete",
   },
+  deleteProductDetails: {
+    method: "delete",
+    url: "/product/delete",
+  },
   deleteSubCategory: {
     method: "delete",
     url: "/subcategory/delete",
@@ -80,6 +84,10 @@ const SummaryApi = {
     url: "/category/update",
   },
   updateProduct: {
+    method: "put",
+    url: "/product/update",
+  },
+  updateProductDetails: {
     method: "put",
     url: "/product/update",
   },

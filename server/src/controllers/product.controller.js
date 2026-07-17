@@ -388,3 +388,7 @@ export const getProductController = async (req, res) => {
     });
   }
 };
+
+export const updateProductDetails = updateProductController;
+
+export const deleteProductDetails = deleteProductController;
