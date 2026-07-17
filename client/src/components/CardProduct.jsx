@@ -1,8 +1,8 @@
-import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import DisplayPriceInVND from "../utils/DisplayPriceInVND";
 import priceWithDiscount from "../utils/priceWithDiscount";
 import validURLConvert from "../utils/validURLConvert";
+import AddToCartButton from "./AddToCartButton";
 
 const CardProduct = ({ data }) => {
   const url = `/product/${validURLConvert(data.name)}-${data._id}`;
@@ -53,18 +53,7 @@ const CardProduct = ({ data }) => {
           )}
         </div>
 
-        <button
-          aria-label={`Thêm ${data.name} vào giỏ`}
-          className="flex w-full cursor-pointer items-center justify-center gap-1 rounded-md bg-green-600 px-3 py-1.5 font-medium text-white text-xs transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-600 active:scale-95"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-          }}
-          type="button"
-        >
-          <Plus aria-hidden="true" size={14} />
-          Thêm
-        </button>
+        <AddToCartButton product={data} />
       </div>
     </Link>
   );

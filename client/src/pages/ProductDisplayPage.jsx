@@ -6,13 +6,10 @@ import {
   useRef,
   useState,
 } from "react";
-import toast from "react-hot-toast";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { Link, useParams } from "react-router-dom";
 import SummaryApi from "../common/SummaryApi";
-import AddToCartButton, {
-  QuantityStepper,
-} from "../components/AddToCartButton";
+import AddToCartButton from "../components/AddToCartButton";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/axios";
 import priceWithDiscount from "../utils/priceWithDiscount";
@@ -91,13 +88,6 @@ const ProductDisplayPage = () => {
   const hasDiscount = Number(data.discount) > 0;
   const finalPrice = priceWithDiscount(data.price, data.discount);
   const isOutOfStock = Number(data.stock) <= 0;
-
-  const [quantity, setQuantity] = useState(1);
-
-  const handleAddToCart = () => {
-    // TODO: integrate with cart API / cart slice when available
-    toast.success(`Đã thêm ${quantity} × ${data.name} vào giỏ hàng`);
-  };
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-6">
@@ -236,17 +226,7 @@ const ProductDisplayPage = () => {
           {isOutOfStock ? (
             <p className="font-semibold text-lg text-red-600">Hết hàng</p>
           ) : (
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <QuantityStepper
-                onChange={setQuantity}
-                quantity={quantity}
-                stock={Number(data.stock)}
-              />
-              <AddToCartButton
-                onAdd={handleAddToCart}
-                stock={Number(data.stock)}
-              />
-            </div>
+            <AddToCartButton product={data} />
           )}
 
           {data.description && (
