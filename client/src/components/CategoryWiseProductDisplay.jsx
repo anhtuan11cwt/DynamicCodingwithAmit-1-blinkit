@@ -75,7 +75,7 @@ const CategoryWiseProductDisplay = ({ id, name }) => {
         </button>
 
         <div
-          className="flex items-stretch gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x snap-mandatory items-stretch gap-4 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           ref={containerRef}
         >
           {loading

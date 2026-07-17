@@ -8,22 +8,28 @@ import validURLConvert from "../utils/validURLConvert";
 const CardProduct = ({ data }) => {
   const url = `/product/${validURLConvert(data.name)}-${data._id}`;
   const hasDiscount = Number(data.discount) > 0;
+  const finalPrice = pricewithDiscount(data.price, data.discount);
 
   return (
     <Link
-      className="flex h-full w-full min-w-36 max-w-52 shrink-0 flex-col gap-2 rounded-lg border border-gray-100 bg-white p-3 shadow transition-shadow duration-300 hover:shadow-lg"
+      aria-label={`Xem chi tiết ${data.name}`}
+      className="flex h-full w-full min-w-36 max-w-52 shrink-0 snap-start flex-col gap-2 rounded-lg border border-gray-100 bg-white p-3 shadow transition-shadow duration-300 hover:shadow-lg"
       to={url}
     >
       <div className="relative aspect-square w-full overflow-hidden rounded bg-gray-50">
         <img
           alt={data.name}
-          className="h-full w-full object-contain transition-transform duration-300 hover:scale-105"
+          className="h-full w-full object-scale-down transition-transform duration-300 hover:scale-105"
           loading="lazy"
           src={data.image?.[0]}
         />
 
+        <span className="absolute top-1 left-1 rounded-full bg-green-100 px-2 py-0.5 font-medium text-green-700 text-xs">
+          10 minutes
+        </span>
+
         {hasDiscount && (
-          <span className="absolute top-1 left-1 rounded-full bg-green-100 px-2 py-0.5 font-medium text-green-700 text-xs">
+          <span className="absolute right-1 bottom-1 rounded-full bg-red-50 px-2 py-0.5 font-medium text-red-600 text-xs">
             Giảm {data.discount}%
           </span>
         )}
@@ -36,13 +42,25 @@ const CardProduct = ({ data }) => {
       <div className="mt-auto flex flex-col gap-2">
         <p className="text-gray-500 text-xs">{data.unit}</p>
 
-        <p className="font-semibold text-sm">
-          {DisplayPriceInVND(pricewithDiscount(data.price, data.discount))}
-        </p>
+        <div className="flex items-baseline gap-1.5">
+          <p className="font-semibold text-sm">
+            {DisplayPriceInVND(finalPrice)}
+          </p>
+
+          {hasDiscount && (
+            <p className="text-gray-400 text-xs line-through">
+              {DisplayPriceInVND(data.price)}
+            </p>
+          )}
+        </div>
 
         <button
-          className="flex w-full cursor-pointer items-center justify-center gap-1 rounded-md bg-green-600 px-3 py-1.5 font-medium text-white text-xs transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-600"
-          onClick={(e) => e.preventDefault()}
+          aria-label={`Thêm ${data.name} vào giỏ`}
+          className="flex w-full cursor-pointer items-center justify-center gap-1 rounded-md bg-green-600 px-3 py-1.5 font-medium text-white text-xs transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-600 active:scale-95"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
           type="button"
         >
           <Plus aria-hidden="true" size={14} />
