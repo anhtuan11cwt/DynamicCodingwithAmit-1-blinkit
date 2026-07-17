@@ -13,7 +13,7 @@
     "price": 635000,
     "stock": 1,
     "subCategory": "Trà",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -31,7 +31,7 @@
     "price": 560000,
     "stock": 9,
     "subCategory": "Trà",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -47,7 +47,7 @@
     "price": 654000,
     "stock": 420,
     "subCategory": "Trà",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -64,7 +64,7 @@
     "price": 740000,
     "stock": 107,
     "subCategory": "Trà",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -79,7 +79,7 @@
     "price": 984000,
     "stock": 369,
     "subCategory": "Trà & Cà phê nhập khẩu",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -94,7 +94,7 @@
     "price": 307000,
     "stock": 268,
     "subCategory": "Trà & Cà phê nhập khẩu",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -110,7 +110,7 @@
     "price": 370000,
     "stock": 417,
     "subCategory": "Trà & Cà phê nhập khẩu",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -128,7 +128,7 @@
     "price": 524000,
     "stock": 229,
     "subCategory": "Sô cô la nóng",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -146,7 +146,7 @@
     "price": 596000,
     "stock": 712,
     "subCategory": "Sô cô la nóng",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -162,7 +162,7 @@
     "price": 399000,
     "stock": 297,
     "subCategory": "Sô cô la nóng",
-    "unit": "Chai"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -198,7 +198,7 @@
     "price": 666000,
     "stock": 891,
     "subCategory": "Trà xanh & Trà hương vị",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -338,7 +338,7 @@
     "price": 843000,
     "stock": 101,
     "subCategory": "Cà phê lạnh & Trà đá",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -374,7 +374,7 @@
     "price": 437000,
     "stock": 752,
     "subCategory": "Cà phê lạnh & Trà đá",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -391,7 +391,7 @@
     "price": 391000,
     "stock": 443,
     "subCategory": "Cà phê lạnh & Trà đá",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -409,7 +409,7 @@
     "price": 424000,
     "stock": 880,
     "subCategory": "Cà phê",
-    "unit": "Hộp"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -426,7 +426,7 @@
     "price": 479000,
     "stock": 318,
     "subCategory": "Cà phê",
-    "unit": "Hộp"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -444,7 +444,7 @@
     "price": 826000,
     "stock": 129,
     "subCategory": "Cà phê",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -460,7 +460,7 @@
     "price": 872000,
     "stock": 972,
     "subCategory": "Cà phê",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Trà, Cà phê & Đồ uống lành mạnh",
@@ -477,7 +477,7 @@
     "price": 914000,
     "stock": 905,
     "subCategory": "Cà phê",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Đồ ngọt",
@@ -494,7 +494,7 @@
     "price": 577000,
     "stock": 205,
     "subCategory": "Mứt Ấn Độ",
-    "unit": "Lon"
+    "unit": "Hộp"
   },
   {
     "category": "Đồ ngọt",
@@ -510,7 +510,7 @@
     "price": 342000,
     "stock": 745,
     "subCategory": "Mứt Ấn Độ",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Đồ ngọt",
@@ -525,7 +525,7 @@
     "price": 300000,
     "stock": 910,
     "subCategory": "Mứt Ấn Độ",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Đồ ngọt",
@@ -541,7 +541,7 @@
     "price": 854000,
     "stock": 52,
     "subCategory": "Kem & Tráng miệng đông lạnh",
-    "unit": "Chai"
+    "unit": "Hộp"
   },
   {
     "category": "Đồ ngọt",
@@ -557,7 +557,7 @@
     "price": 479000,
     "stock": 547,
     "subCategory": "Kem & Tráng miệng đông lạnh",
-    "unit": "Lon"
+    "unit": "Hộp"
   },
   {
     "category": "Đồ ngọt",
@@ -572,7 +572,7 @@
     "price": 998000,
     "stock": 100,
     "subCategory": "Kem & Tráng miệng đông lạnh",
-    "unit": "Lon"
+    "unit": "Hộp"
   },
   {
     "category": "Đồ ngọt",
@@ -587,7 +587,7 @@
     "price": 387000,
     "stock": 120,
     "subCategory": "Sữa chua hương vị",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Đồ ngọt",
@@ -602,7 +602,7 @@
     "price": 384000,
     "stock": 860,
     "subCategory": "Sữa chua hương vị",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Đồ ngọt",
@@ -617,7 +617,7 @@
     "price": 914000,
     "stock": 111,
     "subCategory": "Sữa chua hương vị",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Đồ ngọt",
@@ -634,7 +634,7 @@
     "price": 628000,
     "stock": 717,
     "subCategory": "Sô cô la",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Đồ ngọt",
@@ -651,7 +651,7 @@
     "price": 753000,
     "stock": 675,
     "subCategory": "Sô cô la",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Đồ ăn vặt",
@@ -668,7 +668,7 @@
     "price": 528000,
     "stock": 799,
     "subCategory": "Sô cô la",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Đồ ăn vặt",
@@ -682,7 +682,7 @@
     "price": 638000,
     "stock": 187,
     "subCategory": "Bánh & Cuộn",
-    "unit": "Lon"
+    "unit": "Hộp"
   },
   {
     "category": "Đồ ăn vặt",
@@ -698,7 +698,7 @@
     "price": 353000,
     "stock": 501,
     "subCategory": "Bánh mì khô & Wafer",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Đồ ăn vặt",
@@ -714,7 +714,7 @@
     "price": 828000,
     "stock": 589,
     "subCategory": "Bánh & Cuộn",
-    "unit": "Lon"
+    "unit": "Hộp"
   },
   {
     "category": "Đồ ăn vặt",
@@ -747,7 +747,7 @@
     "price": 337000,
     "stock": 163,
     "subCategory": "Bánh mì khô & Wafer",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Đồ ăn vặt",
@@ -953,7 +953,7 @@
     "price": 621000,
     "stock": 60,
     "subCategory": "Nachos",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Đồ ăn vặt",
@@ -986,7 +986,7 @@
     "price": 762000,
     "stock": 119,
     "subCategory": "Quà tặng đồ ăn vặt",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Đồ ăn vặt",
@@ -1002,7 +1002,7 @@
     "price": 696000,
     "stock": 900,
     "subCategory": "Quà tặng đồ ăn vặt",
-    "unit": "Lon"
+    "unit": "Hộp"
   },
   {
     "category": "Đồ ăn vặt",
@@ -1018,7 +1018,7 @@
     "price": 830000,
     "stock": 25,
     "subCategory": "Quà tặng đồ ăn vặt",
-    "unit": "Gói"
+    "unit": "Hộp"
   },
   {
     "category": "Đồ ăn vặt",
@@ -1097,7 +1097,7 @@
     "price": 527000,
     "stock": 784,
     "subCategory": "Đồ ăn nhập khẩu",
-    "unit": "Chai"
+    "unit": "Gói"
   },
   {
     "category": "Đồ ăn vặt",
@@ -1147,7 +1147,7 @@
     "price": 486000,
     "stock": 912,
     "subCategory": "Khoai tây chiên",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Đồ ăn vặt",
@@ -1182,7 +1182,7 @@
     "price": 917000,
     "stock": 817,
     "subCategory": "Khoai tây chiên",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Đồ ăn vặt",
@@ -1381,7 +1381,7 @@
     "price": 302000,
     "stock": 186,
     "subCategory": "Mứt & Gia vị spread",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Sốt & Gia vị",
@@ -1398,7 +1398,7 @@
     "price": 397000,
     "stock": 308,
     "subCategory": "Mứt & Gia vị spread",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Sốt & Gia vị",
@@ -1416,7 +1416,7 @@
     "price": 746000,
     "stock": 220,
     "subCategory": "Mứt & Gia vị spread",
-    "unit": "Lon"
+    "unit": "Chai"
   },
   {
     "category": "Sốt & Gia vị",
@@ -1450,7 +1450,7 @@
     "price": 993000,
     "stock": 354,
     "subCategory": "Chutney & Dưa Ấn Độ",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Sốt & Gia vị",
@@ -1466,7 +1466,7 @@
     "price": 433000,
     "stock": 945,
     "subCategory": "Chutney & Dưa Ấn Độ",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Sốt & Gia vị",
@@ -1680,7 +1680,7 @@
     "price": 6490000,
     "stock": 102,
     "subCategory": "Thuốc hàng ngày",
-    "unit": "Chai"
+    "unit": "Hộp"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1696,7 +1696,7 @@
     "price": 2057000,
     "stock": 451,
     "subCategory": "Thuốc hàng ngày",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1714,7 +1714,7 @@
     "price": 3099000,
     "stock": 70,
     "subCategory": "Thuốc hàng ngày",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1732,7 +1732,7 @@
     "price": 8573000,
     "stock": 83,
     "subCategory": "Chăm sóc tiêu hóa",
-    "unit": "Chai"
+    "unit": "Hộp"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1749,7 +1749,7 @@
     "price": 2526000,
     "stock": 589,
     "subCategory": "Chăm sóc tiêu hóa",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1767,7 +1767,7 @@
     "price": 3750000,
     "stock": 724,
     "subCategory": "Chăm sóc tiêu hóa",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1785,7 +1785,7 @@
     "price": 7218000,
     "stock": 303,
     "subCategory": "Ho & cảm lạnh",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1803,7 +1803,7 @@
     "price": 6350000,
     "stock": 420,
     "subCategory": "Ho & cảm lạnh",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1821,7 +1821,7 @@
     "price": 2338000,
     "stock": 878,
     "subCategory": "Ho & cảm lạnh",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1836,7 +1836,7 @@
     "price": 9987000,
     "stock": 173,
     "subCategory": "Chyawanprash",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1854,7 +1854,7 @@
     "price": 6171000,
     "stock": 858,
     "subCategory": "Chyawanprash",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1870,7 +1870,7 @@
     "price": 3607000,
     "stock": 371,
     "subCategory": "Thực phẩm làm đẹp",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1887,7 +1887,7 @@
     "price": 8195000,
     "stock": 593,
     "subCategory": "Thực phẩm làm đẹp",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1904,7 +1904,7 @@
     "price": 9479000,
     "stock": 217,
     "subCategory": "Thực phẩm làm đẹp",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1976,7 +1976,7 @@
     "price": 9364000,
     "stock": 986,
     "subCategory": "Bỉm người lớn",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -1994,7 +1994,7 @@
     "price": 3721000,
     "stock": 480,
     "subCategory": "Bỉm người lớn",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Thuốc & Sức khỏe",
@@ -2012,7 +2012,7 @@
     "price": 3742000,
     "stock": 503,
     "subCategory": "Bỉm người lớn",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Chăm sóc thú cưng",
@@ -2030,7 +2030,7 @@
     "price": 1388000,
     "stock": 349,
     "subCategory": "Chải chuốt thú cưng",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Chăm sóc thú cưng",
@@ -2048,7 +2048,7 @@
     "price": 2172000,
     "stock": 21,
     "subCategory": "Chải chuốt thú cưng",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Chăm sóc thú cưng",
@@ -2065,7 +2065,7 @@
     "price": 1298000,
     "stock": 145,
     "subCategory": "Chải chuốt thú cưng",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Chăm sóc thú cưng",
@@ -2083,7 +2083,7 @@
     "price": 2540000,
     "stock": 168,
     "subCategory": "Chải chuốt thú cưng",
-    "unit": "Hộp"
+    "unit": "Chai"
   },
   {
     "category": "Chăm sóc thú cưng",
@@ -2101,7 +2101,7 @@
     "price": 5373000,
     "stock": 609,
     "subCategory": "Đồ dùng cho chó",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Chăm sóc thú cưng",
@@ -2119,7 +2119,7 @@
     "price": 2149000,
     "stock": 944,
     "subCategory": "Đồ dùng cho chó",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Chăm sóc thú cưng",
@@ -2136,7 +2136,7 @@
     "price": 6080000,
     "stock": 784,
     "subCategory": "Đồ dùng cho chó",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Chăm sóc thú cưng",
@@ -2154,7 +2154,7 @@
     "price": 5536000,
     "stock": 358,
     "subCategory": "Đồ dùng cho chó",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Chăm sóc thú cưng",
@@ -2170,7 +2170,7 @@
     "price": 4987000,
     "stock": 784,
     "subCategory": "Thức ăn thú cưng đa dạng",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Chăm sóc thú cưng",
@@ -2185,7 +2185,7 @@
     "price": 9633000,
     "stock": 576,
     "subCategory": "Thức ăn thú cưng đa dạng",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Chăm sóc thú cưng",
@@ -2203,7 +2203,7 @@
     "price": 4416000,
     "stock": 355,
     "subCategory": "Đồ dùng cho mèo",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Chăm sóc thú cưng",
@@ -2220,7 +2220,7 @@
     "price": 6235000,
     "stock": 423,
     "subCategory": "Đồ dùng cho mèo",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Chăm sóc thú cưng",
@@ -2238,7 +2238,7 @@
     "price": 6566000,
     "stock": 582,
     "subCategory": "Đồ dùng cho mèo",
-    "unit": "Hộp"
+    "unit": "Túi"
   },
   {
     "category": "Chăm sóc thú cưng",
@@ -2312,7 +2312,7 @@
     "unit": "Cái"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Kẹo cao su nicotine Ryze (2 mg, thì là tươi)",
     "discount": 44,
     "image": [
@@ -2327,10 +2327,10 @@
     "price": 6094000,
     "stock": 287,
     "subCategory": "Cai thuốc lá",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Kẹo cao su nicotine Nicotex Bạc hà đậm",
     "discount": 10,
     "image": [
@@ -2342,10 +2342,10 @@
     "price": 1337000,
     "stock": 67,
     "subCategory": "Cai thuốc lá",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Kẹo cao su nicotine Nicotex Không đường",
     "discount": 16,
     "image": [
@@ -2357,10 +2357,10 @@
     "price": 3798000,
     "stock": 503,
     "subCategory": "Cai thuốc lá",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Kẹo cao su nicotine Nicotex Mint Plus vị 2",
     "discount": 43,
     "image": [
@@ -2373,10 +2373,10 @@
     "price": 7030000,
     "stock": 569,
     "subCategory": "Cai thuốc lá",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Kẹo cao su nicotine Nicotex Bùng nổ trái cây",
     "discount": 50,
     "image": [
@@ -2389,10 +2389,10 @@
     "price": 5160000,
     "stock": 346,
     "subCategory": "Cai thuốc lá",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Kẹo GO DESi Mints Meetha Paan",
     "discount": 14,
     "image": [
@@ -2406,11 +2406,11 @@
     "name": "Kẹo GO DESi Mints Meetha Paan",
     "price": 1105000,
     "stock": 615,
-    "subCategory": "Tr?u",
-    "unit": "Cái"
+    "subCategory": "Trầu",
+    "unit": "Gói"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Rajnigandha Silver Pearls - Silver Coated Elaichi Mouth Freshener",
     "discount": 12,
     "image": [
@@ -2424,10 +2424,10 @@
     "price": 1579000,
     "stock": 663,
     "subCategory": "Kem thơm miệng",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Paan tự nhiên Praakritik Gulkand",
     "discount": 31,
     "image": [
@@ -2441,10 +2441,10 @@
     "price": 5349000,
     "stock": 674,
     "subCategory": "Kem thơm miệng",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Làm mới miệng Pass Pass Minty Mix",
     "discount": 31,
     "image": [
@@ -2459,10 +2459,10 @@
     "price": 3807000,
     "stock": 620,
     "subCategory": "Kem thơm miệng",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Làm mới miệng Chandan Star 5 trong 1",
     "discount": 25,
     "image": [
@@ -2477,10 +2477,10 @@
     "price": 9714000,
     "stock": 174,
     "subCategory": "Kem thơm miệng",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Làm mới miệng Chandan Rajwadi",
     "discount": 43,
     "image": [
@@ -2492,10 +2492,10 @@
     "price": 4300000,
     "stock": 114,
     "subCategory": "Kem thơm miệng",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Làm mới miệng Chandan Mint Saunf",
     "discount": 29,
     "image": [
@@ -2509,10 +2509,10 @@
     "price": 8135000,
     "stock": 552,
     "subCategory": "Kem thơm miệng",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Kẹo bạc hà Center Fresh Không đường",
     "discount": 44,
     "image": [
@@ -2527,10 +2527,10 @@
     "price": 7074000,
     "stock": 312,
     "subCategory": "Kem thơm miệng",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Bật lửa ngọn lửa Stash Pro",
     "discount": 45,
     "image": [
@@ -2547,7 +2547,7 @@
     "unit": "Cái"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Retro Circulo Flint Lighter (Assorted, Refillable) - Stash Pro",
     "discount": 46,
     "image": [
@@ -2565,7 +2565,7 @@
     "unit": "Cái"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Bật lửa đá lửa cao cấp (Đa dạng) - Stash Pro",
     "discount": 33,
     "image": [
@@ -2583,7 +2583,7 @@
     "unit": "Cái"
   },
   {
-    "category": "Góc trầu",
+    "category": "Cai thuốc & Thơm miệng",
     "description": "Bật lửa chống gió Jetty - Stash Pro 2",
     "discount": 40,
     "image": [
@@ -2613,7 +2613,7 @@
     "price": 5251000,
     "stock": 819,
     "subCategory": "Protein lành mạnh",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Hữu cơ & Sống lành mạnh",
@@ -2629,7 +2629,7 @@
     "price": 7611000,
     "stock": 585,
     "subCategory": "Bánh quy & Wafer",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Hữu cơ & Sống lành mạnh",
@@ -2645,7 +2645,7 @@
     "price": 9073000,
     "stock": 667,
     "subCategory": "Bánh quy & Wafer",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Hữu cơ & Sống lành mạnh",
@@ -2660,7 +2660,7 @@
     "price": 9102000,
     "stock": 352,
     "subCategory": "Bánh quy & Wafer",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Hữu cơ & Sống lành mạnh",
@@ -2692,7 +2692,7 @@
     "price": 3935000,
     "stock": 206,
     "subCategory": "Bữa sáng & Nhiều hơn",
-    "unit": "Gói"
+    "unit": "Hộp"
   },
   {
     "category": "Hữu cơ & Sống lành mạnh",
@@ -2761,7 +2761,7 @@
     "price": 9095000,
     "stock": 521,
     "subCategory": "Thức ăn trẻ em",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Hữu cơ & Sống lành mạnh",
@@ -2777,7 +2777,7 @@
     "price": 8494000,
     "stock": 355,
     "subCategory": "Thức ăn trẻ em",
-    "unit": "Gói"
+    "unit": "Hộp"
   },
   {
     "category": "Hữu cơ & Sống lành mạnh",
@@ -2823,7 +2823,7 @@
     "price": 5415000,
     "stock": 636,
     "subCategory": "Gia vị nguyên chất",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -2839,7 +2839,7 @@
     "price": 5029000,
     "stock": 826,
     "subCategory": "Gia vị nguyên chất",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -2853,7 +2853,7 @@
     "price": 4789000,
     "stock": 725,
     "subCategory": "Gia vị nguyên chất",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -2869,7 +2869,7 @@
     "price": 6282000,
     "stock": 891,
     "subCategory": "Gia vị nguyên chất",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -2887,7 +2887,7 @@
     "price": 7432000,
     "stock": 610,
     "subCategory": "Gia vị nguyên chất",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -2905,7 +2905,7 @@
     "price": 6656000,
     "stock": 447,
     "subCategory": "Muối, Đường & Đường thô",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -2922,7 +2922,7 @@
     "price": 9347000,
     "stock": 513,
     "subCategory": "Muối, Đường & Đường thô",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -2938,7 +2938,7 @@
     "price": 5936000,
     "stock": 921,
     "subCategory": "Muối, Đường & Đường thô",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -2954,7 +2954,7 @@
     "price": 9556000,
     "stock": 430,
     "subCategory": "Muối, Đường & Đường thô",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -2968,7 +2968,7 @@
     "price": 3165000,
     "stock": 619,
     "subCategory": "Bột gia vị",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -2983,7 +2983,7 @@
     "price": 3202000,
     "stock": 279,
     "subCategory": "Bột gia vị",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -2998,7 +2998,7 @@
     "price": 1633000,
     "stock": 257,
     "subCategory": "Bột gia vị",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -3015,7 +3015,7 @@
     "price": 9966000,
     "stock": 707,
     "subCategory": "Bột gia vị",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -3030,7 +3030,7 @@
     "price": 6202000,
     "stock": 454,
     "subCategory": "Bơ clarified & Dầu thực vật",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -3045,7 +3045,7 @@
     "price": 1104000,
     "stock": 375,
     "subCategory": "Bơ clarified & Dầu thực vật",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -3061,7 +3061,7 @@
     "price": 8928000,
     "stock": 599,
     "subCategory": "Bơ clarified & Dầu thực vật",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -3076,7 +3076,7 @@
     "price": 5858000,
     "stock": 354,
     "subCategory": "Bơ clarified & Dầu thực vật",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -3094,7 +3094,7 @@
     "price": 9507000,
     "stock": 868,
     "subCategory": "Quà tặng khô",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -3130,7 +3130,7 @@
     "price": 4239000,
     "stock": 133,
     "subCategory": "Quà tặng khô",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -3145,7 +3145,7 @@
     "price": 8471000,
     "stock": 372,
     "subCategory": "Trái cây khô",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -3174,7 +3174,7 @@
     "price": 2429000,
     "stock": 39,
     "subCategory": "Trái cây khô",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -3190,7 +3190,7 @@
     "price": 2431000,
     "stock": 456,
     "subCategory": "Chà là & Hạt",
-    "unit": "Chai"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -3208,7 +3208,7 @@
     "price": 4844000,
     "stock": 137,
     "subCategory": "Chà là & Hạt",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -3226,7 +3226,7 @@
     "price": 7148000,
     "stock": 438,
     "subCategory": "Chà là & Hạt",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -3244,7 +3244,7 @@
     "price": 3128000,
     "stock": 614,
     "subCategory": "Chà là & Hạt",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia vị, Dầu & Nhiều hơn",
@@ -3262,7 +3262,7 @@
     "price": 8147000,
     "stock": 717,
     "subCategory": "Chà là & Hạt",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gia đình & Văn phòng",
@@ -3333,7 +3333,7 @@
     "price": 4122000,
     "stock": 669,
     "subCategory": "Đồ dùng lễ hội & sự kiện",
-    "unit": "Gói"
+    "unit": "Cái"
   },
   {
     "category": "Gia đình & Văn phòng",
@@ -3758,7 +3758,7 @@
     "price": 2070000,
     "stock": 872,
     "subCategory": "Túi",
-    "unit": "Gói"
+    "unit": "Cái"
   },
   {
     "category": "Gia đình & Văn phòng",
@@ -3776,7 +3776,7 @@
     "price": 2606000,
     "stock": 240,
     "subCategory": "Túi",
-    "unit": "Gói"
+    "unit": "Cái"
   },
   {
     "category": "Gia đình & Văn phòng",
@@ -3794,7 +3794,7 @@
     "price": 7831000,
     "stock": 604,
     "subCategory": "Túi",
-    "unit": "Gói"
+    "unit": "Cái"
   },
   {
     "category": "Gia đình & Văn phòng",
@@ -3810,7 +3810,7 @@
     "price": 4666000,
     "stock": 715,
     "subCategory": "Túi",
-    "unit": "Gói"
+    "unit": "Cái"
   },
   {
     "category": "Gia đình & Văn phòng",
@@ -3968,7 +3968,7 @@
     "price": 155000,
     "stock": 446,
     "subCategory": "Rau lá & Thảo mộc",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -3983,7 +3983,7 @@
     "price": 160000,
     "stock": 8,
     "subCategory": "Rau lá & Thảo mộc",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -3998,7 +3998,7 @@
     "price": 432000,
     "stock": 197,
     "subCategory": "Rau lá & Thảo mộc",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4012,7 +4012,7 @@
     "price": 474000,
     "stock": 317,
     "subCategory": "Thức ăn trẻ em",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4026,7 +4026,7 @@
     "price": 139000,
     "stock": 624,
     "subCategory": "Rau củ tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4042,7 +4042,7 @@
     "price": 349000,
     "stock": 996,
     "subCategory": "Rau củ tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4058,7 +4058,7 @@
     "price": 168000,
     "stock": 983,
     "subCategory": "Rau củ tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4073,7 +4073,7 @@
     "price": 259000,
     "stock": 729,
     "subCategory": "Rau củ tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4087,7 +4087,7 @@
     "price": 329000,
     "stock": 647,
     "subCategory": "Rau củ tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4103,7 +4103,7 @@
     "price": 491000,
     "stock": 206,
     "subCategory": "Rau củ tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4119,7 +4119,7 @@
     "price": 182000,
     "stock": 906,
     "subCategory": "Rau củ tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4134,7 +4134,7 @@
     "price": 301000,
     "stock": 157,
     "subCategory": "Rau củ tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4151,7 +4151,7 @@
     "price": 365000,
     "stock": 692,
     "subCategory": "Rau củ tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4167,7 +4167,7 @@
     "price": 206000,
     "stock": 603,
     "subCategory": "Rau củ tươi",
-    "unit": "Gói"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4183,7 +4183,7 @@
     "price": 264000,
     "stock": 612,
     "subCategory": "Trái cây tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4200,7 +4200,7 @@
     "price": 435000,
     "stock": 618,
     "subCategory": "Trái cây tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4217,7 +4217,7 @@
     "price": 199000,
     "stock": 665,
     "subCategory": "Trái cây tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4233,7 +4233,7 @@
     "price": 476000,
     "stock": 159,
     "subCategory": "Trái cây tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4250,7 +4250,7 @@
     "price": 383000,
     "stock": 395,
     "subCategory": "Trái cây tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4264,7 +4264,7 @@
     "price": 436000,
     "stock": 607,
     "subCategory": "Trái cây tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4279,7 +4279,7 @@
     "price": 226000,
     "stock": 652,
     "subCategory": "Trái cây tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4294,7 +4294,7 @@
     "price": 448000,
     "stock": 103,
     "subCategory": "Trái cây tươi",
-    "unit": "Chai"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4309,7 +4309,7 @@
     "price": 480000,
     "stock": 199,
     "subCategory": "Trái cây tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4326,7 +4326,7 @@
     "price": 392000,
     "stock": 337,
     "subCategory": "Trái cây tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4341,7 +4341,7 @@
     "price": 363000,
     "stock": 293,
     "subCategory": "Trái cây tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4357,7 +4357,7 @@
     "price": 110000,
     "stock": 62,
     "subCategory": "Trái cây tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4371,7 +4371,7 @@
     "price": 423000,
     "stock": 698,
     "subCategory": "Trái cây tươi",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4435,7 +4435,7 @@
     "price": 155000,
     "stock": 988,
     "subCategory": "Hữu cơ chứng nhận",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4450,7 +4450,7 @@
     "price": 133000,
     "stock": 378,
     "subCategory": "Hữu cơ chứng nhận",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4466,7 +4466,7 @@
     "price": 234000,
     "stock": 978,
     "subCategory": "Hữu cơ chứng nhận",
-    "unit": "Gói"
+    "unit": "Kg"
   },
   {
     "category": "Trái cây & Rau củ",
@@ -4482,7 +4482,7 @@
     "price": 2321000,
     "stock": 5646,
     "subCategory": "Hữu cơ chứng nhận",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4499,7 +4499,7 @@
     "price": 129000,
     "stock": 396,
     "subCategory": "Trứng",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4515,7 +4515,7 @@
     "price": 250000,
     "stock": 518,
     "subCategory": "Poha, Daliya & Ngũ cốc khác",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4533,7 +4533,7 @@
     "price": 409000,
     "stock": 296,
     "subCategory": "Poha, Daliya & Ngũ cốc khác",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4549,7 +4549,7 @@
     "price": 133000,
     "stock": 532,
     "subCategory": "Poha, Daliya & Ngũ cốc khác",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4567,7 +4567,7 @@
     "price": 396000,
     "stock": 442,
     "subCategory": "Poha, Daliya & Ngũ cốc khác",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4585,7 +4585,7 @@
     "price": 106000,
     "stock": 453,
     "subCategory": "Poha, Daliya & Ngũ cốc khác",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4605,7 +4605,7 @@
     "price": 368000,
     "stock": 645,
     "subCategory": "Poha, Daliya & Ngũ cốc khác",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4621,7 +4621,7 @@
     "price": 319000,
     "stock": 640,
     "subCategory": "Poha, Daliya & Ngũ cốc khác",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4637,7 +4637,7 @@
     "price": 421000,
     "stock": 158,
     "subCategory": "Poha, Daliya & Ngũ cốc khác",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4654,7 +4654,7 @@
     "price": 255000,
     "stock": 993,
     "subCategory": "Bơ đậu phộng",
-    "unit": "Lon"
+    "unit": "Chai"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4678,7 +4678,7 @@
     "price": 476000,
     "stock": 343,
     "subCategory": "Bơ đậu phộng",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4697,7 +4697,7 @@
     "price": 365000,
     "stock": 368,
     "subCategory": "Bơ đậu phộng",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4717,7 +4717,7 @@
     "price": 409000,
     "stock": 421,
     "subCategory": "Bơ đậu phộng",
-    "unit": "Lon"
+    "unit": "Chai"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4736,7 +4736,7 @@
     "price": 434000,
     "stock": 756,
     "subCategory": "Bơ đậu phộng",
-    "unit": "Lon"
+    "unit": "Chai"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4753,7 +4753,7 @@
     "price": 317000,
     "stock": 100,
     "subCategory": "Bơ đậu phộng",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4785,7 +4785,7 @@
     "price": 177000,
     "stock": 48,
     "subCategory": "Phô mai & Đậu phụ",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4801,7 +4801,7 @@
     "price": 362000,
     "stock": 199,
     "subCategory": "Phô mai & Đậu phụ",
-    "unit": "Chai"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4820,7 +4820,7 @@
     "price": 311000,
     "stock": 963,
     "subCategory": "Phô mai & Đậu phụ",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4837,7 +4837,7 @@
     "price": 494000,
     "stock": 192,
     "subCategory": "Phô mai & Đậu phụ",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4853,7 +4853,7 @@
     "price": 417000,
     "stock": 519,
     "subCategory": "Phô mai & Đậu phụ",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4870,7 +4870,7 @@
     "price": 111000,
     "stock": 187,
     "subCategory": "Yến mạch",
-    "unit": "Hộp"
+    "unit": "Túi"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4886,7 +4886,7 @@
     "price": 383000,
     "stock": 197,
     "subCategory": "Yến mạch",
-    "unit": "Hộp"
+    "unit": "Túi"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4902,7 +4902,7 @@
     "price": 275000,
     "stock": 974,
     "subCategory": "Yến mạch",
-    "unit": "Hộp"
+    "unit": "Túi"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4922,7 +4922,7 @@
     "price": 244000,
     "stock": 277,
     "subCategory": "Muesli & Granola",
-    "unit": "Lon"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4940,7 +4940,7 @@
     "price": 239000,
     "stock": 156,
     "subCategory": "Muesli & Granola",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4959,7 +4959,7 @@
     "price": 183000,
     "stock": 882,
     "subCategory": "Muesli & Granola",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4974,7 +4974,7 @@
     "price": 450000,
     "stock": 685,
     "subCategory": "Sữa",
-    "unit": "Gói"
+    "unit": "Lít"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -4990,7 +4990,7 @@
     "price": 189000,
     "stock": 264,
     "subCategory": "Sữa",
-    "unit": "Chai"
+    "unit": "Lít"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5006,7 +5006,7 @@
     "price": 367000,
     "stock": 246,
     "subCategory": "Sữa",
-    "unit": "Cái"
+    "unit": "Lít"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5023,7 +5023,7 @@
     "price": 268000,
     "stock": 426,
     "subCategory": "Sữa",
-    "unit": "Cái"
+    "unit": "Lít"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5038,7 +5038,7 @@
     "price": 438000,
     "stock": 368,
     "subCategory": "Sữa",
-    "unit": "Cái"
+    "unit": "Lít"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5054,7 +5054,7 @@
     "price": 481000,
     "stock": 675,
     "subCategory": "Sữa",
-    "unit": "Chai"
+    "unit": "Lít"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5069,7 +5069,7 @@
     "price": 54000,
     "stock": 4564,
     "subCategory": "Sữa",
-    "unit": "Cái"
+    "unit": "Lít"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5085,7 +5085,7 @@
     "price": 161000,
     "stock": 34,
     "subCategory": "Mật ong & Chyawanprash",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5102,7 +5102,7 @@
     "price": 140000,
     "stock": 873,
     "subCategory": "Mật ong & Chyawanprash",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5123,7 +5123,7 @@
     "price": 318000,
     "stock": 996,
     "subCategory": "Mật ong & Chyawanprash",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5144,7 +5144,7 @@
     "price": 270000,
     "stock": 397,
     "subCategory": "Mật ong & Chyawanprash",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5163,7 +5163,7 @@
     "price": 221000,
     "stock": 502,
     "subCategory": "Mật ong & Chyawanprash",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5181,7 +5181,7 @@
     "price": 492000,
     "stock": 83,
     "subCategory": "Mật ong & Chyawanprash",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5232,7 +5232,7 @@
     "price": 254000,
     "stock": 808,
     "subCategory": "Ngũ cốc & Ngũ cốc trẻ em",
-    "unit": "Lon"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5267,7 +5267,7 @@
     "price": 373000,
     "stock": 809,
     "subCategory": "Ngũ cốc & Ngũ cốc trẻ em",
-    "unit": "Lon"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5302,7 +5302,7 @@
     "price": 345000,
     "stock": 507,
     "subCategory": "Ngũ cốc & Ngũ cốc trẻ em",
-    "unit": "Gói"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5369,7 +5369,7 @@
     "price": 600000,
     "stock": 56456,
     "subCategory": "Thanh năng lượng",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5385,7 +5385,7 @@
     "price": 268000,
     "stock": 813,
     "subCategory": "Trứng",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5401,7 +5401,7 @@
     "price": 276000,
     "stock": 663,
     "subCategory": "Trứng",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5416,7 +5416,7 @@
     "price": 564000,
     "stock": 123156,
     "subCategory": "Trứng",
-    "unit": "Gói"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5448,7 +5448,7 @@
     "price": 176000,
     "stock": 897,
     "subCategory": "Trứng",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5463,7 +5463,7 @@
     "price": 290000,
     "stock": 589,
     "subCategory": "Trứng",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5482,7 +5482,7 @@
     "price": 265000,
     "stock": 467,
     "subCategory": "Trứng",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5500,7 +5500,7 @@
     "price": 374000,
     "stock": 29,
     "subCategory": "Trứng",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5516,7 +5516,7 @@
     "price": 419000,
     "stock": 525,
     "subCategory": "Sữa chua",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5534,7 +5534,7 @@
     "price": 446000,
     "stock": 900,
     "subCategory": "Sữa chua",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5551,7 +5551,7 @@
     "price": 404000,
     "stock": 935,
     "subCategory": "Sữa chua",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5568,7 +5568,7 @@
     "price": 428000,
     "stock": 337,
     "subCategory": "Sữa chua",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5586,7 +5586,7 @@
     "price": 163000,
     "stock": 95,
     "subCategory": "Sữa chua",
-    "unit": "Chai"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5601,7 +5601,7 @@
     "price": 349000,
     "stock": 13,
     "subCategory": "Sữa chua",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5619,7 +5619,7 @@
     "price": 158000,
     "stock": 366,
     "subCategory": "Sữa chua",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5637,7 +5637,7 @@
     "price": 301000,
     "stock": 104,
     "subCategory": "Sữa chua",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5653,7 +5653,7 @@
     "price": 100000,
     "stock": 20,
     "subCategory": "Sữa chua",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5670,7 +5670,7 @@
     "price": 436000,
     "stock": 224,
     "subCategory": "Kem & Chất tạo ngọt",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5686,7 +5686,7 @@
     "price": 124000,
     "stock": 163,
     "subCategory": "Kem & Chất tạo ngọt",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5703,7 +5703,7 @@
     "price": 461000,
     "stock": 606,
     "subCategory": "Kem & Chất tạo ngọt",
-    "unit": "Chai"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5719,7 +5719,7 @@
     "price": 215000,
     "stock": 169,
     "subCategory": "Kem & Chất tạo ngọt",
-    "unit": "Chai"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5738,7 +5738,7 @@
     "price": 374000,
     "stock": 527,
     "subCategory": "Sữa đặc",
-    "unit": "Cái"
+    "unit": "Lon"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5756,7 +5756,7 @@
     "price": 192000,
     "stock": 519,
     "subCategory": "Sữa đặc",
-    "unit": "Cái"
+    "unit": "Lon"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5770,7 +5770,7 @@
     "price": 282000,
     "stock": 888,
     "subCategory": "Sữa đặc",
-    "unit": "Cái"
+    "unit": "Lon"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5786,7 +5786,7 @@
     "price": 161000,
     "stock": 979,
     "subCategory": "Phô mai",
-    "unit": "Chai"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5804,7 +5804,7 @@
     "price": 325000,
     "stock": 924,
     "subCategory": "Phô mai",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5821,7 +5821,7 @@
     "price": 360000,
     "stock": 923,
     "subCategory": "Phô mai",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5838,7 +5838,7 @@
     "price": 466000,
     "stock": 185,
     "subCategory": "Phô mai",
-    "unit": "Chai"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5855,7 +5855,7 @@
     "price": 122000,
     "stock": 325,
     "subCategory": "Phô mai",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5872,7 +5872,7 @@
     "price": 147000,
     "stock": 369,
     "subCategory": "Phô mai",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5891,7 +5891,7 @@
     "price": 4684000,
     "stock": 633,
     "subCategory": "Bơ & Nhiều hơn",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5907,7 +5907,7 @@
     "price": 1731000,
     "stock": 107,
     "subCategory": "Bơ & Nhiều hơn",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5922,7 +5922,7 @@
     "price": 128000,
     "stock": 712,
     "subCategory": "Bơ & Nhiều hơn",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5939,7 +5939,7 @@
     "price": 2088000,
     "stock": 213,
     "subCategory": "Bơ & Nhiều hơn",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5956,7 +5956,7 @@
     "price": 1876000,
     "stock": 562,
     "subCategory": "Bơ & Nhiều hơn",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -5992,7 +5992,7 @@
     "price": 359000,
     "stock": 769,
     "subCategory": "Hỗn hợp bữa sáng",
-    "unit": "Gói"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -6009,7 +6009,7 @@
     "price": 2021000,
     "stock": 305,
     "subCategory": "Hỗn hợp bữa sáng",
-    "unit": "Gói"
+    "unit": "Hộp"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -6043,7 +6043,7 @@
     "price": 9592000,
     "stock": 359,
     "subCategory": "Bánh mì",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -6059,7 +6059,7 @@
     "price": 2730000,
     "stock": 785,
     "subCategory": "Bánh mì",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -6076,7 +6076,7 @@
     "price": 8080000,
     "stock": 736,
     "subCategory": "Bánh mì",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -6096,7 +6096,7 @@
     "price": 1901000,
     "stock": 501,
     "subCategory": "Bánh mì",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -6113,7 +6113,7 @@
     "price": 9841000,
     "stock": 356,
     "subCategory": "Bánh mì",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -6131,7 +6131,7 @@
     "price": 8527000,
     "stock": 717,
     "subCategory": "Bánh mì",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -6146,7 +6146,7 @@
     "price": 3231000,
     "stock": 512,
     "subCategory": "Bánh mì",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -6163,7 +6163,7 @@
     "price": 1484000,
     "stock": 663,
     "subCategory": "Bánh mì",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -6180,7 +6180,7 @@
     "price": 9778000,
     "stock": 30,
     "subCategory": "Bột nhão",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Sữa, Bánh mì & Trứng",
@@ -6196,7 +6196,7 @@
     "price": 797000,
     "stock": 807,
     "subCategory": "Bột nhão",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Đồ uống lạnh & Nước ép",
@@ -6402,7 +6402,7 @@
     "price": 3932000,
     "stock": 601,
     "subCategory": "Soda & Trộn",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Đồ uống lạnh & Nước ép",
@@ -6539,7 +6539,7 @@
     "price": 4579000,
     "stock": 935,
     "subCategory": "Đồ uống nhập khẩu",
-    "unit": "Gói"
+    "unit": "Chai"
   },
   {
     "category": "Đồ uống lạnh & Nước ép",
@@ -6557,7 +6557,7 @@
     "price": 880000,
     "stock": 784,
     "subCategory": "Đồ uống nhập khẩu",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Đồ uống lạnh & Nước ép",
@@ -6644,7 +6644,7 @@
     "price": 6947000,
     "stock": 180,
     "subCategory": "Đồ uống thảo mộc",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Đồ uống lạnh & Nước ép",
@@ -6779,7 +6779,7 @@
     "price": 966000,
     "stock": 540,
     "subCategory": "Hương liệu & Sirô",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Đồ uống lạnh & Nước ép",
@@ -6796,7 +6796,7 @@
     "price": 2499000,
     "stock": 932,
     "subCategory": "Hương liệu & Sirô",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Đồ uống lạnh & Nước ép",
@@ -6814,7 +6814,7 @@
     "price": 1594000,
     "stock": 53,
     "subCategory": "Cà phê lạnh & Trà đá",
-    "unit": "Hộp"
+    "unit": "Chai"
   },
   {
     "category": "Đồ uống lạnh & Nước ép",
@@ -6830,7 +6830,7 @@
     "price": 6405000,
     "stock": 431,
     "subCategory": "Cà phê lạnh & Trà đá",
-    "unit": "Hộp"
+    "unit": "Chai"
   },
   {
     "category": "Đồ uống lạnh & Nước ép",
@@ -6843,7 +6843,7 @@
     "price": 5008000,
     "stock": 415,
     "subCategory": "Cà phê lạnh & Trà đá",
-    "unit": "Gói"
+    "unit": "Chai"
   },
   {
     "category": "Đồ uống lạnh & Nước ép",
@@ -6861,7 +6861,7 @@
     "price": 5668000,
     "stock": 458,
     "subCategory": "Cà phê lạnh & Trà đá",
-    "unit": "Hộp"
+    "unit": "Chai"
   },
   {
     "category": "Đồ uống lạnh & Nước ép",
@@ -6874,7 +6874,7 @@
     "price": 8850000,
     "stock": 255,
     "subCategory": "Cà phê lạnh & Trà đá",
-    "unit": "Hộp"
+    "unit": "Chai"
   },
   {
     "category": "Đồ uống lạnh & Nước ép",
@@ -6961,7 +6961,7 @@
     "price": 50000,
     "stock": 60,
     "subCategory": "Quà tặng đồ uống",
-    "unit": "Gói"
+    "unit": "Hộp"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7049,7 +7049,7 @@
     "price": 156000,
     "stock": 59,
     "subCategory": "Hóa chất giặt ủi",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7065,7 +7065,7 @@
     "price": 771000,
     "stock": 597,
     "subCategory": "Hóa chất giặt ủi",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7083,7 +7083,7 @@
     "price": 545000,
     "stock": 769,
     "subCategory": "Hóa chất giặt ủi",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7136,7 +7136,7 @@
     "price": 566000,
     "stock": 744,
     "subCategory": "Hương thơm",
-    "unit": "Gói"
+    "unit": "Chai"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7153,7 +7153,7 @@
     "price": 651000,
     "stock": 243,
     "subCategory": "Hương thơm",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7171,7 +7171,7 @@
     "price": 252000,
     "stock": 545,
     "subCategory": "Hương thơm",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7188,7 +7188,7 @@
     "price": 349000,
     "stock": 245,
     "subCategory": "Hương thơm",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7206,7 +7206,7 @@
     "price": 736000,
     "stock": 592,
     "subCategory": "Hương thơm",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7224,7 +7224,7 @@
     "price": 687000,
     "stock": 1000,
     "subCategory": "Nước lau sàn & Nhiều hơn",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7242,7 +7242,7 @@
     "price": 427000,
     "stock": 331,
     "subCategory": "Nước lau sàn & Nhiều hơn",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7260,7 +7260,7 @@
     "price": 560000,
     "stock": 524,
     "subCategory": "Nước lau sàn & Nhiều hơn",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7278,7 +7278,7 @@
     "price": 383000,
     "stock": 671,
     "subCategory": "Khử trùng & Nhiều hơn",
-    "unit": "Gói"
+    "unit": "Chai"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7314,7 +7314,7 @@
     "price": 357000,
     "stock": 464,
     "subCategory": "Khử trùng & Nhiều hơn",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7472,7 +7472,7 @@
     "price": 781000,
     "stock": 673,
     "subCategory": "Bột giặt & Xà phòng",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7505,7 +7505,7 @@
     "price": 265000,
     "stock": 401,
     "subCategory": "Phụ kiện rửa bát",
-    "unit": "Hộp"
+    "unit": "Cái"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7521,7 +7521,7 @@
     "price": 732000,
     "stock": 541,
     "subCategory": "Bột giặt & Xà phòng",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7539,7 +7539,7 @@
     "price": 731000,
     "stock": 150,
     "subCategory": "Bột giặt & Xà phòng",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7557,7 +7557,7 @@
     "price": 845000,
     "stock": 509,
     "subCategory": "Bột giặt & Xà phòng",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Vệ sinh cơ bản",
@@ -7642,7 +7642,7 @@
     "price": 674000,
     "stock": 412,
     "subCategory": "Xúc xích, Salami & Thịt nguội",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gà, Thịt & Cá",
@@ -7658,7 +7658,7 @@
     "price": 844000,
     "stock": 247,
     "subCategory": "Xúc xích, Salami & Thịt nguội",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Gà, Thịt & Cá",
@@ -7675,7 +7675,7 @@
     "price": 935000,
     "stock": 993,
     "subCategory": "Cá & Hải sản",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Gà, Thịt & Cá",
@@ -7690,7 +7690,7 @@
     "price": 188000,
     "stock": 151,
     "subCategory": "Cá & Hải sản",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Gà, Thịt & Cá",
@@ -7706,7 +7706,7 @@
     "price": 418000,
     "stock": 532,
     "subCategory": "Cá & Hải sản",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Gà, Thịt & Cá",
@@ -7722,7 +7722,7 @@
     "price": 518000,
     "stock": 666,
     "subCategory": "Gà",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Gà, Thịt & Cá",
@@ -7739,7 +7739,7 @@
     "price": 317000,
     "stock": 639,
     "subCategory": "Bánh & Cuộn",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Gà, Thịt & Cá",
@@ -7756,7 +7756,7 @@
     "price": 632000,
     "stock": 43,
     "subCategory": "Gà",
-    "unit": "Cái"
+    "unit": "Kg"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -7771,7 +7771,7 @@
     "price": 989000,
     "stock": 969,
     "subCategory": "Súp",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -7787,7 +7787,7 @@
     "price": 665000,
     "stock": 59,
     "subCategory": "Súp",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -7803,7 +7803,7 @@
     "price": 928000,
     "stock": 266,
     "subCategory": "Súp",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -7818,7 +7818,7 @@
     "price": 646000,
     "stock": 907,
     "subCategory": "Đậu & Nhiều hơn",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -7835,7 +7835,7 @@
     "price": 641000,
     "stock": 982,
     "subCategory": "Sẵn sàng nấu & ăn",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -7850,7 +7850,7 @@
     "price": 930000,
     "stock": 782,
     "subCategory": "Mì Ý",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -7867,7 +7867,7 @@
     "price": 513000,
     "stock": 465,
     "subCategory": "Mì Ý",
-    "unit": "Chai"
+    "unit": "Gói"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -7883,7 +7883,7 @@
     "price": 154000,
     "stock": 879,
     "subCategory": "Mì Ý",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -7899,7 +7899,7 @@
     "price": 301000,
     "stock": 584,
     "subCategory": "Mì Ý",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -7963,7 +7963,7 @@
     "price": 454000,
     "stock": 895,
     "subCategory": "Hỗn hợp nhanh",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -7980,7 +7980,7 @@
     "price": 736000,
     "stock": 16,
     "subCategory": "Hỗn hợp nhanh",
-    "unit": "Gói"
+    "unit": "Hộp"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -7997,7 +7997,7 @@
     "price": 578000,
     "stock": 715,
     "subCategory": "Hỗn hợp nhanh",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -8012,7 +8012,7 @@
     "price": 600000,
     "stock": 50,
     "subCategory": "Mì & Pasta nhập khẩu",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -8028,7 +8028,7 @@
     "price": 600000,
     "stock": 500,
     "subCategory": "Đồ ăn nhập khẩu",
-    "unit": "Hộp"
+    "unit": "Gói"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -8043,7 +8043,7 @@
     "price": 100000,
     "stock": 500,
     "subCategory": "Thảo mộc & Gia vị",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -8059,7 +8059,7 @@
     "price": 500000,
     "stock": 19,
     "subCategory": "Thảo mộc & Gia vị",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -8076,7 +8076,7 @@
     "price": 20000,
     "stock": 5000,
     "subCategory": "Thảo mộc & Gia vị",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -8092,7 +8092,7 @@
     "price": 800000,
     "stock": 6000,
     "subCategory": "Hỗn hợp tráng miệng & Bánh",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -8110,7 +8110,7 @@
     "price": 8000000,
     "stock": 60,
     "subCategory": "Hỗn hợp tráng miệng & Bánh",
-    "unit": "Lon"
+    "unit": "Hộp"
   },
   {
     "category": "Bữa sáng & Đồ ăn nhanh",
@@ -8125,7 +8125,7 @@
     "price": 500000,
     "stock": 60,
     "subCategory": "Hỗn hợp tráng miệng & Bánh",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Bánh & Bánh quy",
@@ -8156,7 +8156,7 @@
     "price": 80000,
     "stock": 59,
     "subCategory": "Lành mạnh & Tiêu hóa",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Bánh & Bánh quy",
@@ -8254,7 +8254,7 @@
     "price": 600000,
     "stock": 50,
     "subCategory": "Bánh quy kem",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Bánh & Bánh quy",
@@ -8272,7 +8272,7 @@
     "price": 789000,
     "stock": 59,
     "subCategory": "Bánh quy",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Bánh & Bánh quy",
@@ -8290,7 +8290,7 @@
     "price": 500000,
     "stock": 20,
     "subCategory": "Kem & Chất tạo ngọt",
-    "unit": "Gói"
+    "unit": "Hộp"
   },
   {
     "category": "Bánh & Bánh quy",
@@ -8323,7 +8323,7 @@
     "price": 780000,
     "stock": 60,
     "subCategory": "Bánh quy & Wafer",
-    "unit": "Lon"
+    "unit": "Gói"
   },
   {
     "category": "Bánh & Bánh quy",
@@ -8340,7 +8340,7 @@
     "price": 799000,
     "stock": 60,
     "subCategory": "Bánh quy",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Bánh & Bánh quy",
@@ -8376,7 +8376,7 @@
     "price": 760000,
     "stock": 60,
     "subCategory": "Bánh mì",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Bánh & Bánh quy",
@@ -8390,7 +8390,7 @@
     "price": 600000,
     "stock": 500,
     "subCategory": "Bánh mì",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Bánh & Bánh quy",
@@ -8405,7 +8405,7 @@
     "price": 498000,
     "stock": 600,
     "subCategory": "Bánh mì",
-    "unit": "Chai"
+    "unit": "Gói"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8423,7 +8423,7 @@
     "price": 5999000,
     "stock": 652,
     "subCategory": "Chăm sóc",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8440,7 +8440,7 @@
     "price": 7894000,
     "stock": 59,
     "subCategory": "Chăm sóc miệng & mũi",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8526,7 +8526,7 @@
     "price": 12345000,
     "stock": 900,
     "subCategory": "Vệ sinh",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8544,7 +8544,7 @@
     "price": 900000,
     "stock": 800,
     "subCategory": "Vệ sinh",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8562,7 +8562,7 @@
     "price": 7800000,
     "stock": 800,
     "subCategory": "Vệ sinh",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8580,7 +8580,7 @@
     "price": 800000,
     "stock": 600,
     "subCategory": "Vệ sinh",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8596,7 +8596,7 @@
     "price": 206000,
     "stock": 18,
     "subCategory": "Vệ sinh",
-    "unit": "Cái"
+    "unit": "Túi"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8718,7 +8718,7 @@
     "price": 9000000,
     "stock": 10,
     "subCategory": "Bình sữa & Nhiều hơn",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8736,7 +8736,7 @@
     "price": 500000,
     "stock": 800,
     "subCategory": "Bình sữa & Nhiều hơn",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8754,7 +8754,7 @@
     "price": 8000000,
     "stock": 700,
     "subCategory": "Bình sữa & Nhiều hơn",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8771,7 +8771,7 @@
     "price": 3080000,
     "stock": 30,
     "subCategory": "Đồ tắm",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8786,7 +8786,7 @@
     "price": 7000000,
     "stock": 60,
     "subCategory": "Đồ tắm",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8804,7 +8804,7 @@
     "price": 10000000,
     "stock": 900,
     "subCategory": "Đồ tắm",
-    "unit": "Cái"
+    "unit": "Chai"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8822,7 +8822,7 @@
     "price": 599000,
     "stock": 900,
     "subCategory": "Khăn ướt em bé",
-    "unit": "Chai"
+    "unit": "Gói"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8840,7 +8840,7 @@
     "price": 2000000,
     "stock": 900,
     "subCategory": "Khăn ướt em bé",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8858,7 +8858,7 @@
     "price": 600000,
     "stock": 99,
     "subCategory": "Khăn ướt em bé",
-    "unit": "Cái"
+    "unit": "Gói"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8875,7 +8875,7 @@
     "price": 1978000,
     "stock": 600,
     "subCategory": "Quà tặng & Đồ chơi em bé",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8891,7 +8891,7 @@
     "price": 1999000,
     "stock": 498,
     "subCategory": "Quà tặng & Đồ chơi em bé",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8907,7 +8907,7 @@
     "price": 4654000,
     "stock": 800,
     "subCategory": "Quà tặng & Đồ chơi em bé",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8923,7 +8923,7 @@
     "price": 600000,
     "stock": 800,
     "subCategory": "Thức ăn trẻ em",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8939,7 +8939,7 @@
     "price": 780000,
     "stock": 600,
     "subCategory": "Thức ăn trẻ em",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8956,7 +8956,7 @@
     "price": 7894000,
     "stock": 800,
     "subCategory": "Phụ kiện & Quần áo em bé",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Chăm sóc em bé",
@@ -8973,7 +8973,7 @@
     "price": 900000,
     "stock": 599,
     "subCategory": "Thức ăn trẻ em",
-    "unit": "Cái"
+    "unit": "Hộp"
   },
   {
     "category": "Chăm sóc em bé",
@@ -9009,7 +9009,7 @@
     "price": 1978000,
     "stock": 599,
     "subCategory": "Phụ kiện & Quần áo em bé",
-    "unit": "Gói"
+    "unit": "Cái"
   },
   {
     "category": "Chăm sóc em bé",
@@ -9059,7 +9059,7 @@
     "price": 700000,
     "stock": 500,
     "subCategory": "Gạo",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9076,7 +9076,7 @@
     "price": 700000,
     "stock": 60,
     "subCategory": "Gạo",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9092,7 +9092,7 @@
     "price": 598000,
     "stock": 200,
     "subCategory": "Gạo",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9110,7 +9110,7 @@
     "price": 588000,
     "stock": 60,
     "subCategory": "Gạo",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9125,7 +9125,7 @@
     "price": 500000,
     "stock": 60,
     "subCategory": "Gạo",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9143,7 +9143,7 @@
     "price": 799000,
     "stock": 10,
     "subCategory": "Gạo",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9159,7 +9159,7 @@
     "price": 200000,
     "stock": 50,
     "subCategory": "Poha, Daliya & Ngũ cốc khác",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9174,7 +9174,7 @@
     "price": 600000,
     "stock": 20,
     "subCategory": "Đậu & Nhiều hơn",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9191,7 +9191,7 @@
     "price": 100000,
     "stock": 50,
     "subCategory": "Đậu & Nhiều hơn",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9207,7 +9207,7 @@
     "price": 60000,
     "stock": 50,
     "subCategory": "Poha, Daliya & Ngũ cốc khác",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9224,7 +9224,7 @@
     "price": 20000,
     "stock": 10,
     "subCategory": "Đậu & Đậu lăng",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9242,7 +9242,7 @@
     "price": 796000,
     "stock": 10,
     "subCategory": "Poha, Daliya & Ngũ cốc khác",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9257,7 +9257,7 @@
     "price": 39000,
     "stock": 30,
     "subCategory": "Poha, Daliya & Ngũ cốc khác",
-    "unit": "Kg"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9275,7 +9275,7 @@
     "price": 498000,
     "stock": 70,
     "subCategory": "Đậu & Đậu lăng",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9293,7 +9293,7 @@
     "price": 600000,
     "stock": 50,
     "subCategory": "Đậu & Đậu lăng",
-    "unit": "Gói"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9308,7 +9308,7 @@
     "price": 180000,
     "stock": 50,
     "subCategory": "Đậu & Đậu lăng",
-    "unit": "Kg"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9324,7 +9324,7 @@
     "price": 799000,
     "stock": 5,
     "subCategory": "Lúa mạch & Bột khác",
-    "unit": "Kg"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9340,7 +9340,7 @@
     "price": 789000,
     "stock": 56,
     "subCategory": "Lúa mạch & Bột khác",
-    "unit": "Kg"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9356,7 +9356,7 @@
     "price": 789000,
     "stock": 4,
     "subCategory": "Lúa mạch & Bột khác",
-    "unit": "Kg"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9375,7 +9375,7 @@
     "price": 499000,
     "stock": 4,
     "subCategory": "Bột gram, Mì & Bột mì",
-    "unit": "Kg"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9391,7 +9391,7 @@
     "price": 599000,
     "stock": 5,
     "subCategory": "Bột gram, Mì & Bột mì",
-    "unit": "Kg"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9407,7 +9407,7 @@
     "price": 499000,
     "stock": 10,
     "subCategory": "Bột gram, Mì & Bột mì",
-    "unit": "Kg"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9423,7 +9423,7 @@
     "price": 855000,
     "stock": 9,
     "subCategory": "Bột gram, Mì & Bột mì",
-    "unit": "Kg"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9439,7 +9439,7 @@
     "price": 754000,
     "stock": 60,
     "subCategory": "Bột gram, Mì & Bột mì",
-    "unit": "Kg"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9454,7 +9454,7 @@
     "price": 695000,
     "stock": 19,
     "subCategory": "Bột mì whole wheat",
-    "unit": "Kg"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9472,7 +9472,7 @@
     "price": 799000,
     "stock": 50,
     "subCategory": "Bột mì whole wheat",
-    "unit": "Kg"
+    "unit": "Túi"
   },
   {
     "category": "Bột mì, Gạo & Đậu",
@@ -9490,6 +9490,6 @@
     "price": 599000,
     "stock": 600,
     "subCategory": "Bột mì whole wheat",
-    "unit": "Kg"
+    "unit": "Túi"
   }
 ]
