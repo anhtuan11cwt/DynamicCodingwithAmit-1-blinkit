@@ -2,6 +2,7 @@ import express from "express";
 import {
   createProductController,
   deleteProductController,
+  getProductByCategoryAndSubCategoryController,
   getProductByCategoryController,
   getProductByIdController,
   getProductController,
@@ -307,5 +308,62 @@ router.post("/getById", auth, admin, getProductByIdController);
  *         description: Lỗi máy chủ
  */
 router.post("/get-product-by-category", getProductByCategoryController);
+
+/**
+ * @openapi
+ * /api/v1/product/get-product-category-subcategory:
+ *   post:
+ *     tags: [Product]
+ *     summary: Lấy sản phẩm theo danh mục và danh mục con (có phân trang)
+ *     description: |
+ *       Trả về danh sách sản phẩm thuộc đồng thời categoryId và subCategoryId,
+ *       dùng toán tử $in của MongoDB, kèm totalCount để hỗ trợ infinite scroll.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [categoryId, subCategoryId]
+ *             properties:
+ *               categoryId:
+ *                 type: string
+ *                 example: 6849a1b2c3d4e5f6a7b8c9d0
+ *               subCategoryId:
+ *                 type: string
+ *                 example: 6849a1b2c3d4e5f6a7b8c9d1
+ *               page:
+ *                 type: number
+ *                 example: 1
+ *               limit:
+ *                 type: number
+ *                 example: 15
+ *     responses:
+ *       200:
+ *         description: Lấy sản phẩm thành công
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                 totalCount:
+ *                   type: number
+ *                 page:
+ *                   type: number
+ *                 limit:
+ *                   type: number
+ *       400:
+ *         description: Thiếu ID danh mục hoặc danh mục con
+ *       500:
+ *         description: Lỗi máy chủ
+ */
+router.post(
+  "/get-product-category-subcategory",
+  getProductByCategoryAndSubCategoryController,
+);
 
 export default router;

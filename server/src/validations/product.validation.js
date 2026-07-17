@@ -52,3 +52,10 @@ export const getProductSchema = z.object({
 export const getProductByCategorySchema = z.object({
   id: objectIdSchema,
 });
+
+export const getProductByCategoryAndSubCategorySchema = z.object({
+  categoryId: objectIdSchema,
+  limit: z.coerce.number().int().positive().max(100).default(15),
+  page: z.coerce.number().int().positive().default(1),
+  subCategoryId: objectIdSchema,
+});

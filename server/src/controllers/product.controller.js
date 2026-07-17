@@ -5,6 +5,7 @@ import {
 } from "../utils/uploadImageCloudinary.js";
 import {
   createProductSchema,
+  getProductByCategoryAndSubCategorySchema,
   getProductByCategorySchema,
   getProductSchema,
   updateProductSchema,
@@ -239,6 +240,57 @@ export const getProductByCategoryController = async (req, res) => {
       error: false,
       message: "Lấy sản phẩm theo danh mục thành công",
       success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: error.message || "Đã xảy ra lỗi",
+      success: false,
+    });
+  }
+};
+
+export const getProductByCategoryAndSubCategoryController = async (
+  req,
+  res,
+) => {
+  try {
+    const parsed = getProductByCategoryAndSubCategorySchema.safeParse(req.body);
+
+    if (!parsed.success) {
+      return res.status(400).json({
+        error: true,
+        message: parsed.error.errors[0]?.message || "Thiếu ID danh mục",
+        success: false,
+      });
+    }
+
+    const { categoryId, limit, page, subCategoryId } = parsed.data;
+    const pageNumber = Number(page) || 1;
+    const limitNumber = Number(limit) || 15;
+    const skip = (pageNumber - 1) * limitNumber;
+
+    const query = {
+      category: { $in: [categoryId] },
+      subCategory: { $in: [subCategoryId] },
+    };
+
+    const [products, totalCount] = await Promise.all([
+      ProductModel.find(query)
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limitNumber),
+      ProductModel.countDocuments(query),
+    ]);
+
+    return res.json({
+      data: products,
+      error: false,
+      limit: limitNumber,
+      message: "Lấy sản phẩm theo danh mục và danh mục con thành công",
+      page: pageNumber,
+      success: true,
+      totalCount,
     });
   } catch (error) {
     return res.status(500).json({
