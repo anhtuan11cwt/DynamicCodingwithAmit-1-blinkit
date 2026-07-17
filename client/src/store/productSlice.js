@@ -4,6 +4,7 @@ const initialState = {
   allCategory: [],
   allProduct: [],
   allSubCategory: [],
+  loadingCategory: false,
 };
 
 const productSlice = createSlice({
@@ -19,10 +20,17 @@ const productSlice = createSlice({
     setAllSubCategory: (state, action) => {
       state.allSubCategory = action.payload || [];
     },
+    setLoadingCategory: (state, action) => {
+      state.loadingCategory = action.payload;
+    },
   },
 });
 
-export const { setAllCategory, setAllProduct, setAllSubCategory } =
-  productSlice.actions;
+export const {
+  setAllCategory,
+  setAllProduct,
+  setAllSubCategory,
+  setLoadingCategory,
+} = productSlice.actions;
 
 export default productSlice.reducer;

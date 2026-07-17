@@ -5,7 +5,11 @@ import { Outlet, useLocation } from "react-router-dom";
 import SummaryApi from "./common/SummaryApi";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import { setAllCategory, setAllSubCategory } from "./store/productSlice";
+import {
+  setAllCategory,
+  setAllSubCategory,
+  setLoadingCategory,
+} from "./store/productSlice";
 import { setUserDetails } from "./store/userSlice";
 import Axios from "./utils/axios";
 import fetchUserDetails from "./utils/fetchUserDetails";
@@ -40,12 +44,15 @@ function App() {
   useEffect(() => {
     const fetchCategory = async () => {
       try {
+        dispatch(setLoadingCategory(true));
         const response = await Axios({ ...SummaryApi.getCategory });
         if (response.data.success) {
           dispatch(setAllCategory(response.data.data));
         }
       } catch {
         // Bỏ qua lỗi nền: các trang sẽ tự tải lại khi cần
+      } finally {
+        dispatch(setLoadingCategory(false));
       }
     };
 
