@@ -25,7 +25,7 @@ const CardProduct = ({ data }) => {
         />
 
         <span className="absolute top-1 left-1 rounded-full bg-green-100 px-2 py-0.5 font-medium text-green-700 text-xs">
-          10 minutes
+          10 phút
         </span>
 
         {hasDiscount && (
