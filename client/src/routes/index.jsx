@@ -11,6 +11,7 @@ import Login from "../pages/Login";
 import MyOrders from "../pages/MyOrders";
 import OTPVerification from "../pages/OTPVerification";
 import ProductAdmin from "../pages/ProductAdmin";
+import ProductDisplayPage from "../pages/ProductDisplayPage";
 import ProductListPage from "../pages/ProductListPage";
 import Profile from "../pages/Profile";
 import Register from "../pages/Register";
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         element: <ProductListPage />,
         path: ":category/:subcategory",
+      },
+      {
+        element: <ProductDisplayPage />,
+        path: "product/:product",
       },
       {
         element: (

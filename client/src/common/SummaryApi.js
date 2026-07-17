@@ -59,6 +59,10 @@ const SummaryApi = {
     method: "post",
     url: "/auth/logout",
   },
+  productDetails: {
+    method: "post",
+    url: "/product/details",
+  },
   refreshToken: {
     method: "post",
     url: "/auth/refresh-token",
