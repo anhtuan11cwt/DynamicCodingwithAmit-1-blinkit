@@ -5,6 +5,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import SummaryApi from "./common/SummaryApi";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import GlobalProvider from "./provider/GlobalProvider";
 import {
   setAllCategory,
   setAllSubCategory,
@@ -72,7 +73,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <GlobalProvider>
       <div className="flex min-h-dvh flex-col">
         <Header isHydrated={isHydrated} />
         <main className="flex-1">
@@ -81,7 +82,7 @@ function App() {
         {showFooter && <Footer />}
       </div>
       <Toaster position="top-center" toastOptions={{ duration: 2000 }} />
-    </>
+    </GlobalProvider>
   );
 }
 
