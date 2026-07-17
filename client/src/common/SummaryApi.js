@@ -35,6 +35,10 @@ const SummaryApi = {
     method: "post",
     url: "/product/get",
   },
+  getProductByCategory: {
+    method: "post",
+    url: "/product/get-product-by-category",
+  },
   getProductById: {
     method: "post",
     url: "/product/getById",

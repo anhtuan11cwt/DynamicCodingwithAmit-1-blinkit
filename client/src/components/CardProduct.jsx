@@ -1,0 +1,56 @@
+import { Plus } from "lucide-react";
+import { Link } from "react-router-dom";
+import DisplayPriceInVND, {
+  pricewithDiscount,
+} from "../utils/DisplayPriceInVND";
+import validURLConvert from "../utils/validURLConvert";
+
+const CardProduct = ({ data }) => {
+  const url = `/product/${validURLConvert(data.name)}-${data._id}`;
+  const hasDiscount = Number(data.discount) > 0;
+
+  return (
+    <Link
+      className="flex h-full w-full min-w-36 max-w-52 shrink-0 flex-col gap-2 rounded-lg border border-gray-100 bg-white p-3 shadow transition-shadow duration-300 hover:shadow-lg"
+      to={url}
+    >
+      <div className="relative aspect-square w-full overflow-hidden rounded bg-gray-50">
+        <img
+          alt={data.name}
+          className="h-full w-full object-contain transition-transform duration-300 hover:scale-105"
+          loading="lazy"
+          src={data.image?.[0]}
+        />
+
+        {hasDiscount && (
+          <span className="absolute top-1 left-1 rounded-full bg-green-100 px-2 py-0.5 font-medium text-green-700 text-xs">
+            Giảm {data.discount}%
+          </span>
+        )}
+      </div>
+
+      <p className="line-clamp-2 h-10 font-medium text-secondary-100 text-sm leading-5">
+        {data.name}
+      </p>
+
+      <div className="mt-auto flex flex-col gap-2">
+        <p className="text-gray-500 text-xs">{data.unit}</p>
+
+        <p className="font-semibold text-sm">
+          {DisplayPriceInVND(pricewithDiscount(data.price, data.discount))}
+        </p>
+
+        <button
+          className="flex w-full cursor-pointer items-center justify-center gap-1 rounded-md bg-green-600 px-3 py-1.5 font-medium text-white text-xs transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-600"
+          onClick={(e) => e.preventDefault()}
+          type="button"
+        >
+          <Plus aria-hidden="true" size={14} />
+          Thêm
+        </button>
+      </div>
+    </Link>
+  );
+};
+
+export default CardProduct;

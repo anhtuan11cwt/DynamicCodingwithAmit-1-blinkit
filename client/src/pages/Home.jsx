@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Banner from "../assets/banner.jpg";
 import BannerMobile from "../assets/banner-mobile.jpg";
+import CategoryWiseProductDisplay from "../components/CategoryWiseProductDisplay";
 import validURLConvert from "../utils/validURLConvert";
 
 const SKELETON_CATEGORIES = Array.from({ length: 20 }, (_, index) => ({
@@ -106,6 +107,17 @@ const Home = () => {
             ))}
           </div>
         </section>
+      </div>
+
+      <div className="mx-auto px-4">
+        {!loadingCategory &&
+          categoryData.map((category) => (
+            <CategoryWiseProductDisplay
+              id={category._id}
+              key={`category-products-${category._id}`}
+              name={category.name}
+            />
+          ))}
       </div>
     </>
   );

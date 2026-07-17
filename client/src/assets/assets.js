@@ -158,7 +158,7 @@ export const categories = [
     _id: "66dffd91071e92f6b41280b77",
     image:
       "http://res.cloudinary.com/dljwfy0pe/image/upload/v1725955387/binkeyit/smkbswgvrws6jwjx2gbu.png",
-    name: "Góc trầu",
+    name: "Cai thuốc & Thơm miệng",
   },
   {
     _id: "66dffd91081e92f6b41280b78",
@@ -281,7 +281,7 @@ export const dummyCategories = [
     _id: "66dffd91071e92f6b41280b77",
     image:
       "http://res.cloudinary.com/dljwfy0pe/image/upload/v1725955387/binkeyit/smkbswgvrws6jwjx2gbu.png",
-    name: "Góc trầu",
+    name: "Cai thuốc & Thơm miệng",
   },
   {
     _id: "66dffd91081e92f6b41280b78",
