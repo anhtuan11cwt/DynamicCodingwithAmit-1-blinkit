@@ -6,6 +6,7 @@ import {
   getProductByCategoryController,
   getProductByIdController,
   getProductController,
+  getProductDetailsController,
   updateProductController,
 } from "../controllers/product.controller.js";
 import admin from "../middleware/admin.js";
@@ -365,5 +366,44 @@ router.post(
   "/get-product-category-subcategory",
   getProductByCategoryAndSubCategoryController,
 );
+
+/**
+ * @openapi
+ * /api/v1/product/details:
+ *   post:
+ *     tags: [Product]
+ *     summary: Lấy chi tiết sản phẩm theo ID (trang hiển thị sản phẩm)
+ *     description: |
+ *       Trả về chi tiết một sản phẩm dựa trên `_id` để hiển thị trên trang Product Display Page.
+ *       Endpoint công khai, không yêu cầu đăng nhập.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [_id]
+ *             properties:
+ *               _id:
+ *                 type: string
+ *                 example: 6849a1b2c3d4e5f6a7b8c9d0
+ *     responses:
+ *       200:
+ *         description: Lấy chi tiết sản phẩm thành công
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *       400:
+ *         description: Thiếu ID sản phẩm
+ *       404:
+ *         description: Không tìm thấy sản phẩm
+ *       500:
+ *         description: Lỗi máy chủ
+ */
+router.post("/details", getProductDetailsController);
 
 export default router;

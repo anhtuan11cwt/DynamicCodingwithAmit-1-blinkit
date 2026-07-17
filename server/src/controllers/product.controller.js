@@ -180,6 +180,45 @@ export const deleteProductController = async (req, res) => {
   }
 };
 
+export const getProductDetailsController = async (req, res) => {
+  try {
+    const { _id } = req.body;
+
+    if (!_id) {
+      return res.status(400).json({
+        error: true,
+        message: "Thiếu ID sản phẩm",
+        success: false,
+      });
+    }
+
+    const product = await ProductModel.findOne({ _id })
+      .populate("category", "name")
+      .populate("subCategory", "name");
+
+    if (!product) {
+      return res.status(404).json({
+        error: true,
+        message: "Không tìm thấy sản phẩm",
+        success: false,
+      });
+    }
+
+    return res.json({
+      data: product,
+      error: false,
+      message: "Lấy chi tiết sản phẩm thành công",
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: error.message || "Đã xảy ra lỗi",
+      success: false,
+    });
+  }
+};
+
 export const getProductByIdController = async (req, res) => {
   try {
     const { _id } = req.body;
