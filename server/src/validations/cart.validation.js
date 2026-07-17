@@ -1,12 +1,17 @@
 import { z } from "zod";
 import { objectIdSchema } from "../utils/objectId.js";
 
-export const createCartSchema = z.object({
+export const addToCartSchema = z.object({
   productId: objectIdSchema,
-
-  quantity: z.number().int().positive().max(1000),
-
-  userId: objectIdSchema,
 });
 
-export const updateCartSchema = createCartSchema.partial();
+export const getCartSchema = z.object({});
+
+export const updateCartSchema = z.object({
+  _id: objectIdSchema,
+  quantity: z.coerce.number().int().positive().max(1000),
+});
+
+export const deleteCartSchema = z.object({
+  _id: objectIdSchema,
+});
