@@ -11,6 +11,7 @@ import Login from "../pages/Login";
 import MyOrders from "../pages/MyOrders";
 import OTPVerification from "../pages/OTPVerification";
 import ProductAdmin from "../pages/ProductAdmin";
+import ProductListPage from "../pages/ProductListPage";
 import Profile from "../pages/Profile";
 import Register from "../pages/Register";
 import ResetPassword from "../pages/ResetPassword";
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         element: <SearchPage />,
         path: "search",
+      },
+      {
+        element: <ProductListPage />,
+        path: ":category/:subcategory",
       },
       {
         element: (

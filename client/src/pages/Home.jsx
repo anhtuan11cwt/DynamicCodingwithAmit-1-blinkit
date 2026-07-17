@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Banner from "../assets/banner.jpg";
 import BannerMobile from "../assets/banner-mobile.jpg";
+import validURLConvert from "../utils/validURLConvert";
 
 const SKELETON_CATEGORIES = Array.from({ length: 20 }, (_, index) => ({
   _id: `skeleton-${index}`,
@@ -11,8 +13,28 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const loadingCategory = useSelector((state) => state.product.loadingCategory);
   const categoryData = useSelector((state) => state.product.allCategory);
+  const subCategoryData = useSelector((state) => state.product.allSubCategory);
+  const navigate = useNavigate();
 
   const categories = loadingCategory ? SKELETON_CATEGORIES : categoryData;
+
+  const handleRedirectProductListPage = (categoryId, categoryName) => {
+    const filterData = subCategoryData.filter((subCategory) =>
+      subCategory.category.some((cat) => cat._id === categoryId),
+    );
+
+    const subCategory = filterData[0];
+
+    if (!subCategory) {
+      return;
+    }
+
+    const url = `/${validURLConvert(categoryName)}-${categoryId}/${validURLConvert(
+      subCategory.name,
+    )}-${subCategory._id}`;
+
+    navigate(url);
+  };
 
   return (
     <>
@@ -41,11 +63,21 @@ const Home = () => {
 
           <div className="grid grid-cols-4 gap-4 md:grid-cols-7 lg:grid-cols-10">
             {categories.map((category) => (
-              <div
+              <button
                 className={`group relative flex h-full flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow transition-all duration-300 hover:shadow-lg ${
-                  loadingCategory ? "animate-pulse" : ""
+                  loadingCategory ? "animate-pulse" : "cursor-pointer"
                 }`}
                 key={category._id}
+                onClick={
+                  loadingCategory
+                    ? undefined
+                    : () =>
+                        handleRedirectProductListPage(
+                          category._id,
+                          category.name,
+                        )
+                }
+                type="button"
               >
                 {loadingCategory ? (
                   <>
@@ -70,7 +102,7 @@ const Home = () => {
                     </p>
                   </>
                 )}
-              </div>
+              </button>
             ))}
           </div>
         </section>
