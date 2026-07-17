@@ -1,0 +1,11 @@
+[
+  {
+    "_id": "67b5b9e54ea97f71bbc196a0",
+    "address_line": "123 Đường chính",
+    "city": "Thành phố Hồ Chí Minh",
+    "mobile": "0123456789",
+    "pincode": "700000",
+    "state": "Hồ Chí Minh",
+    "status": true
+  }
+]

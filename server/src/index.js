@@ -13,6 +13,7 @@ import productRouter from "./routes/product.route.js";
 import subCategoryRouter from "./routes/subCategory.route.js";
 import uploadRouter from "./routes/upload.route.js";
 import userRouter from "./routes/user.route.js";
+import seedData from "./seed.js";
 
 const app = express();
 
@@ -48,6 +49,7 @@ const PORT = process.env.PORT || 8080;
 
 const startServer = async () => {
   await connectDB();
+  await seedData();
 
   app.listen(PORT, () => {
     console.log(`Máy chủ đang chạy tại http://localhost:${PORT}`);
