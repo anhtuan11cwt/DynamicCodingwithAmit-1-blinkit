@@ -1,14 +1,13 @@
 import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
-import DisplayPriceInVND, {
-  pricewithDiscount,
-} from "../utils/DisplayPriceInVND";
+import DisplayPriceInVND from "../utils/DisplayPriceInVND";
+import priceWithDiscount from "../utils/priceWithDiscount";
 import validURLConvert from "../utils/validURLConvert";
 
 const CardProduct = ({ data }) => {
   const url = `/product/${validURLConvert(data.name)}-${data._id}`;
   const hasDiscount = Number(data.discount) > 0;
-  const finalPrice = pricewithDiscount(data.price, data.discount);
+  const finalPrice = priceWithDiscount(data.price, data.discount);
 
   return (
     <Link

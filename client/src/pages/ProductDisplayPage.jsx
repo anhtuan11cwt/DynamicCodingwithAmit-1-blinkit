@@ -1,4 +1,4 @@
-import { ChevronRight, Home } from "lucide-react";
+import { Boxes, ChevronRight, Home, Truck, Wallet } from "lucide-react";
 import {
   useCallback,
   useEffect,
@@ -6,12 +6,16 @@ import {
   useRef,
   useState,
 } from "react";
+import toast from "react-hot-toast";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { Link, useParams } from "react-router-dom";
 import SummaryApi from "../common/SummaryApi";
+import AddToCartButton, {
+  QuantityStepper,
+} from "../components/AddToCartButton";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/axios";
-import { pricewithDiscount } from "../utils/DisplayPriceInVND";
+import priceWithDiscount from "../utils/priceWithDiscount";
 import validURLConvert from "../utils/validURLConvert";
 
 const ProductDisplayPage = () => {
@@ -85,7 +89,15 @@ const ProductDisplayPage = () => {
   };
 
   const hasDiscount = Number(data.discount) > 0;
-  const finalPrice = pricewithDiscount(data.price, data.discount);
+  const finalPrice = priceWithDiscount(data.price, data.discount);
+  const isOutOfStock = Number(data.stock) <= 0;
+
+  const [quantity, setQuantity] = useState(1);
+
+  const handleAddToCart = () => {
+    // TODO: integrate with cart API / cart slice when available
+    toast.success(`Đã thêm ${quantity} × ${data.name} vào giỏ hàng`);
+  };
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-6">
@@ -133,13 +145,15 @@ const ProductDisplayPage = () => {
       </nav>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div className="lg:sticky lg:top-24 lg:h-fit lg:self-start">
-          <div className="flex items-center justify-center rounded-lg border border-gray-100 bg-white p-4">
-            <img
-              alt={data.name || "Sản phẩm"}
-              className="min-h-64 w-full object-scale-down lg:min-h-[28rem]"
-              src={image}
-            />
+        <div className="h-fit self-start">
+          <div className="flex aspect-square w-full items-center justify-center rounded-lg border border-gray-100 bg-white p-4">
+            {image && (
+              <img
+                alt={data.name || "Sản phẩm"}
+                className="h-full w-full object-scale-down"
+                src={image}
+              />
+            )}
           </div>
 
           {data.image?.length > 0 && (
@@ -197,11 +211,11 @@ const ProductDisplayPage = () => {
         <div className="flex flex-col gap-4">
           <h1 className="font-semibold text-xl lg:text-2xl">{data.name}</h1>
 
-          <p className="text-gray-500 text-sm">{data.unit}</p>
+          {data.unit && <p className="text-gray-500 text-sm">{data.unit}</p>}
 
           {hasDiscount && (
-            <span className="w-fit rounded-full bg-red-50 px-2 py-0.5 font-medium text-red-600 text-xs">
-              Giảm {data.discount}%
+            <span className="w-fit rounded-full bg-green-100 px-3 py-1 font-semibold text-green-700 text-sm">
+              {data.discount}% OFF
             </span>
           )}
 
@@ -219,18 +233,85 @@ const ProductDisplayPage = () => {
             )}
           </div>
 
-          {data.description && (
-            <p className="whitespace-pre-line text-secondary-100 text-sm leading-relaxed">
-              {data.description}
-            </p>
+          {isOutOfStock ? (
+            <p className="font-semibold text-lg text-red-600">Hết hàng</p>
+          ) : (
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+              <QuantityStepper
+                onChange={setQuantity}
+                quantity={quantity}
+                stock={Number(data.stock)}
+              />
+              <AddToCartButton
+                onAdd={handleAddToCart}
+                stock={Number(data.stock)}
+              />
+            </div>
           )}
 
-          {data.stock != null && (
-            <p className="text-gray-500 text-sm">
-              {data.stock > 0 ? `Còn ${data.stock} trong kho` : "Hết hàng"}
-            </p>
+          {data.description && (
+            <div>
+              <h2 className="mb-1 font-semibold text-secondary-100">
+                Mô tả sản phẩm
+              </h2>
+              <p className="whitespace-pre-line text-secondary-100 text-sm leading-relaxed">
+                {data.description}
+              </p>
+            </div>
+          )}
+
+          {Object.keys(data.more_details || {}).length > 0 && (
+            <div>
+              <h2 className="mb-2 font-semibold text-secondary-100">
+                Thông tin chi tiết
+              </h2>
+              <dl className="flex flex-col gap-1.5">
+                {Object.keys(data.more_details || {}).map((key) => (
+                  <div className="flex gap-2 text-sm" key={key}>
+                    <dt className="font-semibold text-secondary-100">{key}</dt>
+                    <dd className="text-gray-600">{data.more_details[key]}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
           )}
         </div>
+
+        <section className="mt-10 lg:col-span-2">
+          <h2 className="mb-4 font-semibold text-lg">
+            Tại sao nên mua sắm tại đây
+          </h2>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="flex flex-col items-start gap-2 rounded-lg border border-gray-100 bg-white p-4">
+              <Truck aria-hidden="true" className="text-green-700" size={28} />
+              <h3 className="font-semibold text-secondary-100">
+                Giao hàng siêu tốc
+              </h3>
+              <p className="text-gray-500 text-sm">
+                Giao hàng trong 10 phút tới tận cửa.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-start gap-2 rounded-lg border border-gray-100 bg-white p-4">
+              <Wallet aria-hidden="true" className="text-green-700" size={28} />
+              <h3 className="font-semibold text-secondary-100">Giá tốt nhất</h3>
+              <p className="text-gray-500 text-sm">
+                Giá cả phải chăng mỗi ngày.
+              </p>
+            </div>
+
+            <div className="flex flex-col items-start gap-2 rounded-lg border border-gray-100 bg-white p-4">
+              <Boxes aria-hidden="true" className="text-green-700" size={28} />
+              <h3 className="font-semibold text-secondary-100">
+                Đa dạng sản phẩm
+              </h3>
+              <p className="text-gray-500 text-sm">
+                Hàng ngàn sản phẩm để lựa chọn.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </section>
   );
