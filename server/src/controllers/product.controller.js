@@ -392,3 +392,48 @@ export const getProductController = async (req, res) => {
 export const updateProductDetails = updateProductController;
 
 export const deleteProductDetails = deleteProductController;
+
+export const searchProduct = async (req, res) => {
+  try {
+    const search = (req.body.search || "").toString().trim();
+    const pageNumber = Number(req.body.page) || 1;
+    const limitNumber = Number(req.body.limit) || 12;
+    const skip = (pageNumber - 1) * limitNumber;
+
+    const query = search
+      ? {
+          $or: [
+            { name: { $options: "i", $regex: search } },
+            { description: { $options: "i", $regex: search } },
+          ],
+        }
+      : {};
+
+    const [products, totalCount] = await Promise.all([
+      ProductModel.find(query)
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limitNumber),
+      ProductModel.countDocuments(query),
+    ]);
+
+    const totalPage = Math.ceil(totalCount / limitNumber);
+
+    return res.json({
+      data: products,
+      error: false,
+      limit: limitNumber,
+      message: "Tìm kiếm sản phẩm thành công",
+      page: pageNumber,
+      success: true,
+      totalCount,
+      totalPage,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: error.message || "Đã xảy ra lỗi",
+      success: false,
+    });
+  }
+};

@@ -8,6 +8,7 @@ import {
   getProductByIdController,
   getProductController,
   getProductDetailsController,
+  searchProduct,
   updateProductController,
   updateProductDetails,
 } from "../controllers/product.controller.js";
@@ -406,6 +407,56 @@ router.post(
  *       500:
  *         description: Lỗi máy chủ
  */
+/**
+ * @openapi
+ * /api/v1/product/search-product:
+ *   post:
+ *     tags: [Product]
+ *     summary: Tìm kiếm sản phẩm theo tên và mô tả
+ *     description: |
+ *       Tìm kiếm sản phẩm khớp với từ khóa trên các trường `name` và `description`
+ *       (không phân biệt hoa/thường), có phân trang. Endpoint công khai.
+ *     requestBody:
+ *       required: false
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               search:
+ *                 type: string
+ *                 example: sữa
+ *               page:
+ *                 type: number
+ *                 example: 1
+ *               limit:
+ *                 type: number
+ *                 example: 12
+ *     responses:
+ *       200:
+ *         description: Tìm kiếm thành công
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                 totalCount:
+ *                   type: number
+ *                 totalPage:
+ *                   type: number
+ *                 page:
+ *                   type: number
+ *                 limit:
+ *                   type: number
+ *       500:
+ *         description: Lỗi máy chủ
+ */
+router.post("/search-product", searchProduct);
+
 router.post("/details", getProductDetailsController);
 
 /**
