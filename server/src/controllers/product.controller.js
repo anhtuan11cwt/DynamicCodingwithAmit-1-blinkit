@@ -5,6 +5,7 @@ import {
 } from "../utils/uploadImageCloudinary.js";
 import {
   createProductSchema,
+  getProductByCategorySchema,
   getProductSchema,
   updateProductSchema,
 } from "../validations/product.validation.js";
@@ -204,6 +205,39 @@ export const getProductByIdController = async (req, res) => {
       data: product,
       error: false,
       message: "Lấy sản phẩm thành công",
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: error.message || "Đã xảy ra lỗi",
+      success: false,
+    });
+  }
+};
+
+export const getProductByCategoryController = async (req, res) => {
+  try {
+    const parsed = getProductByCategorySchema.safeParse(req.body);
+
+    if (!parsed.success) {
+      return res.status(400).json({
+        error: true,
+        message: parsed.error.errors[0]?.message || "Thiếu ID danh mục",
+        success: false,
+      });
+    }
+
+    const { id } = parsed.data;
+
+    const products = await ProductModel.find({
+      category: { $in: [id] },
+    }).limit(15);
+
+    return res.json({
+      data: products,
+      error: false,
+      message: "Lấy sản phẩm theo danh mục thành công",
       success: true,
     });
   } catch (error) {

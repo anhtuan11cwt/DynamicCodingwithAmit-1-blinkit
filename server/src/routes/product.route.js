@@ -2,6 +2,7 @@ import express from "express";
 import {
   createProductController,
   deleteProductController,
+  getProductByCategoryController,
   getProductByIdController,
   getProductController,
   updateProductController,
@@ -267,5 +268,44 @@ router.post("/get", getProductController);
  *         description: Lỗi máy chủ
  */
 router.post("/getById", auth, admin, getProductByIdController);
+
+/**
+ * @openapi
+ * /api/v1/product/get-product-by-category:
+ *   post:
+ *     tags: [Product]
+ *     summary: Lấy sản phẩm theo danh mục
+ *     description: |
+ *       Trả về tối đa 15 sản phẩm thuộc danh mục có `id` được truyền vào,
+ *       dùng toán tử `$in` của MongoDB. Phục vụ hiển thị sản phẩm theo danh mục trên trang chủ.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [id]
+ *             properties:
+ *               id:
+ *                 type: string
+ *                 example: 6849a1b2c3d4e5f6a7b8c9d0
+ *     responses:
+ *       200:
+ *         description: Lấy sản phẩm theo danh mục thành công
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *       400:
+ *         description: Thiếu ID danh mục
+ *       500:
+ *         description: Lỗi máy chủ
+ */
+router.post("/get-product-by-category", getProductByCategoryController);
 
 export default router;

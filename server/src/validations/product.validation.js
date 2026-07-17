@@ -48,3 +48,7 @@ export const getProductSchema = z.object({
   page: z.coerce.number().int().positive().default(1),
   search: z.string().max(100).optional(),
 });
+
+export const getProductByCategorySchema = z.object({
+  id: objectIdSchema,
+});
