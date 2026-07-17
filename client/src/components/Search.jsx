@@ -1,4 +1,5 @@
 import { Search as SearchGlass } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
 
@@ -40,8 +41,38 @@ const SearchIcon = ({ className }) => (
 
 const Search = () => {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   const isSearchPage = pathname === "/search";
+
+  const urlQuery = new URLSearchParams(search).get("q") || "";
+  const [value, setValue] = useState(urlQuery);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setValue(urlQuery);
+  }, [urlQuery]);
+
+  useEffect(() => {
+    if (!isSearchPage) return;
+
+    const timer = setTimeout(() => {
+      const params = new URLSearchParams(search);
+
+      if (value.trim()) {
+        params.set("q", value.trim());
+      } else {
+        params.delete("q");
+      }
+
+      const next = params.toString();
+
+      if (`?${next}` !== search) {
+        navigate(`/search?${next}`, { replace: true });
+      }
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [value, isSearchPage, navigate, search]);
 
   if (isSearchPage) {
     return (
@@ -50,8 +81,10 @@ const Search = () => {
         <input
           aria-label="Tìm kiếm sản phẩm"
           className="w-full bg-transparent text-gray-800 text-sm outline-none placeholder:text-gray-400"
+          onChange={(e) => setValue(e.target.value)}
           placeholder="Tìm kiếm sản phẩm..."
           type="search"
+          value={value}
         />
       </div>
     );
@@ -61,7 +94,9 @@ const Search = () => {
     <button
       aria-label="Tìm kiếm sản phẩm"
       className={`${baseClasses} cursor-pointer text-left`}
-      onClick={() => navigate("/search")}
+      onClick={() =>
+        navigate(value.trim() ? `/search?q=${value.trim()}` : "/search")
+      }
       type="button"
     >
       <SearchIcon />

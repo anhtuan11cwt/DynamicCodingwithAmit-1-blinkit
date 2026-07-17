@@ -79,6 +79,10 @@ const SummaryApi = {
     method: "post",
     url: "/auth/reset-password",
   },
+  searchProduct: {
+    method: "post",
+    url: "/product/search-product",
+  },
   updateCategory: {
     method: "put",
     url: "/category/update",
