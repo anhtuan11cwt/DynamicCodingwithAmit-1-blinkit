@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Outlet, useLocation } from "react-router-dom";
 import SummaryApi from "./common/SummaryApi";
+import CardMobileLink from "./components/CardMobileLink";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import GlobalProvider from "./provider/GlobalProvider";
@@ -80,6 +81,7 @@ function App() {
           <Outlet />
         </main>
         {showFooter && <Footer />}
+        <CardMobileLink />
       </div>
       <Toaster position="top-center" toastOptions={{ duration: 2000 }} />
     </GlobalProvider>

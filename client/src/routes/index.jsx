@@ -4,6 +4,7 @@ import AdminPermission from "../components/AdminPermission";
 import AuthRoute from "../components/AuthRoute";
 import Dashboard from "../layouts/Dashboard";
 import Addresses from "../pages/Addresses";
+import CardMobile from "../pages/CardMobile";
 import Category from "../pages/Category";
 import ForgotPassword from "../pages/ForgotPassword";
 import Home from "../pages/Home";
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         element: <SearchPage />,
         path: "search",
+      },
+      {
+        element: <CardMobile />,
+        path: "cart",
       },
       {
         element: <ProductListPage />,

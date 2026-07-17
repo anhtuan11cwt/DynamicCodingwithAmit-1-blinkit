@@ -53,7 +53,7 @@ const CardProduct = ({ data }) => {
           )}
         </div>
 
-        <AddToCartButton product={data} />
+        <AddToCartButton compact product={data} />
       </div>
     </Link>
   );

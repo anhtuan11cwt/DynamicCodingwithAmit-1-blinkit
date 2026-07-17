@@ -22,7 +22,9 @@ import { logout } from "../store/userSlice";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/axios";
 import isAdmin from "../utils/isAdmin";
+import priceWithDiscount from "../utils/priceWithDiscount";
 import Cart from "./Cart";
+import DisplayCardItem from "./DisplayCardItem";
 import SearchBar from "./Search";
 import UserMenu from "./UserMenu";
 import UserMenuMobile from "./UserMenuMobile";
@@ -39,7 +41,23 @@ const Header = ({ isHydrated }) => {
   const isSearchPage = pathname === "/search";
   const hideLogoAndUser = isMobile && isSearchPage;
   const user = useSelector((state) => state.user);
+  const cartItem = useSelector((state) => state.cartItem.cart);
   const isLoggedIn = Boolean(user._id);
+  const [cartOpen, setCartOpen] = useState(false);
+
+  const totalQty = cartItem.reduce(
+    (sum, item) => sum + (Number(item?.quantity) || 0),
+    0,
+  );
+  const totalPrice = cartItem.reduce((sum, item) => {
+    const product = item?.productId;
+    if (!product) return sum;
+    return (
+      sum +
+      priceWithDiscount(product.price, product.discount) *
+        (Number(item.quantity) || 0)
+    );
+  }, 0);
 
   useEffect(() => {
     if (!menuOpen && !openUserMenu) return;
@@ -91,6 +109,9 @@ const Header = ({ isHydrated }) => {
     setOpenMobileMenu(false);
     window.history.back();
   };
+
+  const toggleCart = () => setCartOpen((open) => !open);
+  const closeCart = () => setCartOpen(false);
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md" ref={headerRef}>
@@ -157,7 +178,11 @@ const Header = ({ isHydrated }) => {
               <div className="h-4 w-20 animate-pulse rounded bg-gray-200" />
             </div>
           )}
-          <Cart />
+          <Cart
+            onClick={toggleCart}
+            totalPrice={totalPrice}
+            totalQty={totalQty}
+          />
         </div>
       </div>
 
@@ -332,7 +357,14 @@ const Header = ({ isHydrated }) => {
                   : "Đang tải..."}
               </span>
             </Link>
-            <Cart onClick={() => setMenuOpen(false)} />
+            <Cart
+              onClick={() => {
+                setMenuOpen(false);
+                toggleCart();
+              }}
+              totalPrice={totalPrice}
+              totalQty={totalQty}
+            />
           </div>
         </nav>
       </div>
@@ -344,6 +376,8 @@ const Header = ({ isHydrated }) => {
           user={user}
         />
       )}
+
+      {cartOpen && <DisplayCardItem onClose={closeCart} />}
     </header>
   );
 };
