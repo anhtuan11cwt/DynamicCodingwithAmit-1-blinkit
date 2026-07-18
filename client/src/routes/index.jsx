@@ -6,6 +6,7 @@ import Dashboard from "../layouts/Dashboard";
 import Addresses from "../pages/Addresses";
 import CardMobile from "../pages/CardMobile";
 import Category from "../pages/Category";
+import CheckoutPage from "../pages/CheckoutPage";
 import ForgotPassword from "../pages/ForgotPassword";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         element: <CardMobile />,
         path: "cart",
+      },
+      {
+        element: <CheckoutPage />,
+        path: "checkout",
       },
       {
         element: <ProductListPage />,

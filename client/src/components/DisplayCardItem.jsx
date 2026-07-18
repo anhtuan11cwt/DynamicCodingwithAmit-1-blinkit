@@ -1,7 +1,8 @@
-import { X } from "lucide-react";
+import { ArrowRight, ShoppingBag, X } from "lucide-react";
 import { useContext, useEffect } from "react";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import emptyCart from "../assets/empty_cart.webp";
 import { GlobalContext } from "../provider/useGlobalContext";
 import DisplayPriceInVND from "../utils/DisplayPriceInVND";
@@ -10,6 +11,8 @@ import AddToCartButton from "./AddToCartButton";
 
 const DisplayCardItem = ({ onClose }) => {
   const cartItem = useSelector((state) => state.cartItem.cart);
+  const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const { fetchCartItem } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -42,6 +45,15 @@ const DisplayCardItem = ({ onClose }) => {
     return sum + Number(product.price) * (Number(item.quantity) || 0);
   }, 0);
   const totalSavings = originalTotal - totalPrice;
+
+  const handleCheckoutPage = () => {
+    if (!user?._id) {
+      toast.error("Please login first");
+      return;
+    }
+    onClose();
+    navigate("/checkout");
+  };
 
   return (
     <div
@@ -85,10 +97,11 @@ const DisplayCardItem = ({ onClose }) => {
               Bạn chưa thêm sản phẩm nào vào giỏ hàng.
             </p>
             <Link
-              className="rounded-full bg-green-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-800"
+              className="flex items-center justify-center gap-2 rounded-full bg-green-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-800"
               onClick={onClose}
               to="/"
             >
+              <ShoppingBag aria-hidden="true" size={18} />
               Bắt đầu mua sắm
             </Link>
           </div>
@@ -136,7 +149,7 @@ const DisplayCardItem = ({ onClose }) => {
               })}
             </div>
 
-            <div className="sticky bottom-0 space-y-2 border-gray-100 border-t bg-white p-4">
+            <div className="space-y-3 border-gray-100 border-t bg-white p-5 lg:p-8">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">Tiết kiệm của bạn</span>
                 <span className="font-semibold text-green-700">
@@ -153,12 +166,20 @@ const DisplayCardItem = ({ onClose }) => {
                 <span className="text-gray-500">Vận chuyển</span>
                 <span className="font-semibold text-green-700">MIỄN PHÍ</span>
               </div>
-              <div className="flex justify-between border-gray-100 border-t pt-2 font-bold text-base">
+              <div className="flex justify-between border-gray-100 border-t pt-3 font-bold text-base">
                 <span className="text-secondary-100">Tổng thanh toán</span>
                 <span className="text-secondary-100">
                   {DisplayPriceInVND(totalPrice)}
                 </span>
               </div>
+              <button
+                className="mt-3 flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-green-600 py-3 font-semibold text-white transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-800"
+                onClick={handleCheckoutPage}
+                type="button"
+              >
+                Tiến hành thanh toán
+                <ArrowRight aria-hidden="true" size={18} />
+              </button>
             </div>
           </>
         )}

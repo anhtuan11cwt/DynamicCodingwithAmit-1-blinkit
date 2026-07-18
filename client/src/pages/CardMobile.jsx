@@ -1,5 +1,6 @@
-import { X } from "lucide-react";
+import { ArrowRight, ShoppingBag, X } from "lucide-react";
 import { useContext, useEffect } from "react";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import emptyCart from "../assets/empty_cart.webp";
@@ -10,6 +11,7 @@ import priceWithDiscount from "../utils/priceWithDiscount";
 
 const CardMobile = () => {
   const cartItem = useSelector((state) => state.cartItem.cart);
+  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const { fetchCartItem } = useContext(GlobalContext);
 
@@ -44,9 +46,17 @@ const CardMobile = () => {
   }, 0);
   const totalSavings = originalTotal - totalPrice;
 
+  const handleCheckoutPage = () => {
+    if (!user?._id) {
+      toast.error("Please login first");
+      return;
+    }
+    navigate("/checkout");
+  };
+
   return (
-    <div className="flex min-h-screen flex-col">
-      <div className="flex items-center justify-between border-gray-100 border-b bg-white px-4 py-4">
+    <div className="flex flex-col">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between border-gray-100 border-b bg-white px-4 py-4 lg:px-6">
         <h1 className="font-semibold text-lg text-secondary-100">
           Giỏ hàng ({totalQty} sản phẩm)
         </h1>
@@ -74,78 +84,91 @@ const CardMobile = () => {
             Bạn chưa thêm sản phẩm nào vào giỏ hàng.
           </p>
           <Link
-            className="rounded-full bg-green-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-800"
+            className="flex items-center justify-center gap-2 rounded-full bg-green-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-800"
             to="/"
           >
+            <ShoppingBag aria-hidden="true" size={18} />
             Bắt đầu mua sắm
           </Link>
         </div>
       ) : (
         <>
-          <div className="flex-1 space-y-4 overflow-y-auto p-4">
-            {cartItem.map((item) => {
-              const product = item?.productId;
-              if (!product) return null;
-              const discountedPrice = priceWithDiscount(
-                product.price,
-                product.discount,
-              );
-              const hasDiscount = Number(product.discount) > 0;
+          <div className="mx-auto w-full max-w-7xl space-y-4 overflow-y-auto p-4 lg:p-6">
+            <div className="space-y-4">
+              {cartItem.map((item) => {
+                const product = item?.productId;
+                if (!product) return null;
+                const discountedPrice = priceWithDiscount(
+                  product.price,
+                  product.discount,
+                );
+                const hasDiscount = Number(product.discount) > 0;
 
-              return (
-                <div
-                  className="flex gap-3 border-gray-100 border-b pb-4"
-                  key={item._id}
-                >
-                  <img
-                    alt={product.name}
-                    className="h-20 w-20 shrink-0 rounded-lg border border-gray-100 object-scale-down"
-                    src={product.image?.[0]}
-                  />
-                  <div className="flex flex-1 flex-col gap-1">
-                    <p className="line-clamp-2 font-medium text-secondary-100 text-sm leading-5">
-                      {product.name}
-                    </p>
-                    <p className="text-gray-500 text-xs">{product.unit}</p>
-                    <div className="flex items-baseline gap-1.5">
-                      <p className="font-semibold text-sm">
-                        {DisplayPriceInVND(discountedPrice)}
+                return (
+                  <div
+                    className="flex gap-3 border-gray-100 border-b pb-4"
+                    key={item._id}
+                  >
+                    <img
+                      alt={product.name}
+                      className="h-20 w-20 shrink-0 rounded-lg border border-gray-100 object-scale-down"
+                      src={product.image?.[0]}
+                    />
+                    <div className="flex flex-1 flex-col gap-1">
+                      <p className="line-clamp-2 font-medium text-secondary-100 text-sm leading-5">
+                        {product.name}
                       </p>
-                      {hasDiscount && (
-                        <p className="text-gray-400 text-xs line-through">
-                          {DisplayPriceInVND(product.price)}
+                      <p className="text-gray-500 text-xs">{product.unit}</p>
+                      <div className="flex items-baseline gap-1.5">
+                        <p className="font-semibold text-sm">
+                          {DisplayPriceInVND(discountedPrice)}
                         </p>
-                      )}
+                        {hasDiscount && (
+                          <p className="text-gray-400 text-xs line-through">
+                            {DisplayPriceInVND(product.price)}
+                          </p>
+                        )}
+                      </div>
+                      <AddToCartButton product={product} showRemove />
                     </div>
-                    <AddToCartButton product={product} showRemove />
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
 
-          <div className="space-y-2 border-gray-100 border-t bg-white p-4">
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-500">Tiết kiệm của bạn</span>
-              <span className="font-semibold text-green-700">
-                {DisplayPriceInVND(totalSavings)}
-              </span>
-            </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-500">Tổng cộng</span>
-              <span className="font-semibold">
-                {DisplayPriceInVND(totalPrice)}
-              </span>
-            </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-500">Vận chuyển</span>
-              <span className="font-semibold text-green-700">MIỄN PHÍ</span>
-            </div>
-            <div className="flex justify-between border-gray-100 border-t pt-2 font-bold text-base">
-              <span className="text-secondary-100">Tổng thanh toán</span>
-              <span className="text-secondary-100">
-                {DisplayPriceInVND(totalPrice)}
-              </span>
+          <div className="mx-auto w-full max-w-7xl border-gray-100 border-t bg-white p-5 lg:p-8">
+            <div className="space-y-3">
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-500">Tiết kiệm của bạn</span>
+                <span className="font-semibold text-green-700">
+                  {DisplayPriceInVND(totalSavings)}
+                </span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-500">Tổng cộng</span>
+                <span className="font-semibold">
+                  {DisplayPriceInVND(totalPrice)}
+                </span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-500">Vận chuyển</span>
+                <span className="font-semibold text-green-700">MIỄN PHÍ</span>
+              </div>
+              <div className="flex justify-between border-gray-100 border-t pt-3 font-bold text-base">
+                <span className="text-secondary-100">Tổng thanh toán</span>
+                <span className="text-secondary-100">
+                  {DisplayPriceInVND(totalPrice)}
+                </span>
+              </div>
+              <button
+                className="mt-3 flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-green-600 py-3 font-semibold text-white transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-800"
+                onClick={handleCheckoutPage}
+                type="button"
+              >
+                Tiến hành thanh toán
+                <ArrowRight aria-hidden="true" size={18} />
+              </button>
             </div>
           </div>
         </>

@@ -30,6 +30,7 @@ function App() {
   const dispatch = useDispatch();
   const showFooter =
     !hideFooterRoutes.includes(pathname) && !pathname.startsWith("/dashboard");
+  const showMobileCart = pathname !== "/checkout";
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
@@ -81,7 +82,7 @@ function App() {
           <Outlet />
         </main>
         {showFooter && <Footer />}
-        <CardMobileLink />
+        {showMobileCart && <CardMobileLink />}
       </div>
       <Toaster position="top-center" toastOptions={{ duration: 2000 }} />
     </GlobalProvider>
