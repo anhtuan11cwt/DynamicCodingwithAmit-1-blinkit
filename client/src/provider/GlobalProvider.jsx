@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import SummaryApi from "../common/SummaryApi";
 import { handleAddItemCart } from "../store/cartProduct";
+import { setOrder } from "../store/orderSlice";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/axios";
 import priceWithDiscount from "../utils/priceWithDiscount";
@@ -21,6 +22,20 @@ export const GlobalProvider = ({ children }) => {
 
       if (response.data.success) {
         dispatch(handleAddItemCart(response.data.data));
+      }
+    } catch (error) {
+      AxiosToastError(error);
+    }
+  }, [dispatch]);
+
+  const fetchOrders = useCallback(async () => {
+    try {
+      const response = await Axios({
+        ...SummaryApi.getMyOrders,
+      });
+
+      if (response.data.success) {
+        dispatch(setOrder(response.data.data));
       }
     } catch (error) {
       AxiosToastError(error);
@@ -71,8 +86,9 @@ export const GlobalProvider = ({ children }) => {
   useEffect(() => {
     if (user?._id) {
       fetchCartItem();
+      fetchOrders();
     }
-  }, [user, fetchCartItem]);
+  }, [user, fetchCartItem, fetchOrders]);
 
   const { totalPrice, notDiscountTotalPrice, totalQuantity } = useMemo(() => {
     const totalQty = cartItem.reduce(
@@ -109,6 +125,7 @@ export const GlobalProvider = ({ children }) => {
     cartItem,
     deleteCartItem,
     fetchCartItem,
+    fetchOrders,
     notDiscountTotalPrice,
     totalPrice,
     totalQuantity,

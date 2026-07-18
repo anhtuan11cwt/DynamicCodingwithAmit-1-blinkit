@@ -63,6 +63,10 @@ const SummaryApi = {
     method: "get",
     url: "/category/get",
   },
+  getMyOrders: {
+    method: "get",
+    url: "/order/my-order",
+  },
   getProduct: {
     method: "post",
     url: "/product/get",
@@ -94,6 +98,10 @@ const SummaryApi = {
   paymentCheckout: {
     method: "post",
     url: "/payment/checkout",
+  },
+  paymentSuccess: {
+    method: "post",
+    url: "/order/payment-success",
   },
   productDetails: {
     method: "post",

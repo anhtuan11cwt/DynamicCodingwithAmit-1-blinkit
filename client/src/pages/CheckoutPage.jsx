@@ -19,20 +19,20 @@ import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/axios";
 import DisplayPriceInVND from "../utils/DisplayPriceInVND";
 import priceWithDiscount from "../utils/priceWithDiscount";
-import { stripePromise } from "../utils/stripe";
 
 const CheckoutPage = () => {
   const cartItem = useSelector((state) => state.cartItem.cart);
   const user = useSelector((state) => state.user);
   const addressList = useSelector((state) => state.address.addressList);
   const navigate = useNavigate();
-  const { fetchCartItem } = useContext(GlobalContext);
+  const { fetchCartItem, fetchOrders } = useContext(GlobalContext);
   const dispatch = useDispatch();
 
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [openAddress, setOpenAddress] = useState(false);
   const [codLoading, setCodLoading] = useState(false);
+  const [paymentUrl, setPaymentUrl] = useState("");
 
   const fetchAddress = useCallback(async () => {
     try {
@@ -52,6 +52,12 @@ const CheckoutPage = () => {
   useEffect(() => {
     fetchAddress();
   }, [fetchAddress]);
+
+  useEffect(() => {
+    if (paymentUrl) {
+      window.location.href = paymentUrl;
+    }
+  }, [paymentUrl]);
 
   const totalQty = cartItem.reduce(
     (sum, item) => sum + (Number(item?.quantity) || 0),
@@ -112,6 +118,7 @@ const CheckoutPage = () => {
         if (response.data.success) {
           toast.success(response.data.message || "Đặt hàng thành công");
           await fetchCartItem();
+          await fetchOrders();
           navigate("/success");
         }
       } else if (paymentMethod === "online") {
@@ -125,16 +132,13 @@ const CheckoutPage = () => {
             data: { addressId: selectedAddressId },
           });
 
-          if (response.data.success) {
-            const stripe = await stripePromise;
-            if (!stripe) {
-              throw new Error("Stripe chưa được khởi tạo");
-            }
-
-            await stripe.redirectToCheckout({
-              sessionId: response.data.sessionId,
-            });
+          if (response.data.success && response.data.url) {
+            setPaymentUrl(response.data.url);
           }
+        } catch (stripeError) {
+          toast.error(
+            stripeError.message || "Đã có lỗi xảy ra, vui lòng thử lại.",
+          );
         } finally {
           toast.dismiss(loadingToast);
         }
