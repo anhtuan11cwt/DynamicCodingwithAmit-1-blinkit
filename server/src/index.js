@@ -7,6 +7,7 @@ import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
 import connectDB from "./config/connectDB.js";
 import swaggerSpec from "./config/swagger.js";
+import addressRouter from "./routes/address.route.js";
 import authRouter from "./routes/auth.route.js";
 import cartRouter from "./routes/cart.route.js";
 import categoryRouter from "./routes/category.route.js";
@@ -39,6 +40,7 @@ app.get("/", (_req, res) => {
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+app.use("/api/v1/address", addressRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/cart", cartRouter);
 app.use("/api/v1/users", userRouter);
