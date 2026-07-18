@@ -91,6 +91,10 @@ const SummaryApi = {
     method: "post",
     url: "/auth/logout",
   },
+  paymentCheckout: {
+    method: "post",
+    url: "/payment/checkout",
+  },
   productDetails: {
     method: "post",
     url: "/product/details",

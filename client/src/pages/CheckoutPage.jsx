@@ -19,6 +19,7 @@ import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/axios";
 import DisplayPriceInVND from "../utils/DisplayPriceInVND";
 import priceWithDiscount from "../utils/priceWithDiscount";
+import { stripePromise } from "../utils/stripe";
 
 const CheckoutPage = () => {
   const cartItem = useSelector((state) => state.cartItem.cart);
@@ -80,41 +81,63 @@ const CheckoutPage = () => {
       toast.error("Vui lòng chọn phương thức thanh toán");
       return;
     }
-    if (paymentMethod !== "cod") {
-      toast.error("Chức năng thanh toán trực tuyến sẽ sớm được cập nhật");
-      return;
-    }
 
     setCodLoading(true);
     try {
-      const list_items = cartItem
-        .map((item) => {
-          const product = item?.productId;
-          if (!product) return null;
-          return {
-            _id: item._id,
-            image: product.image || [],
-            name: product.name,
-            productId: product._id,
-            quantity: Number(item.quantity) || 1,
-          };
-        })
-        .filter(Boolean);
+      if (paymentMethod === "cod") {
+        const list_items = cartItem
+          .map((item) => {
+            const product = item?.productId;
+            if (!product) return null;
+            return {
+              _id: item._id,
+              image: product.image || [],
+              name: product.name,
+              productId: product._id,
+              quantity: Number(item.quantity) || 1,
+            };
+          })
+          .filter(Boolean);
 
-      const response = await Axios({
-        ...SummaryApi.cashOnDelivery,
-        data: {
-          addressId: selectedAddressId,
-          list_items,
-          subTotalAmt: totalPrice,
-          totalAmt: totalPrice,
-        },
-      });
+        const response = await Axios({
+          ...SummaryApi.cashOnDelivery,
+          data: {
+            addressId: selectedAddressId,
+            list_items,
+            subTotalAmt: totalPrice,
+            totalAmt: totalPrice,
+          },
+        });
 
-      if (response.data.success) {
-        toast.success(response.data.message || "Đặt hàng thành công");
-        await fetchCartItem();
-        navigate("/success");
+        if (response.data.success) {
+          toast.success(response.data.message || "Đặt hàng thành công");
+          await fetchCartItem();
+          navigate("/success");
+        }
+      } else if (paymentMethod === "online") {
+        const loadingToast = toast.loading(
+          "Đang chuyển đến trang thanh toán...",
+        );
+
+        try {
+          const response = await Axios({
+            ...SummaryApi.paymentCheckout,
+            data: { addressId: selectedAddressId },
+          });
+
+          if (response.data.success) {
+            const stripe = await stripePromise;
+            if (!stripe) {
+              throw new Error("Stripe chưa được khởi tạo");
+            }
+
+            await stripe.redirectToCheckout({
+              sessionId: response.data.sessionId,
+            });
+          }
+        } finally {
+          toast.dismiss(loadingToast);
+        }
       }
     } catch (error) {
       AxiosToastError(error);
