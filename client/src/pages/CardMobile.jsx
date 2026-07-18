@@ -19,13 +19,6 @@ const CardMobile = () => {
     fetchCartItem();
   }, [fetchCartItem]);
 
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, []);
-
   const totalQty = cartItem.reduce(
     (sum, item) => sum + (Number(item?.quantity) || 0),
     0,
@@ -55,7 +48,7 @@ const CardMobile = () => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between border-gray-100 border-b bg-white px-4 py-4 lg:px-6">
         <h1 className="font-semibold text-lg text-secondary-100">
           Giỏ hàng ({totalQty} sản phẩm)
@@ -92,52 +85,50 @@ const CardMobile = () => {
           </Link>
         </div>
       ) : (
-        <>
-          <div className="mx-auto w-full max-w-7xl space-y-4 overflow-y-auto p-4 lg:p-6">
-            <div className="space-y-4">
-              {cartItem.map((item) => {
-                const product = item?.productId;
-                if (!product) return null;
-                const discountedPrice = priceWithDiscount(
-                  product.price,
-                  product.discount,
-                );
-                const hasDiscount = Number(product.discount) > 0;
+        <div className="mx-auto w-full max-w-7xl">
+          <div className="space-y-4 p-4 lg:p-6">
+            {cartItem.map((item) => {
+              const product = item?.productId;
+              if (!product) return null;
+              const discountedPrice = priceWithDiscount(
+                product.price,
+                product.discount,
+              );
+              const hasDiscount = Number(product.discount) > 0;
 
-                return (
-                  <div
-                    className="flex gap-3 border-gray-100 border-b pb-4"
-                    key={item._id}
-                  >
-                    <img
-                      alt={product.name}
-                      className="h-20 w-20 shrink-0 rounded-lg border border-gray-100 object-scale-down"
-                      src={product.image?.[0]}
-                    />
-                    <div className="flex flex-1 flex-col gap-1">
-                      <p className="line-clamp-2 font-medium text-secondary-100 text-sm leading-5">
-                        {product.name}
+              return (
+                <div
+                  className="flex gap-3 border-gray-100 border-b pb-4"
+                  key={item._id}
+                >
+                  <img
+                    alt={product.name}
+                    className="h-20 w-20 shrink-0 rounded-lg border border-gray-100 object-scale-down"
+                    src={product.image?.[0]}
+                  />
+                  <div className="flex flex-1 flex-col gap-1">
+                    <p className="line-clamp-2 font-medium text-secondary-100 text-sm leading-5">
+                      {product.name}
+                    </p>
+                    <p className="text-gray-500 text-xs">{product.unit}</p>
+                    <div className="flex items-baseline gap-1.5">
+                      <p className="font-semibold text-sm">
+                        {DisplayPriceInVND(discountedPrice)}
                       </p>
-                      <p className="text-gray-500 text-xs">{product.unit}</p>
-                      <div className="flex items-baseline gap-1.5">
-                        <p className="font-semibold text-sm">
-                          {DisplayPriceInVND(discountedPrice)}
+                      {hasDiscount && (
+                        <p className="text-gray-400 text-xs line-through">
+                          {DisplayPriceInVND(product.price)}
                         </p>
-                        {hasDiscount && (
-                          <p className="text-gray-400 text-xs line-through">
-                            {DisplayPriceInVND(product.price)}
-                          </p>
-                        )}
-                      </div>
-                      <AddToCartButton product={product} showRemove />
+                      )}
                     </div>
+                    <AddToCartButton product={product} showRemove />
                   </div>
-                );
-              })}
-            </div>
+                </div>
+              );
+            })}
           </div>
 
-          <div className="mx-auto w-full max-w-7xl border-gray-100 border-t bg-white p-5 lg:p-8">
+          <div className="border-gray-100 border-t bg-white p-5 lg:p-8">
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">Tiết kiệm của bạn</span>
@@ -171,7 +162,7 @@ const CardMobile = () => {
               </button>
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
