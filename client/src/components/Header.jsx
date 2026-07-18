@@ -18,6 +18,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import SummaryApi from "../common/SummaryApi";
 import useMobile from "../hooks/useMobile";
+import { handleAddItemCart } from "../store/cartProduct";
 import { logout } from "../store/userSlice";
 import AxiosToastError from "../utils/AxiosToastError";
 import Axios from "../utils/axios";
@@ -94,6 +95,8 @@ const Header = ({ isHydrated }) => {
     try {
       const response = await Axios({ ...SummaryApi.logout });
       if (response.data.success) {
+        localStorage.clear();
+        dispatch(handleAddItemCart([]));
         dispatch(logout());
         setOpenUserMenu(false);
         setOpenMobileMenu(false);

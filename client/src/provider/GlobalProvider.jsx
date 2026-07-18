@@ -72,7 +72,7 @@ export const GlobalProvider = ({ children }) => {
     if (user?._id) {
       fetchCartItem();
     }
-  }, [user?._id, fetchCartItem]);
+  }, [user, fetchCartItem]);
 
   const { totalPrice, notDiscountTotalPrice, totalQuantity } = useMemo(() => {
     const totalQty = cartItem.reduce(
