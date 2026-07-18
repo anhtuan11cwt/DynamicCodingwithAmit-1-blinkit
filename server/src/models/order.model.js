@@ -10,13 +10,20 @@ const orderSchema = new mongoose.Schema(
       default: "",
       type: String,
     },
+    order_status: {
+      default: "processing",
+      type: String,
+    },
     orderId: {
       required: true,
       type: String,
-      unique: true,
+    },
+    payment_method: {
+      default: "COD",
+      type: String,
     },
     payment_status: {
-      default: "",
+      default: "cash_on_delivery",
       type: String,
     },
     paymentId: {
