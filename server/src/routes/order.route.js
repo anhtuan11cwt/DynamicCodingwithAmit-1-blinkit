@@ -1,5 +1,9 @@
 import express from "express";
-import { cashOnDeliveryOrderController } from "../controllers/order.controller.js";
+import {
+  cashOnDeliveryOrderController,
+  getOrderDetailsController,
+  paymentSuccessController,
+} from "../controllers/order.controller.js";
 import auth from "../middleware/auth.js";
 
 const router = express.Router();
@@ -95,5 +99,9 @@ const router = express.Router();
  *         description: Lỗi máy chủ
  */
 router.post("/cash-on-delivery", auth, cashOnDeliveryOrderController);
+
+router.post("/payment-success", auth, paymentSuccessController);
+
+router.get("/my-order", auth, getOrderDetailsController);
 
 export default router;
