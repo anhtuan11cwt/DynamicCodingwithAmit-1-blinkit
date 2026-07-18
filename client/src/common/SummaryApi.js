@@ -1,4 +1,8 @@
 const SummaryApi = {
+  addAddress: {
+    method: "post",
+    url: "/address/create",
+  },
   addCategory: {
     method: "post",
     url: "/category/add-category",
@@ -14,6 +18,10 @@ const SummaryApi = {
   createProduct: {
     method: "post",
     url: "/product/create",
+  },
+  deleteAddress: {
+    method: "delete",
+    url: "/address/delete",
   },
   deleteCartItem: {
     method: "delete",
@@ -38,6 +46,10 @@ const SummaryApi = {
   forgotPassword: {
     method: "post",
     url: "/auth/forgot-password",
+  },
+  getAddress: {
+    method: "get",
+    url: "/address/get",
   },
   getCartItem: {
     method: "get",
@@ -94,6 +106,10 @@ const SummaryApi = {
   searchProduct: {
     method: "post",
     url: "/product/search-product",
+  },
+  updateAddress: {
+    method: "put",
+    url: "/address/update",
   },
   updateCartItem: {
     method: "put",

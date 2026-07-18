@@ -6,26 +6,49 @@ import {
   ShoppingBag,
   X,
 } from "lucide-react";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import SummaryApi from "../common/SummaryApi";
+import AddAddress from "../components/AddAddress";
 import { GlobalContext } from "../provider/useGlobalContext";
+import { handleAddress } from "../store/addressSlice";
+import AxiosToastError from "../utils/AxiosToastError";
+import Axios from "../utils/axios";
 import DisplayPriceInVND from "../utils/DisplayPriceInVND";
 import priceWithDiscount from "../utils/priceWithDiscount";
 
 const CheckoutPage = () => {
   const cartItem = useSelector((state) => state.cartItem.cart);
   const user = useSelector((state) => state.user);
+  const addressList = useSelector((state) => state.address.addressList);
   const navigate = useNavigate();
   const { fetchCartItem } = useContext(GlobalContext);
+  const dispatch = useDispatch();
 
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
+  const [openAddress, setOpenAddress] = useState(false);
+
+  const fetchAddress = useCallback(async () => {
+    try {
+      const response = await Axios({ ...SummaryApi.getAddress });
+      if (response.data.success) {
+        dispatch(handleAddress(response.data.data));
+      }
+    } catch (error) {
+      AxiosToastError(error);
+    }
+  }, [dispatch]);
 
   useEffect(() => {
     fetchCartItem();
   }, [fetchCartItem]);
+
+  useEffect(() => {
+    fetchAddress();
+  }, [fetchAddress]);
 
   const totalQty = cartItem.reduce(
     (sum, item) => sum + (Number(item?.quantity) || 0),
@@ -101,37 +124,54 @@ const CheckoutPage = () => {
                 </h2>
 
                 <div className="flex flex-col gap-3">
-                  <div className="flex flex-col gap-3">
-                    <button
-                      aria-label="Chọn địa chỉ mặc định"
-                      className={`flex w-full cursor-pointer flex-col gap-1 rounded-xl border-2 p-4 text-left outline-none transition-all ${
-                        selectedAddressId === "default"
-                          ? "border-green-600 bg-green-50"
-                          : "border-gray-200 hover:border-green-600"
-                      } focus-visible:ring-2 focus-visible:ring-green-600`}
-                      onClick={() => setSelectedAddressId("default")}
-                      type="button"
-                    >
-                      <span className="font-medium text-secondary-100 text-sm">
-                        123 Đường ABC, Phường XYZ
-                      </span>
-                      <span className="text-gray-500 text-xs">
-                        Quận 1, TP. Hồ Chí Minh
-                      </span>
-                      <span className="text-gray-400 text-xs">0123456789</span>
-                    </button>
+                  {addressList.length === 0 ? (
+                    <p className="text-center text-gray-500 text-sm">
+                      Bạn chưa có địa chỉ nào
+                    </p>
+                  ) : (
+                    addressList.map((address) => (
+                      <button
+                        aria-label={`Chọn địa chỉ ${address.address_line}`}
+                        className={`flex w-full cursor-pointer flex-col gap-1 rounded-xl border-2 p-4 text-left outline-none transition-all ${
+                          selectedAddressId === address._id
+                            ? "border-green-600 bg-green-50"
+                            : "border-gray-200 hover:border-green-600"
+                        } focus-visible:ring-2 focus-visible:ring-green-600`}
+                        key={address._id}
+                        onClick={() => setSelectedAddressId(address._id)}
+                        type="button"
+                      >
+                        <span className="font-medium text-secondary-100 text-sm">
+                          {address.address_line}
+                        </span>
+                        <span className="text-gray-500 text-xs">
+                          {address.city}, {address.state}
+                        </span>
+                        {address.pincode && (
+                          <span className="text-gray-400 text-xs">
+                            Mã bưu điện: {address.pincode}
+                          </span>
+                        )}
+                        {address.mobile && (
+                          <span className="text-gray-400 text-xs">
+                            {address.mobile}
+                          </span>
+                        )}
+                      </button>
+                    ))
+                  )}
 
-                    <button
-                      aria-label="Thêm địa chỉ mới"
-                      className="flex h-16 w-full cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-gray-300 border-dashed text-gray-500 outline-none transition-colors hover:border-green-600 hover:text-green-600 focus-visible:ring-2 focus-visible:ring-green-600"
-                      type="button"
-                    >
-                      <Plus aria-hidden="true" size={18} />
-                      <span className="font-medium text-sm">
-                        Thêm địa chỉ mới
-                      </span>
-                    </button>
-                  </div>
+                  <button
+                    aria-label="Thêm địa chỉ mới"
+                    className="flex h-16 w-full cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-gray-300 border-dashed text-gray-500 outline-none transition-colors hover:border-green-600 hover:text-green-600 focus-visible:ring-2 focus-visible:ring-green-600"
+                    onClick={() => setOpenAddress(true)}
+                    type="button"
+                  >
+                    <Plus aria-hidden="true" size={18} />
+                    <span className="font-medium text-sm">
+                      Thêm địa chỉ mới
+                    </span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -206,7 +246,7 @@ const CheckoutPage = () => {
             </div>
           </div>
 
-          <div className="rounded-2xl bg-white p-5 shadow-sm">
+          <div className="mt-6 rounded-2xl bg-white p-5 shadow-sm">
             <h2 className="mb-4 font-semibold text-lg text-secondary-100">
               Đơn hàng của bạn
             </h2>
@@ -252,6 +292,15 @@ const CheckoutPage = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {openAddress && (
+        <AddAddress
+          close={() => {
+            setOpenAddress(false);
+            fetchAddress();
+          }}
+        />
       )}
     </div>
   );
