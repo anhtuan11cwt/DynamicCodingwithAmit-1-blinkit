@@ -15,6 +15,10 @@ const SummaryApi = {
     method: "post",
     url: "/cart/create",
   },
+  cashOnDelivery: {
+    method: "post",
+    url: "/order/cash-on-delivery",
+  },
   createProduct: {
     method: "post",
     url: "/product/create",

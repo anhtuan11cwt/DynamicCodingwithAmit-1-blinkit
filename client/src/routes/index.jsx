@@ -4,6 +4,7 @@ import AdminPermission from "../components/AdminPermission";
 import AuthRoute from "../components/AuthRoute";
 import Dashboard from "../layouts/Dashboard";
 import Addresses from "../pages/Addresses";
+import Cancel from "../pages/Cancel";
 import CardMobile from "../pages/CardMobile";
 import Category from "../pages/Category";
 import CheckoutPage from "../pages/CheckoutPage";
@@ -20,6 +21,7 @@ import Register from "../pages/Register";
 import ResetPassword from "../pages/ResetPassword";
 import SearchPage from "../pages/SearchPage";
 import SubCategory from "../pages/SubCategoryPage";
+import Success from "../pages/Success";
 import UploadProduct from "../pages/UploadProduct";
 import VerifyEmail from "../pages/VerifyEmail";
 
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
       {
         element: <CheckoutPage />,
         path: "checkout",
+      },
+      {
+        element: <Success />,
+        path: "success",
+      },
+      {
+        element: <Cancel />,
+        path: "cancel",
       },
       {
         element: <ProductListPage />,

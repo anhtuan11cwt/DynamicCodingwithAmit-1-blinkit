@@ -2,6 +2,7 @@ import {
   ArrowRight,
   Banknote,
   CreditCard,
+  Loader2,
   Plus,
   ShoppingBag,
   X,
@@ -30,6 +31,7 @@ const CheckoutPage = () => {
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [openAddress, setOpenAddress] = useState(false);
+  const [codLoading, setCodLoading] = useState(false);
 
   const fetchAddress = useCallback(async () => {
     try {
@@ -65,9 +67,9 @@ const CheckoutPage = () => {
     );
   }, 0);
 
-  const handleCheckoutPage = () => {
+  const handleCashOnDelivery = async () => {
     if (!user?._id) {
-      toast.error("Please login first");
+      toast.error("Vui lòng đăng nhập");
       return;
     }
     if (!selectedAddressId) {
@@ -78,7 +80,47 @@ const CheckoutPage = () => {
       toast.error("Vui lòng chọn phương thức thanh toán");
       return;
     }
-    toast.success("Chức năng thanh toán sẽ sớm được cập nhật");
+    if (paymentMethod !== "cod") {
+      toast.error("Chức năng thanh toán trực tuyến sẽ sớm được cập nhật");
+      return;
+    }
+
+    setCodLoading(true);
+    try {
+      const list_items = cartItem
+        .map((item) => {
+          const product = item?.productId;
+          if (!product) return null;
+          return {
+            _id: item._id,
+            image: product.image || [],
+            name: product.name,
+            productId: product._id,
+            quantity: Number(item.quantity) || 1,
+          };
+        })
+        .filter(Boolean);
+
+      const response = await Axios({
+        ...SummaryApi.cashOnDelivery,
+        data: {
+          addressId: selectedAddressId,
+          list_items,
+          subTotalAmt: totalPrice,
+          totalAmt: totalPrice,
+        },
+      });
+
+      if (response.data.success) {
+        toast.success(response.data.message || "Đặt hàng thành công");
+        await fetchCartItem();
+        navigate("/success");
+      }
+    } catch (error) {
+      AxiosToastError(error);
+    } finally {
+      setCodLoading(false);
+    }
   };
 
   return (
@@ -115,7 +157,11 @@ const CheckoutPage = () => {
           </button>
         </div>
       ) : (
-        <div className="mx-auto w-full max-w-7xl p-4 lg:p-6">
+        <div
+          className={`mx-auto w-full max-w-7xl p-4 lg:p-6 ${
+            codLoading ? "pointer-events-none opacity-50" : ""
+          }`}
+        >
           <div className="flex flex-col gap-5 lg:flex-row">
             <div className="flex flex-1 flex-col gap-4">
               <div className="rounded-2xl bg-white p-5 shadow-sm">
@@ -212,8 +258,10 @@ const CheckoutPage = () => {
                 <div className="mt-5 flex flex-col gap-3">
                   <button
                     aria-label="Thanh toán trực tuyến"
-                    className={`flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-green-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-800 ${
-                      paymentMethod === "online" ? "ring-2 ring-green-800" : ""
+                    className={`flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-lg px-4 py-3 font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-green-800 ${
+                      paymentMethod === "online"
+                        ? "bg-green-600 text-white ring-2 ring-green-800 hover:bg-green-700"
+                        : "border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
                     }`}
                     onClick={() => setPaymentMethod("online")}
                     type="button"
@@ -223,8 +271,10 @@ const CheckoutPage = () => {
                   </button>
                   <button
                     aria-label="Thanh toán khi nhận hàng"
-                    className={`flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-green-600 px-4 py-3 font-semibold text-green-600 transition-colors hover:bg-green-600 hover:text-white focus-visible:ring-2 focus-visible:ring-green-800 ${
-                      paymentMethod === "cod" ? "bg-green-600 text-white" : ""
+                    className={`flex min-h-[44px] w-full cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-lg px-4 py-3 font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-green-800 ${
+                      paymentMethod === "cod"
+                        ? "bg-green-600 text-white ring-2 ring-green-800 hover:bg-green-700"
+                        : "border-2 border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
                     }`}
                     onClick={() => setPaymentMethod("cod")}
                     type="button"
@@ -235,12 +285,26 @@ const CheckoutPage = () => {
                 </div>
 
                 <button
-                  className="mt-4 flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-green-600 py-3 font-semibold text-white transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-800"
-                  onClick={handleCheckoutPage}
+                  className="mt-4 flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-green-600 py-3 font-semibold text-white transition-colors hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-green-800 disabled:cursor-not-allowed disabled:bg-gray-300"
+                  disabled={codLoading}
+                  onClick={handleCashOnDelivery}
                   type="button"
                 >
-                  Xác nhận đơn hàng
-                  <ArrowRight aria-hidden="true" size={18} />
+                  {codLoading ? (
+                    <>
+                      <Loader2
+                        aria-hidden="true"
+                        className="animate-spin"
+                        size={18}
+                      />
+                      Đang xử lý...
+                    </>
+                  ) : (
+                    <>
+                      Xác nhận đơn hàng
+                      <ArrowRight aria-hidden="true" size={18} />
+                    </>
+                  )}
                 </button>
               </div>
             </div>
